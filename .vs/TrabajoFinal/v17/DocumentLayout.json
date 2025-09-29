@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\entity\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|solutionrelative:entity\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2C2739EB-911D-4365-A180-3EB50AAC7307}|DAO\\DAO.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\dao\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2C2739EB-911D-4365-A180-3EB50AAC7307}|DAO\\DAO.csproj|solutionrelative:dao\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|solutionrelative:bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{604CA144-FFCA-4830-B9D8-4F9255FE3425}|Mapper\\Mapper.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\mapper\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{604CA144-FFCA-4830-B9D8-4F9255FE3425}|Mapper\\Mapper.csproj|solutionrelative:mapper\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
@@ -27,14 +43,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs [Design]",
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Class1.cs",
+              "RelativeDocumentMoniker": "Entity\\Class1.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Class1.cs",
+              "RelativeToolTip": "Entity\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T19:25:30.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\Class1.cs",
+              "RelativeDocumentMoniker": "DAO\\Class1.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\Class1.cs",
+              "RelativeToolTip": "DAO\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T19:25:18.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\Class1.cs",
+              "RelativeDocumentMoniker": "BLL\\Class1.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\Class1.cs",
+              "RelativeToolTip": "BLL\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T19:25:08.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Mapper\\Class1.cs",
+              "RelativeDocumentMoniker": "Mapper\\Class1.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Mapper\\Class1.cs",
+              "RelativeToolTip": "Mapper\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T19:24:58.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [Dise\u00F1o]",
               "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs",
               "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs [Design]",
-              "RelativeToolTip": "UI\\Form1.cs [Design]",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Form1.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-29T19:23:42.783Z",
-              "EditorCaption": " [Design]"
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }
