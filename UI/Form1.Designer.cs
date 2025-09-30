@@ -36,8 +36,6 @@
             registrarReservaToolStripMenuItem = new ToolStripMenuItem();
             inventarioToolStripMenuItem = new ToolStripMenuItem();
             verInsumosToolStripMenuItem = new ToolStripMenuItem();
-            verInsumosToolStripMenuItem1 = new ToolStripMenuItem();
-            registrarInsumosToolStripMenuItem = new ToolStripMenuItem();
             registrarPlatoToolStripMenuItem = new ToolStripMenuItem();
             verPlatosToolStripMenuItem = new ToolStripMenuItem();
             registrarPlatoToolStripMenuItem1 = new ToolStripMenuItem();
@@ -111,22 +109,10 @@
             // 
             // verInsumosToolStripMenuItem
             // 
-            verInsumosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verInsumosToolStripMenuItem1, registrarInsumosToolStripMenuItem });
             verInsumosToolStripMenuItem.Name = "verInsumosToolStripMenuItem";
             verInsumosToolStripMenuItem.Size = new Size(180, 22);
             verInsumosToolStripMenuItem.Text = "Insumos";
-            // 
-            // verInsumosToolStripMenuItem1
-            // 
-            verInsumosToolStripMenuItem1.Name = "verInsumosToolStripMenuItem1";
-            verInsumosToolStripMenuItem1.Size = new Size(168, 22);
-            verInsumosToolStripMenuItem1.Text = "Ver Insumos";
-            // 
-            // registrarInsumosToolStripMenuItem
-            // 
-            registrarInsumosToolStripMenuItem.Name = "registrarInsumosToolStripMenuItem";
-            registrarInsumosToolStripMenuItem.Size = new Size(168, 22);
-            registrarInsumosToolStripMenuItem.Text = "Registrar Insumos";
+            verInsumosToolStripMenuItem.Click += verInsumosToolStripMenuItem_Click;
             // 
             // registrarPlatoToolStripMenuItem
             // 
@@ -288,8 +274,6 @@
         private ToolStripMenuItem verToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
         private ToolStripMenuItem verInsumosToolStripMenuItem;
-        private ToolStripMenuItem verInsumosToolStripMenuItem1;
-        private ToolStripMenuItem registrarInsumosToolStripMenuItem;
         private ToolStripMenuItem verPlatosToolStripMenuItem;
         private ToolStripMenuItem registrarPlatoToolStripMenuItem1;
         private ToolStripMenuItem registrarPromocionToolStripMenuItem1;
