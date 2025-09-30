@@ -1,10 +1,35 @@
 namespace UI
 {
-    public partial class Form1 : Form
+    public partial class frmMDI : Form
     {
-        public Form1()
+        public frmMDI()
         {
             InitializeComponent();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        
+
+
+        private void registrarClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmClientes frm = new frmClientes();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
         }
     }
 }

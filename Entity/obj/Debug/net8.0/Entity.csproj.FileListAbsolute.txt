@@ -1,0 +1,12 @@
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\bin\Debug\net8.0\Entity.deps.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\bin\Debug\net8.0\Entity.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\bin\Debug\net8.0\Entity.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.AssemblyInfoInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.AssemblyInfo.cs
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.csproj.CoreCompileInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.sourcelink.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\refint\Entity.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\Entity.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Entity\obj\Debug\net8.0\ref\Entity.dll
