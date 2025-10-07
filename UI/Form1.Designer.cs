@@ -55,12 +55,14 @@
             dashBoardToolStripMenuItem = new ToolStripMenuItem();
             verToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem = new ToolStripMenuItem();
+            usuariosToolStripMenuItem = new ToolStripMenuItem();
+            crearUsuarioToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, dashBoardToolStripMenuItem, salirToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, dashBoardToolStripMenuItem, salirToolStripMenuItem, usuariosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -77,7 +79,7 @@
             // registrarClienteToolStripMenuItem
             // 
             registrarClienteToolStripMenuItem.Name = "registrarClienteToolStripMenuItem";
-            registrarClienteToolStripMenuItem.Size = new Size(180, 22);
+            registrarClienteToolStripMenuItem.Size = new Size(116, 22);
             registrarClienteToolStripMenuItem.Text = "Clientes";
             registrarClienteToolStripMenuItem.Click += registrarClienteToolStripMenuItem_Click;
             // 
@@ -85,7 +87,7 @@
             // 
             hacerReservaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verReservaToolStripMenuItem, registrarReservaToolStripMenuItem });
             hacerReservaToolStripMenuItem.Name = "hacerReservaToolStripMenuItem";
-            hacerReservaToolStripMenuItem.Size = new Size(180, 22);
+            hacerReservaToolStripMenuItem.Size = new Size(116, 22);
             hacerReservaToolStripMenuItem.Text = "Reserva";
             // 
             // verReservaToolStripMenuItem
@@ -110,7 +112,7 @@
             // verInsumosToolStripMenuItem
             // 
             verInsumosToolStripMenuItem.Name = "verInsumosToolStripMenuItem";
-            verInsumosToolStripMenuItem.Size = new Size(180, 22);
+            verInsumosToolStripMenuItem.Size = new Size(177, 22);
             verInsumosToolStripMenuItem.Text = "Insumos";
             verInsumosToolStripMenuItem.Click += verInsumosToolStripMenuItem_Click;
             // 
@@ -118,26 +120,29 @@
             // 
             registrarPlatoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verPlatosToolStripMenuItem, registrarPlatoToolStripMenuItem1 });
             registrarPlatoToolStripMenuItem.Name = "registrarPlatoToolStripMenuItem";
-            registrarPlatoToolStripMenuItem.Size = new Size(180, 22);
+            registrarPlatoToolStripMenuItem.Size = new Size(177, 22);
             registrarPlatoToolStripMenuItem.Text = "Platos";
+            registrarPlatoToolStripMenuItem.Click += registrarPlatoToolStripMenuItem_Click;
             // 
             // verPlatosToolStripMenuItem
             // 
             verPlatosToolStripMenuItem.Name = "verPlatosToolStripMenuItem";
-            verPlatosToolStripMenuItem.Size = new Size(150, 22);
-            verPlatosToolStripMenuItem.Text = "Ver platos";
+            verPlatosToolStripMenuItem.Size = new Size(177, 22);
+            verPlatosToolStripMenuItem.Text = "Registrar categorias";
+            verPlatosToolStripMenuItem.Click += verPlatosToolStripMenuItem_Click;
             // 
             // registrarPlatoToolStripMenuItem1
             // 
             registrarPlatoToolStripMenuItem1.Name = "registrarPlatoToolStripMenuItem1";
-            registrarPlatoToolStripMenuItem1.Size = new Size(150, 22);
+            registrarPlatoToolStripMenuItem1.Size = new Size(177, 22);
             registrarPlatoToolStripMenuItem1.Text = "Registrar Plato";
+            registrarPlatoToolStripMenuItem1.Click += registrarPlatoToolStripMenuItem1_Click;
             // 
             // registrarPromocionToolStripMenuItem
             // 
             registrarPromocionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrarPromocionToolStripMenuItem1, administrarPromocionToolStripMenuItem });
             registrarPromocionToolStripMenuItem.Name = "registrarPromocionToolStripMenuItem";
-            registrarPromocionToolStripMenuItem.Size = new Size(180, 22);
+            registrarPromocionToolStripMenuItem.Size = new Size(177, 22);
             registrarPromocionToolStripMenuItem.Text = "Promociones";
             // 
             // registrarPromocionToolStripMenuItem1
@@ -155,14 +160,14 @@
             // registrarProveedorToolStripMenuItem
             // 
             registrarProveedorToolStripMenuItem.Name = "registrarProveedorToolStripMenuItem";
-            registrarProveedorToolStripMenuItem.Size = new Size(180, 22);
+            registrarProveedorToolStripMenuItem.Size = new Size(177, 22);
             registrarProveedorToolStripMenuItem.Text = "Registrar Proveedor";
             // 
             // registrarMesasToolStripMenuItem
             // 
             registrarMesasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verMesasToolStripMenuItem, registrarMesasToolStripMenuItem1 });
             registrarMesasToolStripMenuItem.Name = "registrarMesasToolStripMenuItem";
-            registrarMesasToolStripMenuItem.Size = new Size(180, 22);
+            registrarMesasToolStripMenuItem.Size = new Size(177, 22);
             registrarMesasToolStripMenuItem.Text = "Mesas";
             // 
             // verMesasToolStripMenuItem
@@ -237,6 +242,20 @@
             salirToolStripMenuItem.Text = "Salir";
             salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
+            // usuariosToolStripMenuItem
+            // 
+            usuariosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { crearUsuarioToolStripMenuItem });
+            usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            usuariosToolStripMenuItem.Size = new Size(64, 20);
+            usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // crearUsuarioToolStripMenuItem
+            // 
+            crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
+            crearUsuarioToolStripMenuItem.Size = new Size(180, 22);
+            crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            crearUsuarioToolStripMenuItem.Click += crearUsuarioToolStripMenuItem_Click;
+            // 
             // frmMDI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -283,5 +302,7 @@
         private ToolStripMenuItem registrarMesasToolStripMenuItem1;
         private ToolStripMenuItem verReservaToolStripMenuItem;
         private ToolStripMenuItem registrarReservaToolStripMenuItem;
+        private ToolStripMenuItem usuariosToolStripMenuItem;
+        private ToolStripMenuItem crearUsuarioToolStripMenuItem;
     }
 }

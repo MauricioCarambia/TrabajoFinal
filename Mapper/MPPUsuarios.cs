@@ -1,6 +1,6 @@
 ﻿namespace Mapper
 {
-    public class Class1
+    public class MPPUsuarios
     {
 
     }

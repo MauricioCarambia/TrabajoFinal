@@ -36,7 +36,6 @@
             groupBox1 = new GroupBox();
             btnCerrar = new Button();
             label3 = new Label();
-            txtTelefono = new TextBox();
             label2 = new Label();
             txtDNI = new TextBox();
             label1 = new Label();
@@ -44,11 +43,13 @@
             btnModificar = new Button();
             btnGuardar = new Button();
             txtNombre = new TextBox();
-            cmbCategoria = new ComboBox();
             label5 = new Label();
+            textBox1 = new TextBox();
+            numericUpDown1 = new NumericUpDown();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // txtBuscar
@@ -102,11 +103,11 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(numericUpDown1);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(cmbCategoria);
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(btnCerrar);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(txtTelefono);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(txtDNI);
             groupBox1.Controls.Add(label1);
@@ -114,9 +115,9 @@
             groupBox1.Controls.Add(btnModificar);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtNombre);
-            groupBox1.Location = new Point(67, 80);
+            groupBox1.Location = new Point(67, 69);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(249, 379);
+            groupBox1.Size = new Size(272, 398);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "ABM Insumos";
@@ -124,7 +125,7 @@
             // btnCerrar
             // 
             btnCerrar.Font = new Font("Segoe UI", 11F);
-            btnCerrar.Location = new Point(133, 326);
+            btnCerrar.Location = new Point(125, 338);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(102, 39);
             btnCerrar.TabIndex = 7;
@@ -135,25 +136,17 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(25, 218);
+            label3.Location = new Point(6, 143);
             label3.Name = "label3";
             label3.Size = new Size(69, 20);
             label3.TabIndex = 6;
             label3.Text = "Cantidad";
             // 
-            // txtTelefono
-            // 
-            txtTelefono.Font = new Font("Segoe UI", 11F);
-            txtTelefono.Location = new Point(25, 241);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(210, 27);
-            txtTelefono.TabIndex = 5;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(25, 142);
+            label2.Location = new Point(6, 80);
             label2.Name = "label2";
             label2.Size = new Size(50, 20);
             label2.TabIndex = 4;
@@ -162,7 +155,7 @@
             // txtDNI
             // 
             txtDNI.Font = new Font("Segoe UI", 11F);
-            txtDNI.Location = new Point(25, 165);
+            txtDNI.Location = new Point(6, 103);
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(210, 27);
             txtDNI.TabIndex = 3;
@@ -171,7 +164,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(25, 84);
+            label1.Location = new Point(6, 22);
             label1.Name = "label1";
             label1.Size = new Size(64, 20);
             label1.TabIndex = 2;
@@ -180,7 +173,7 @@
             // btnEliminar
             // 
             btnEliminar.Font = new Font("Segoe UI", 11F);
-            btnEliminar.Location = new Point(25, 326);
+            btnEliminar.Location = new Point(17, 338);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(102, 39);
             btnEliminar.TabIndex = 1;
@@ -190,7 +183,7 @@
             // btnModificar
             // 
             btnModificar.Font = new Font("Segoe UI", 11F);
-            btnModificar.Location = new Point(133, 281);
+            btnModificar.Location = new Point(125, 293);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(102, 39);
             btnModificar.TabIndex = 1;
@@ -200,7 +193,7 @@
             // btnGuardar
             // 
             btnGuardar.Font = new Font("Segoe UI", 11F);
-            btnGuardar.Location = new Point(25, 281);
+            btnGuardar.Location = new Point(17, 293);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(102, 39);
             btnGuardar.TabIndex = 1;
@@ -210,28 +203,35 @@
             // txtNombre
             // 
             txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(25, 107);
+            txtNombre.Location = new Point(6, 45);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(210, 27);
             txtNombre.TabIndex = 0;
-            // 
-            // cmbCategoria
-            // 
-            cmbCategoria.FormattingEnabled = true;
-            cmbCategoria.Location = new Point(25, 53);
-            cmbCategoria.Name = "cmbCategoria";
-            cmbCategoria.Size = new Size(210, 23);
-            cmbCategoria.TabIndex = 8;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(25, 30);
+            label5.Location = new Point(6, 207);
             label5.Name = "label5";
-            label5.Size = new Size(74, 20);
+            label5.Size = new Size(112, 20);
             label5.TabIndex = 9;
-            label5.Text = "Categoria";
+            label5.Text = "Unidad Medida";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 11F);
+            textBox1.Location = new Point(6, 230);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(210, 27);
+            textBox1.TabIndex = 8;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(6, 166);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(210, 23);
+            numericUpDown1.TabIndex = 10;
             // 
             // frmInsumos
             // 
@@ -251,6 +251,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -265,7 +266,6 @@
         private GroupBox groupBox1;
         private Button btnCerrar;
         private Label label3;
-        private TextBox txtTelefono;
         private Label label2;
         private TextBox txtDNI;
         private Label label1;
@@ -273,7 +273,8 @@
         private Button btnModificar;
         private Button btnGuardar;
         private TextBox txtNombre;
+        private NumericUpDown numericUpDown1;
         private Label label5;
-        private ComboBox cmbCategoria;
+        private TextBox textBox1;
     }
 }

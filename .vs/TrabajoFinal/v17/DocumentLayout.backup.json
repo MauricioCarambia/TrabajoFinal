@@ -3,36 +3,28 @@
   "WorkspaceRootPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\ui\\frminsumos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\frminsumos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{B8B4A996-A664-4DD1-8EAB-F5F0A3482014}|DAL\\DAL.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\dal\\dalusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8B4A996-A664-4DD1-8EAB-F5F0A3482014}|DAL\\DAL.csproj|solutionrelative:dal\\dalusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\frminsumos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\frminsumos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\frmabmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\frmabmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\frmabmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\frmabmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\ui\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\entity\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|solutionrelative:entity\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\bll\\bllusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|solutionrelative:bll\\bllusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C2739EB-911D-4365-A180-3EB50AAC7307}|DAO\\DAO.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\dao\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2C2739EB-911D-4365-A180-3EB50AAC7307}|DAO\\DAO.csproj|solutionrelative:dao\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\entity\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E35534CC-1BD6-42DC-A892-390FC65E6179}|Entity\\Entity.csproj|solutionrelative:entity\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{369B0A84-D5F2-4581-A862-BA469842C3DD}|BLL\\BLL.csproj|solutionrelative:bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|e:\\uai\\trabajo final\\3 entrega\\trabajo_final\\trabajofinal\\ui\\frmgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{38170DB5-79A3-4FDD-A452-9FD8CAA02F70}|UI\\UI.csproj|solutionrelative:ui\\frmgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,100 +46,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmInsumos.cs",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmInsumos.cs",
-              "RelativeDocumentMoniker": "UI\\frmInsumos.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmInsumos.cs",
-              "RelativeToolTip": "UI\\frmInsumos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T15:09:22.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "frmInsumos.cs [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmInsumos.cs",
-              "RelativeDocumentMoniker": "UI\\frmInsumos.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmInsumos.cs [Dise\u00F1o]",
-              "RelativeToolTip": "UI\\frmInsumos.cs [Dise\u00F1o]",
+              "Title": "DALUsuarios.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAL\\DALUsuarios.cs",
+              "RelativeDocumentMoniker": "DAL\\DALUsuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAL\\DALUsuarios.cs",
+              "RelativeToolTip": "DAL\\DALUsuarios.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAIwBwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T14:29:16.181Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2025-10-07T03:16:11.303Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Clientes.cs [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Clientes.cs",
-              "RelativeDocumentMoniker": "UI\\Clientes.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Clientes.cs [Dise\u00F1o]",
-              "RelativeToolTip": "UI\\Clientes.cs [Dise\u00F1o]",
+              "Title": "Usuarios.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Usuarios.cs",
+              "RelativeDocumentMoniker": "Entity\\Usuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Usuarios.cs",
+              "RelativeToolTip": "Entity\\Usuarios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T13:58:04.83Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs",
-              "RelativeToolTip": "UI\\Form1.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAIwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T13:44:56.078Z",
+              "WhenOpened": "2025-10-07T02:59:17.672Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Class1.cs",
-              "RelativeDocumentMoniker": "Entity\\Class1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Class1.cs",
-              "RelativeToolTip": "Entity\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "frmABMUsuarios.cs [Dise\u00F1o]",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmABMUsuarios.cs",
+              "RelativeDocumentMoniker": "UI\\frmABMUsuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmABMUsuarios.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\frmABMUsuarios.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T19:25:30.468Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\Class1.cs",
-              "RelativeDocumentMoniker": "DAO\\Class1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\Class1.cs",
-              "RelativeToolTip": "DAO\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T19:25:18.457Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\Class1.cs",
-              "RelativeDocumentMoniker": "BLL\\Class1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\Class1.cs",
-              "RelativeToolTip": "BLL\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T19:25:08.417Z"
+              "WhenOpened": "2025-10-07T02:56:30.182Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Form1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "UI\\Form1.cs [Dise\u00F1o]",
+              "Title": "frmABMUsuarios.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmABMUsuarios.cs",
+              "RelativeDocumentMoniker": "UI\\frmABMUsuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmABMUsuarios.cs",
+              "RelativeToolTip": "UI\\frmABMUsuarios.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAhwEoAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T19:23:42.783Z",
+              "WhenOpened": "2025-10-07T02:54:06.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BLLUsuarios.cs",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\BLLUsuarios.cs",
+              "RelativeDocumentMoniker": "BLL\\BLLUsuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\BLL\\BLLUsuarios.cs",
+              "RelativeToolTip": "BLL\\BLLUsuarios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T02:53:22.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "frmGestionUsuarios.cs [Dise\u00F1o]",
+              "DocumentMoniker": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmGestionUsuarios.cs",
+              "RelativeDocumentMoniker": "UI\\frmGestionUsuarios.cs",
+              "ToolTip": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\UI\\frmGestionUsuarios.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\frmGestionUsuarios.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T01:44:24.716Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]

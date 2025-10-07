@@ -17,11 +17,23 @@
       },
       "BLL/1.0.0": {
         "dependencies": {
+          "DAL": "1.0.0",
+          "Entity": "1.0.0"
+        },
+        "runtime": {
+          "BLL.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DAL/1.0.0": {
+        "dependencies": {
           "Entity": "1.0.0",
           "Mapper": "1.0.0"
         },
         "runtime": {
-          "BLL.dll": {
+          "DAL.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -55,6 +67,11 @@
       "sha512": ""
     },
     "BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DAL/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -52,9 +52,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\DAO.csproj",
-      "projectName": "DAO",
-      "projectPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\DAO.csproj",
+      "projectUniqueName": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\DAL.csproj",
+      "projectName": "DAL",
+      "projectPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\DAL.csproj",
       "packagesPath": "C:\\Users\\mcara\\.nuget\\packages\\",
       "outputPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAO\\obj\\",
       "projectStyle": "PackageReference",

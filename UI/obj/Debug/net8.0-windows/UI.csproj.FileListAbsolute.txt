@@ -24,3 +24,11 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-wi
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.genruntimeconfig.cache
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\ref\UI.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmClientes.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmInsumos.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmPlatos.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmCategoria.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmLogin.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmABMUsuarios.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\DAL.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\DAL.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmGestionUsuarios.resources
