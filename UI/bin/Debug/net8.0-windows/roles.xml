@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Roles>
+  <Rol>
+    <Id>4</Id>
+    <Nombre>Cocinero</Nombre>
+  </Rol>
+  <Rol>
+    <Id>5</Id>
+    <Nombre>Administrador</Nombre>
+  </Rol>
+</Roles>

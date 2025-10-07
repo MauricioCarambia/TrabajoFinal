@@ -20,13 +20,14 @@ namespace UI
         {
             InitializeComponent();
             CargarUsuarios();
+            LimpiarCampos();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Usuarios u = new Usuarios
             {
-                Nombre = txtUsuario.Text,
+                NombreUsuario = txtUsuario.Text,
                 Contrasenia = txtContrasenia.Text
             };
             usuarioBLL.AgregarUsuario(u);
@@ -46,7 +47,7 @@ namespace UI
             Usuarios u = new Usuarios
             {
                 Id = idSeleccionado,
-                Nombre = txtUsuario.Text,
+                NombreUsuario = txtUsuario.Text,
                 Contrasenia = txtContrasenia.Text
             };
             usuarioBLL.ModificarUsuario(u);
@@ -66,14 +67,32 @@ namespace UI
         {
             if (dgvUsuarios.CurrentRow == null) return;
             idSeleccionado = (int)dgvUsuarios.CurrentRow.Cells[0].Value;
+            txtID.Text = dgvUsuarios.CurrentRow.Cells[0].Value.ToString();
             txtUsuario.Text = dgvUsuarios.CurrentRow.Cells[1].Value.ToString();
             txtContrasenia.Text = dgvUsuarios.CurrentRow.Cells[2].Value.ToString();
         }
         private void LimpiarCampos()
         {
+            txtID.Text = "";
             txtUsuario.Text = "";
             txtContrasenia.Text = "";
             idSeleccionado = -1;
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmABMUsuarios_Load(object sender, EventArgs e)
+        {
+            LimpiarCampos();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
+
         }
     }
 }

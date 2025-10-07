@@ -29,45 +29,61 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
+            inicioToolStripMenuItem = new ToolStripMenuItem();
+            loginToolStripMenuItem = new ToolStripMenuItem();
+            logOutToolStripMenuItem = new ToolStripMenuItem();
             reservasToolStripMenuItem = new ToolStripMenuItem();
             registrarClienteToolStripMenuItem = new ToolStripMenuItem();
             hacerReservaToolStripMenuItem = new ToolStripMenuItem();
-            verReservaToolStripMenuItem = new ToolStripMenuItem();
-            registrarReservaToolStripMenuItem = new ToolStripMenuItem();
             inventarioToolStripMenuItem = new ToolStripMenuItem();
             verInsumosToolStripMenuItem = new ToolStripMenuItem();
             registrarPlatoToolStripMenuItem = new ToolStripMenuItem();
-            verPlatosToolStripMenuItem = new ToolStripMenuItem();
-            registrarPlatoToolStripMenuItem1 = new ToolStripMenuItem();
             registrarPromocionToolStripMenuItem = new ToolStripMenuItem();
-            registrarPromocionToolStripMenuItem1 = new ToolStripMenuItem();
-            administrarPromocionToolStripMenuItem = new ToolStripMenuItem();
             registrarProveedorToolStripMenuItem = new ToolStripMenuItem();
             registrarMesasToolStripMenuItem = new ToolStripMenuItem();
-            verMesasToolStripMenuItem = new ToolStripMenuItem();
-            registrarMesasToolStripMenuItem1 = new ToolStripMenuItem();
             pedidosToolStripMenuItem = new ToolStripMenuItem();
             cargarPedidoToolStripMenuItem = new ToolStripMenuItem();
             cobrarToolStripMenuItem = new ToolStripMenuItem();
             pedidosToolStripMenuItem2 = new ToolStripMenuItem();
             cocinaToolStripMenuItem = new ToolStripMenuItem();
             pedidosToolStripMenuItem1 = new ToolStripMenuItem();
+            usuariosToolStripMenuItem = new ToolStripMenuItem();
+            crearUsuarioToolStripMenuItem = new ToolStripMenuItem();
+            permisosRolesUsuariosToolStripMenuItem = new ToolStripMenuItem();
             dashBoardToolStripMenuItem = new ToolStripMenuItem();
             verToolStripMenuItem = new ToolStripMenuItem();
             salirToolStripMenuItem = new ToolStripMenuItem();
-            usuariosToolStripMenuItem = new ToolStripMenuItem();
-            crearUsuarioToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, dashBoardToolStripMenuItem, salirToolStripMenuItem, usuariosToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inicioToolStripMenuItem, reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, usuariosToolStripMenuItem, dashBoardToolStripMenuItem, salirToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
+            // 
+            // inicioToolStripMenuItem
+            // 
+            inicioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loginToolStripMenuItem, logOutToolStripMenuItem });
+            inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
+            inicioToolStripMenuItem.Size = new Size(48, 20);
+            inicioToolStripMenuItem.Text = "Inicio";
+            // 
+            // loginToolStripMenuItem
+            // 
+            loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            loginToolStripMenuItem.Size = new Size(119, 22);
+            loginToolStripMenuItem.Text = "Log-In";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            logOutToolStripMenuItem.Size = new Size(119, 22);
+            logOutToolStripMenuItem.Text = "Log-Out";
             // 
             // reservasToolStripMenuItem
             // 
@@ -85,22 +101,9 @@
             // 
             // hacerReservaToolStripMenuItem
             // 
-            hacerReservaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verReservaToolStripMenuItem, registrarReservaToolStripMenuItem });
             hacerReservaToolStripMenuItem.Name = "hacerReservaToolStripMenuItem";
             hacerReservaToolStripMenuItem.Size = new Size(116, 22);
             hacerReservaToolStripMenuItem.Text = "Reserva";
-            // 
-            // verReservaToolStripMenuItem
-            // 
-            verReservaToolStripMenuItem.Name = "verReservaToolStripMenuItem";
-            verReservaToolStripMenuItem.Size = new Size(163, 22);
-            verReservaToolStripMenuItem.Text = "Ver Reserva";
-            // 
-            // registrarReservaToolStripMenuItem
-            // 
-            registrarReservaToolStripMenuItem.Name = "registrarReservaToolStripMenuItem";
-            registrarReservaToolStripMenuItem.Size = new Size(163, 22);
-            registrarReservaToolStripMenuItem.Text = "Registrar Reserva";
             // 
             // inventarioToolStripMenuItem
             // 
@@ -118,44 +121,16 @@
             // 
             // registrarPlatoToolStripMenuItem
             // 
-            registrarPlatoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verPlatosToolStripMenuItem, registrarPlatoToolStripMenuItem1 });
             registrarPlatoToolStripMenuItem.Name = "registrarPlatoToolStripMenuItem";
             registrarPlatoToolStripMenuItem.Size = new Size(177, 22);
             registrarPlatoToolStripMenuItem.Text = "Platos";
             registrarPlatoToolStripMenuItem.Click += registrarPlatoToolStripMenuItem_Click;
             // 
-            // verPlatosToolStripMenuItem
-            // 
-            verPlatosToolStripMenuItem.Name = "verPlatosToolStripMenuItem";
-            verPlatosToolStripMenuItem.Size = new Size(177, 22);
-            verPlatosToolStripMenuItem.Text = "Registrar categorias";
-            verPlatosToolStripMenuItem.Click += verPlatosToolStripMenuItem_Click;
-            // 
-            // registrarPlatoToolStripMenuItem1
-            // 
-            registrarPlatoToolStripMenuItem1.Name = "registrarPlatoToolStripMenuItem1";
-            registrarPlatoToolStripMenuItem1.Size = new Size(177, 22);
-            registrarPlatoToolStripMenuItem1.Text = "Registrar Plato";
-            registrarPlatoToolStripMenuItem1.Click += registrarPlatoToolStripMenuItem1_Click;
-            // 
             // registrarPromocionToolStripMenuItem
             // 
-            registrarPromocionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrarPromocionToolStripMenuItem1, administrarPromocionToolStripMenuItem });
             registrarPromocionToolStripMenuItem.Name = "registrarPromocionToolStripMenuItem";
             registrarPromocionToolStripMenuItem.Size = new Size(177, 22);
             registrarPromocionToolStripMenuItem.Text = "Promociones";
-            // 
-            // registrarPromocionToolStripMenuItem1
-            // 
-            registrarPromocionToolStripMenuItem1.Name = "registrarPromocionToolStripMenuItem1";
-            registrarPromocionToolStripMenuItem1.Size = new Size(198, 22);
-            registrarPromocionToolStripMenuItem1.Text = "Registrar Promocion";
-            // 
-            // administrarPromocionToolStripMenuItem
-            // 
-            administrarPromocionToolStripMenuItem.Name = "administrarPromocionToolStripMenuItem";
-            administrarPromocionToolStripMenuItem.Size = new Size(198, 22);
-            administrarPromocionToolStripMenuItem.Text = "Administrar Promocion";
             // 
             // registrarProveedorToolStripMenuItem
             // 
@@ -165,22 +140,9 @@
             // 
             // registrarMesasToolStripMenuItem
             // 
-            registrarMesasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verMesasToolStripMenuItem, registrarMesasToolStripMenuItem1 });
             registrarMesasToolStripMenuItem.Name = "registrarMesasToolStripMenuItem";
             registrarMesasToolStripMenuItem.Size = new Size(177, 22);
             registrarMesasToolStripMenuItem.Text = "Mesas";
-            // 
-            // verMesasToolStripMenuItem
-            // 
-            verMesasToolStripMenuItem.Name = "verMesasToolStripMenuItem";
-            verMesasToolStripMenuItem.Size = new Size(156, 22);
-            verMesasToolStripMenuItem.Text = "Ver Mesas";
-            // 
-            // registrarMesasToolStripMenuItem1
-            // 
-            registrarMesasToolStripMenuItem1.Name = "registrarMesasToolStripMenuItem1";
-            registrarMesasToolStripMenuItem1.Size = new Size(156, 22);
-            registrarMesasToolStripMenuItem1.Text = "Registrar Mesas";
             // 
             // pedidosToolStripMenuItem
             // 
@@ -222,6 +184,27 @@
             pedidosToolStripMenuItem1.Size = new Size(116, 22);
             pedidosToolStripMenuItem1.Text = "Pedidos";
             // 
+            // usuariosToolStripMenuItem
+            // 
+            usuariosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { crearUsuarioToolStripMenuItem, permisosRolesUsuariosToolStripMenuItem });
+            usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            usuariosToolStripMenuItem.Size = new Size(64, 20);
+            usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // crearUsuarioToolStripMenuItem
+            // 
+            crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
+            crearUsuarioToolStripMenuItem.Size = new Size(203, 22);
+            crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            crearUsuarioToolStripMenuItem.Click += crearUsuarioToolStripMenuItem_Click;
+            // 
+            // permisosRolesUsuariosToolStripMenuItem
+            // 
+            permisosRolesUsuariosToolStripMenuItem.Name = "permisosRolesUsuariosToolStripMenuItem";
+            permisosRolesUsuariosToolStripMenuItem.Size = new Size(203, 22);
+            permisosRolesUsuariosToolStripMenuItem.Text = "Permisos-Roles Usuarios";
+            permisosRolesUsuariosToolStripMenuItem.Click += permisosRolesUsuariosToolStripMenuItem_Click;
+            // 
             // dashBoardToolStripMenuItem
             // 
             dashBoardToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verToolStripMenuItem });
@@ -242,20 +225,6 @@
             salirToolStripMenuItem.Text = "Salir";
             salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
-            // usuariosToolStripMenuItem
-            // 
-            usuariosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { crearUsuarioToolStripMenuItem });
-            usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            usuariosToolStripMenuItem.Size = new Size(64, 20);
-            usuariosToolStripMenuItem.Text = "Usuarios";
-            // 
-            // crearUsuarioToolStripMenuItem
-            // 
-            crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            crearUsuarioToolStripMenuItem.Size = new Size(180, 22);
-            crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
-            crearUsuarioToolStripMenuItem.Click += crearUsuarioToolStripMenuItem_Click;
-            // 
             // frmMDI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -267,6 +236,7 @@
             Name = "frmMDI";
             Text = "Inicio";
             WindowState = FormWindowState.Maximized;
+            Load += frmMDI_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -293,16 +263,12 @@
         private ToolStripMenuItem verToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
         private ToolStripMenuItem verInsumosToolStripMenuItem;
-        private ToolStripMenuItem verPlatosToolStripMenuItem;
-        private ToolStripMenuItem registrarPlatoToolStripMenuItem1;
-        private ToolStripMenuItem registrarPromocionToolStripMenuItem1;
-        private ToolStripMenuItem administrarPromocionToolStripMenuItem;
         private ToolStripMenuItem registrarMesasToolStripMenuItem;
-        private ToolStripMenuItem verMesasToolStripMenuItem;
-        private ToolStripMenuItem registrarMesasToolStripMenuItem1;
-        private ToolStripMenuItem verReservaToolStripMenuItem;
-        private ToolStripMenuItem registrarReservaToolStripMenuItem;
         private ToolStripMenuItem usuariosToolStripMenuItem;
         private ToolStripMenuItem crearUsuarioToolStripMenuItem;
+        private ToolStripMenuItem inicioToolStripMenuItem;
+        private ToolStripMenuItem loginToolStripMenuItem;
+        private ToolStripMenuItem logOutToolStripMenuItem;
+        private ToolStripMenuItem permisosRolesUsuariosToolStripMenuItem;
     }
 }

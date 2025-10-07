@@ -2,20 +2,6 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "DAL/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Entity": "1.0.0",
-          "Mapper": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DAL.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DAL.dll": {}
-        }
-      },
       "Entity/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -42,11 +28,6 @@
     }
   },
   "libraries": {
-    "DAL/1.0.0": {
-      "type": "project",
-      "path": "../DAL/DAL.csproj",
-      "msbuildProject": "../DAL/DAL.csproj"
-    },
     "Entity/1.0.0": {
       "type": "project",
       "path": "../Entity/Entity.csproj",
@@ -60,8 +41,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "DAL >= 1.0.0",
-      "Entity >= 1.0.0"
+      "Entity >= 1.0.0",
+      "Mapper >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -96,11 +77,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAL\\DAL.csproj": {
-              "projectPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\DAL\\DAL.csproj"
-            },
             "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Entity.csproj": {
               "projectPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Entity\\Entity.csproj"
+            },
+            "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Mapper\\Mapper.csproj": {
+              "projectPath": "E:\\UAI\\Trabajo final\\3 entrega\\Trabajo_Final\\TrabajoFinal\\Mapper\\Mapper.csproj"
             }
           }
         }

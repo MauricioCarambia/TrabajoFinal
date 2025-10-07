@@ -1,12 +1,12 @@
 ﻿
 using Entity;
-using DAL;
+using Mapper;
 
 namespace BLL
 {
     public class BLLUsuarios
     {
-        private readonly DALUsuarios usuarioDAL = new DALUsuarios();
+        private readonly MPPUsuarios usuarioDAL = new MPPUsuarios();
 
         public List<Usuarios> ObtenerUsuarios()
         {

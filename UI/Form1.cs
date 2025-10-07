@@ -62,5 +62,22 @@ namespace UI
             frm.MdiParent = this;   // le decís que el padre es el MDI actual
             frm.Show();
         }
+
+        private void permisosRolesUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGestionUsuarios frm = new frmGestionUsuarios();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void frmMDI_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
