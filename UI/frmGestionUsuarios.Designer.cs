@@ -34,7 +34,7 @@
             chbBloqueado = new CheckBox();
             txtPassword = new TextBox();
             txtNombre = new TextBox();
-            txtID = new TextBox();
+            txtIDUsuario = new TextBox();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -79,15 +79,15 @@
             btnLimpiar = new Button();
             btnSalir = new Button();
             groupBox9 = new GroupBox();
-            treeUsuarios = new TreeView();
+            treeVwUsuarios = new TreeView();
             groupBox10 = new GroupBox();
-            treeRoles = new TreeView();
+            treeVwRoles = new TreeView();
             groupBox11 = new GroupBox();
-            treePermisos = new TreeView();
+            treeVwPermisos = new TreeView();
             groupBox12 = new GroupBox();
-            treePermisosRol = new TreeView();
+            treeVwPermisosPorRol = new TreeView();
             groupBox13 = new GroupBox();
-            treeRolesPermisosUsuarios = new TreeView();
+            treeVwUsuarioPermisosRoles = new TreeView();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -110,7 +110,7 @@
             groupBox1.Controls.Add(chbBloqueado);
             groupBox1.Controls.Add(txtPassword);
             groupBox1.Controls.Add(txtNombre);
-            groupBox1.Controls.Add(txtID);
+            groupBox1.Controls.Add(txtIDUsuario);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
@@ -140,6 +140,7 @@
             chbDescifrar.TabIndex = 7;
             chbDescifrar.Text = "Descifrar/Cifrar Clave";
             chbDescifrar.UseVisualStyleBackColor = true;
+            chbDescifrar.CheckedChanged += chbDescifrar_CheckedChanged;
             // 
             // chbBloqueado
             // 
@@ -167,13 +168,13 @@
             txtNombre.Size = new Size(154, 23);
             txtNombre.TabIndex = 4;
             // 
-            // txtID
+            // txtIDUsuario
             // 
-            txtID.Location = new Point(85, 27);
-            txtID.Name = "txtID";
-            txtID.ReadOnly = true;
-            txtID.Size = new Size(154, 23);
-            txtID.TabIndex = 3;
+            txtIDUsuario.Location = new Point(85, 27);
+            txtIDUsuario.Name = "txtIDUsuario";
+            txtIDUsuario.ReadOnly = true;
+            txtIDUsuario.Size = new Size(154, 23);
+            txtIDUsuario.TabIndex = 3;
             // 
             // label3
             // 
@@ -232,6 +233,7 @@
             btnQuitarPermisoSuario.TabIndex = 3;
             btnQuitarPermisoSuario.Text = "Quitar Permiso a Usuario";
             btnQuitarPermisoSuario.UseVisualStyleBackColor = true;
+            btnQuitarPermisoSuario.Click += btnQuitarPermisoSuario_Click;
             // 
             // btnAsociarPermisoUsuario
             // 
@@ -241,6 +243,7 @@
             btnAsociarPermisoUsuario.TabIndex = 2;
             btnAsociarPermisoUsuario.Text = "Asociar Permiso a Usuario";
             btnAsociarPermisoUsuario.UseVisualStyleBackColor = true;
+            btnAsociarPermisoUsuario.Click += btnAsociarPermisoUsuario_Click;
             // 
             // groupBox3
             // 
@@ -261,6 +264,7 @@
             btnQuitarRolUsuario.TabIndex = 1;
             btnQuitarRolUsuario.Text = "Quitar Rol a Usuario";
             btnQuitarRolUsuario.UseVisualStyleBackColor = true;
+            btnQuitarRolUsuario.Click += btnQuitarRolUsuario_Click;
             // 
             // btnAsociarRolUsuario
             // 
@@ -270,6 +274,7 @@
             btnAsociarRolUsuario.TabIndex = 0;
             btnAsociarRolUsuario.Text = "Asociar Rol a Usuario";
             btnAsociarRolUsuario.UseVisualStyleBackColor = true;
+            btnAsociarRolUsuario.Click += btnAsociarRolUsuario_Click;
             // 
             // groupBox5
             // 
@@ -355,6 +360,7 @@
             cmbRoles.Name = "cmbRoles";
             cmbRoles.Size = new Size(210, 23);
             cmbRoles.TabIndex = 2;
+            cmbRoles.SelectedIndexChanged += cmbRoles_SelectedIndexChanged;
             // 
             // btnQuitarRolesUsuario
             // 
@@ -364,6 +370,7 @@
             btnQuitarRolesUsuario.TabIndex = 1;
             btnQuitarRolesUsuario.Text = "Quitar Roles a Usuario";
             btnQuitarRolesUsuario.UseVisualStyleBackColor = true;
+            btnQuitarRolesUsuario.Click += btnQuitarRolesUsuario_Click;
             // 
             // btnAsociarRolesUsuario
             // 
@@ -373,6 +380,7 @@
             btnAsociarRolesUsuario.TabIndex = 0;
             btnAsociarRolesUsuario.Text = "Asociar Roles a Usuario";
             btnAsociarRolesUsuario.UseVisualStyleBackColor = true;
+            btnAsociarRolesUsuario.Click += btnAsociarRolesUsuario_Click;
             // 
             // btnEliminarRol
             // 
@@ -492,6 +500,7 @@
             cmbItem.Name = "cmbItem";
             cmbItem.Size = new Size(167, 23);
             cmbItem.TabIndex = 14;
+            cmbItem.SelectedIndexChanged += cmbItem_SelectedIndexChanged;
             // 
             // label11
             // 
@@ -509,6 +518,7 @@
             cmbMenu.Name = "cmbMenu";
             cmbMenu.Size = new Size(130, 23);
             cmbMenu.TabIndex = 12;
+            cmbMenu.SelectedIndexChanged += cmbMenu_SelectedIndexChanged;
             // 
             // txtNombrePermiso
             // 
@@ -563,6 +573,7 @@
             btnQuitarPermisoRol.TabIndex = 19;
             btnQuitarPermisoRol.Text = "Quitar Permiso a Rol";
             btnQuitarPermisoRol.UseVisualStyleBackColor = true;
+            btnQuitarPermisoRol.Click += btnQuitarPermisoRol_Click;
             // 
             // btnAsociarPermisoRol
             // 
@@ -572,6 +583,7 @@
             btnAsociarPermisoRol.TabIndex = 18;
             btnAsociarPermisoRol.Text = "Asociar Permiso a Rol";
             btnAsociarPermisoRol.UseVisualStyleBackColor = true;
+            btnAsociarPermisoRol.Click += btnAsociarPermisoRol_Click;
             // 
             // btnLimpiar
             // 
@@ -581,6 +593,7 @@
             btnLimpiar.TabIndex = 18;
             btnLimpiar.Text = "Limpiar Campos";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnSalir
             // 
@@ -594,7 +607,7 @@
             // 
             // groupBox9
             // 
-            groupBox9.Controls.Add(treeUsuarios);
+            groupBox9.Controls.Add(treeVwUsuarios);
             groupBox9.Location = new Point(12, 294);
             groupBox9.Name = "groupBox9";
             groupBox9.Size = new Size(225, 349);
@@ -602,17 +615,17 @@
             groupBox9.TabStop = false;
             groupBox9.Text = "Usuarios";
             // 
-            // treeUsuarios
+            // treeVwUsuarios
             // 
-            treeUsuarios.Location = new Point(6, 22);
-            treeUsuarios.Name = "treeUsuarios";
-            treeUsuarios.Size = new Size(213, 321);
-            treeUsuarios.TabIndex = 0;
-            treeUsuarios.AfterSelect += treeUsuarios_AfterSelect;
+            treeVwUsuarios.Location = new Point(6, 22);
+            treeVwUsuarios.Name = "treeVwUsuarios";
+            treeVwUsuarios.Size = new Size(213, 321);
+            treeVwUsuarios.TabIndex = 0;
+            treeVwUsuarios.AfterSelect += treeVwUsuarios_AfterSelect;
             // 
             // groupBox10
             // 
-            groupBox10.Controls.Add(treeRoles);
+            groupBox10.Controls.Add(treeVwRoles);
             groupBox10.Location = new Point(245, 297);
             groupBox10.Name = "groupBox10";
             groupBox10.Size = new Size(232, 349);
@@ -620,17 +633,17 @@
             groupBox10.TabStop = false;
             groupBox10.Text = "Roles";
             // 
-            // treeRoles
+            // treeVwRoles
             // 
-            treeRoles.Location = new Point(6, 22);
-            treeRoles.Name = "treeRoles";
-            treeRoles.Size = new Size(220, 321);
-            treeRoles.TabIndex = 1;
-            treeRoles.AfterSelect += treeRoles_AfterSelect;
+            treeVwRoles.Location = new Point(6, 22);
+            treeVwRoles.Name = "treeVwRoles";
+            treeVwRoles.Size = new Size(220, 321);
+            treeVwRoles.TabIndex = 1;
+            treeVwRoles.AfterSelect += treeVwRoles_AfterSelect;
             // 
             // groupBox11
             // 
-            groupBox11.Controls.Add(treePermisos);
+            groupBox11.Controls.Add(treeVwPermisos);
             groupBox11.Location = new Point(483, 297);
             groupBox11.Name = "groupBox11";
             groupBox11.Size = new Size(234, 349);
@@ -638,16 +651,17 @@
             groupBox11.TabStop = false;
             groupBox11.Text = "Permisos";
             // 
-            // treePermisos
+            // treeVwPermisos
             // 
-            treePermisos.Location = new Point(6, 22);
-            treePermisos.Name = "treePermisos";
-            treePermisos.Size = new Size(222, 321);
-            treePermisos.TabIndex = 1;
+            treeVwPermisos.Location = new Point(6, 22);
+            treeVwPermisos.Name = "treeVwPermisos";
+            treeVwPermisos.Size = new Size(222, 321);
+            treeVwPermisos.TabIndex = 1;
+            treeVwPermisos.AfterSelect += treeVwPermisos_AfterSelect;
             // 
             // groupBox12
             // 
-            groupBox12.Controls.Add(treePermisosRol);
+            groupBox12.Controls.Add(treeVwPermisosPorRol);
             groupBox12.Location = new Point(723, 297);
             groupBox12.Name = "groupBox12";
             groupBox12.Size = new Size(232, 349);
@@ -655,16 +669,17 @@
             groupBox12.TabStop = false;
             groupBox12.Text = "Permisos Por Rol";
             // 
-            // treePermisosRol
+            // treeVwPermisosPorRol
             // 
-            treePermisosRol.Location = new Point(6, 22);
-            treePermisosRol.Name = "treePermisosRol";
-            treePermisosRol.Size = new Size(220, 321);
-            treePermisosRol.TabIndex = 1;
+            treeVwPermisosPorRol.Location = new Point(6, 22);
+            treeVwPermisosPorRol.Name = "treeVwPermisosPorRol";
+            treeVwPermisosPorRol.Size = new Size(220, 321);
+            treeVwPermisosPorRol.TabIndex = 1;
+            treeVwPermisosPorRol.AfterSelect += treeVwPermisosRol_AfterSelect;
             // 
             // groupBox13
             // 
-            groupBox13.Controls.Add(treeRolesPermisosUsuarios);
+            groupBox13.Controls.Add(treeVwUsuarioPermisosRoles);
             groupBox13.Location = new Point(961, 297);
             groupBox13.Name = "groupBox13";
             groupBox13.Size = new Size(249, 349);
@@ -672,12 +687,13 @@
             groupBox13.TabStop = false;
             groupBox13.Text = "Roles y Permisos del Usuario";
             // 
-            // treeRolesPermisosUsuarios
+            // treeVwUsuarioPermisosRoles
             // 
-            treeRolesPermisosUsuarios.Location = new Point(6, 22);
-            treeRolesPermisosUsuarios.Name = "treeRolesPermisosUsuarios";
-            treeRolesPermisosUsuarios.Size = new Size(237, 321);
-            treeRolesPermisosUsuarios.TabIndex = 1;
+            treeVwUsuarioPermisosRoles.Location = new Point(6, 22);
+            treeVwUsuarioPermisosRoles.Name = "treeVwUsuarioPermisosRoles";
+            treeVwUsuarioPermisosRoles.Size = new Size(237, 321);
+            treeVwUsuarioPermisosRoles.TabIndex = 1;
+            treeVwUsuarioPermisosRoles.AfterSelect += treeVwRolesPermisosUsuarios_AfterSelect;
             // 
             // frmGestionUsuarios
             // 
@@ -727,7 +743,7 @@
         private CheckBox chbBloqueado;
         private TextBox txtPassword;
         private TextBox txtNombre;
-        private TextBox txtID;
+        private TextBox txtIDUsuario;
         private Label label3;
         private Label label2;
         private Label label1;
@@ -772,14 +788,14 @@
         private Button btnLimpiar;
         private Button btnSalir;
         private GroupBox groupBox9;
-        private TreeView treeUsuarios;
+        private TreeView treeVwUsuarios;
         private GroupBox groupBox10;
-        private TreeView treeRoles;
+        private TreeView treeVwRoles;
         private GroupBox groupBox11;
-        private TreeView treePermisos;
+        private TreeView treeVwPermisos;
         private GroupBox groupBox12;
-        private TreeView treePermisosRol;
+        private TreeView treeVwPermisosPorRol;
         private GroupBox groupBox13;
-        private TreeView treeRolesPermisosUsuarios;
+        private TreeView treeVwUsuarioPermisosRoles;
     }
 }

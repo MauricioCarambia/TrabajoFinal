@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class BERoles
+    public class BEEntidad 
     {
+        #region "Propiedades"
+
         public int Id { get; set; }
-        public string NombreRol { get; set; } = string.Empty;
+
+        
+
+        #endregion
     }
 }

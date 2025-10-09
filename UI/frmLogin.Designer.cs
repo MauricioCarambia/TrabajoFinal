@@ -30,7 +30,7 @@
         {
             btnLogin = new Button();
             txtUsuario = new TextBox();
-            txtContrasenia = new TextBox();
+            txtPassword = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -47,6 +47,7 @@
             btnLogin.TabIndex = 0;
             btnLogin.Text = "Entrar";
             btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
             // txtUsuario
             // 
@@ -56,13 +57,13 @@
             txtUsuario.Size = new Size(148, 27);
             txtUsuario.TabIndex = 1;
             // 
-            // txtContrasenia
+            // txtPassword
             // 
-            txtContrasenia.Font = new Font("Segoe UI", 11F);
-            txtContrasenia.Location = new Point(39, 169);
-            txtContrasenia.Name = "txtContrasenia";
-            txtContrasenia.Size = new Size(148, 27);
-            txtContrasenia.TabIndex = 2;
+            txtPassword.Font = new Font("Segoe UI", 11F);
+            txtPassword.Location = new Point(39, 169);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(148, 27);
+            txtPassword.TabIndex = 2;
             // 
             // label1
             // 
@@ -101,7 +102,7 @@
             groupBox1.Controls.Add(btnLogin);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(txtUsuario);
-            groupBox1.Controls.Add(txtContrasenia);
+            groupBox1.Controls.Add(txtPassword);
             groupBox1.Location = new Point(49, 39);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(219, 299);
@@ -118,6 +119,7 @@
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            Load += frmLogin_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -127,7 +129,7 @@
 
         private Button btnLogin;
         private TextBox txtUsuario;
-        private TextBox txtContrasenia;
+        private TextBox txtPassword;
         private Label label1;
         private Label label2;
         private Label label3;

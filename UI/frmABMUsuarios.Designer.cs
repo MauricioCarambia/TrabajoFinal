@@ -36,10 +36,11 @@
             label3 = new Label();
             label4 = new Label();
             txtUsuario = new TextBox();
-            txtContrasenia = new TextBox();
+            txtPassword = new TextBox();
             dgvUsuarios = new DataGridView();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            chkEncriptar = new CheckBox();
             btnLimpiar = new Button();
             txtID = new TextBox();
             label2 = new Label();
@@ -130,13 +131,13 @@
             txtUsuario.Size = new Size(150, 27);
             txtUsuario.TabIndex = 8;
             // 
-            // txtContrasenia
+            // txtPassword
             // 
-            txtContrasenia.Font = new Font("Segoe UI", 11F);
-            txtContrasenia.Location = new Point(140, 175);
-            txtContrasenia.Name = "txtContrasenia";
-            txtContrasenia.Size = new Size(150, 27);
-            txtContrasenia.TabIndex = 9;
+            txtPassword.Font = new Font("Segoe UI", 11F);
+            txtPassword.Location = new Point(140, 175);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(150, 27);
+            txtPassword.TabIndex = 9;
             // 
             // dgvUsuarios
             // 
@@ -164,13 +165,14 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(chkEncriptar);
             groupBox2.Controls.Add(btnLimpiar);
             groupBox2.Controls.Add(txtID);
             groupBox2.Controls.Add(btnSalir);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(btnGuardar);
-            groupBox2.Controls.Add(txtContrasenia);
+            groupBox2.Controls.Add(txtPassword);
             groupBox2.Controls.Add(btnEliminar);
             groupBox2.Controls.Add(txtUsuario);
             groupBox2.Controls.Add(btnModificar);
@@ -182,6 +184,17 @@
             groupBox2.TabIndex = 12;
             groupBox2.TabStop = false;
             groupBox2.Text = "ABM Usuario";
+            // 
+            // chkEncriptar
+            // 
+            chkEncriptar.AutoSize = true;
+            chkEncriptar.Location = new Point(140, 208);
+            chkEncriptar.Name = "chkEncriptar";
+            chkEncriptar.Size = new Size(144, 19);
+            chkEncriptar.TabIndex = 13;
+            chkEncriptar.Text = "Desencriptar/Encriptar";
+            chkEncriptar.UseVisualStyleBackColor = true;
+            chkEncriptar.CheckedChanged += chkEncriptar_CheckedChanged;
             // 
             // btnLimpiar
             // 
@@ -240,12 +253,13 @@
         private Label label3;
         private Label label4;
         private TextBox txtUsuario;
-        private TextBox txtContrasenia;
+        private TextBox txtPassword;
         private DataGridView dgvUsuarios;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private TextBox txtID;
         private Label label2;
         private Button btnLimpiar;
+        private CheckBox chkEncriptar;
     }
 }

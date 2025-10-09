@@ -14,3 +14,5 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\refint\Mapper.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\Mapper.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\ref\Mapper.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.pdb

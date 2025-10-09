@@ -37,3 +37,5 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-wi
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmMesas.resources
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmProveedores.resources
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmReserva.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\Seguridad.pdb

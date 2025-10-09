@@ -1,10 +1,28 @@
+using BLL;
+using BLL.Composite;
+using Entity;
+using Entity.Composite;
+
 namespace UI
 {
     public partial class frmMDI : Form
     {
-        public frmMDI()
+        BEUsuario oBEUsuario;
+        BLLUsuario oBLLUsuario;
+        BLLPermiso oBLLPermiso;
+        BERol oBERol;
+        BLLRol oBLLRol;
+        List<BEPermiso> listaPermisos;
+        private MenuStrip oMenuStrip;
+        public frmMDI(BEUsuario oBEUsuarioLogueado)//BEUsuario oBEUsuarioLogueado
         {
             InitializeComponent();
+            oBLLPermiso = new BLLPermiso();
+            oBLLUsuario = new BLLUsuario();
+            oBLLRol = new BLLRol();
+            this.oBEUsuario = oBEUsuarioLogueado;
+            listaPermisos = new List<BEPermiso>();
+            listaPermisos = oBLLUsuario.ListarTodosLosPermisosDelUsuario(oBEUsuario);
         }
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -72,12 +90,91 @@ namespace UI
 
         private void frmMDI_Load(object sender, EventArgs e)
         {
-
+            oMenuStrip = this.menuStrip1;
+            OcultarTodosLosItemsDelMenu();
+            if (listaPermisos != null) { MostrarItemsSegunPermisos(listaPermisos); }
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frmLogin fmLogin = new frmLogin();
+            fmLogin.Show();
+        }
+        public void OcultarTodosLosItemsDelMenu()
+        {
+            if (this.menuStrip1 != null)
+            {
+                //Recorro todos los elementos del menú principal:
+                foreach (ToolStripItem item in menuStrip1.Items)
+                {
+                    if (item is ToolStripMenuItem menuItem)
+                    {
+                        //Pongo a todos los items ocultos:
+                        menuItem.Visible = false;
+                        //Si tiene subitems, se llama de vuelta al método para ocultar los subitems:
+                        if (menuItem.DropDownItems.Count > 0) { OcultarItemsDelSubMenu(menuItem.DropDownItems); }
+                    }
+                }
+            }
+        }
+        private void OcultarItemsDelSubMenu(ToolStripItemCollection items)
+        {
+            //Recorro todos los elementos del submenú:
+            foreach (ToolStripItem item in items)
+            {
+                if (item is ToolStripMenuItem subMenuItem)
+                {
+                    //Pongo invisible el elemento del subitem:
+                    subMenuItem.Visible = false;
+                    //Si el elemento tiene submenús, llamar recursivamente a este método
+                    //if (subMenuItem.DropDownItems.Count > 0) { OcultarItemsDelSubMenu(subMenuItem.DropDownItems); }
+                }
+            }
+        }
+        private void MostrarItemsSegunPermisos(List<BEPermiso> permisosUsuario)
+        {
+            foreach (ToolStripItem item in menuStrip1.Items)
+            {
+                if (item is ToolStripMenuItem menuItem)
+                {
+                    //Si el menú principal tiene subitems, Verifico los permisos:
+                    if (menuItem.DropDownItems.Count > 0) { MostrarSubItemsSegunPermisos(menuItem, permisosUsuario); }
+                    if (TienePermiso(menuItem.Text, permisosUsuario)) { menuItem.Visible = true; }
+                }
+            }
+        }
+        private void MostrarSubItemsSegunPermisos(ToolStripMenuItem menuItem, List<BEPermiso> permisosUsuario)
+        {
+            bool algunSubItemVisible = false;
+
+            foreach (ToolStripItem subItem in menuItem.DropDownItems)
+            {
+                if (subItem is ToolStripMenuItem subMenuItem)
+                {
+                    //Meotodo recursioa para verificar subitems:
+                    if (subMenuItem.DropDownItems.Count > 0) { MostrarSubItemsSegunPermisos(subMenuItem, permisosUsuario); }
+
+                    //Verifico si el subitem tiene permisos:
+                    if (TienePermiso(subMenuItem.Text, permisosUsuario))
+                    {
+                        subMenuItem.Visible = true;
+                        algunSubItemVisible = true;
+                    }
+                }
+            }
+            //Si algún subitem es visible, el item también debe ser visible:
+            if (algunSubItemVisible) { menuItem.Visible = true; }
+        }
+        private bool TienePermiso(string nombreItem, List<BEPermiso> permisosUsuario)
+        {
+            //Verifico si algún permiso en la lista de permisos del usuario coincide con el nombre del ítem (ignorando mayúsculas y minúsculas):
+            return permisosUsuario.Any(permiso => permiso.Nombre.Equals(nombreItem, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

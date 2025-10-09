@@ -2,10 +2,14 @@
 <Roles>
   <Rol>
     <Id>4</Id>
-    <Nombre>Cocinero</Nombre>
+    <Nombre>Cocineros</Nombre>
   </Rol>
   <Rol>
     <Id>5</Id>
     <Nombre>Administrador</Nombre>
+  </Rol>
+  <Rol>
+    <Id>6</Id>
+    <Nombre>asd</Nombre>
   </Rol>
 </Roles>

@@ -20,4 +20,9 @@
     <Nombre>xcxc</Nombre>
     <Contraseña>2</Contraseña>
   </Usuario>
+  <Usuario>
+    <Id>7</Id>
+    <Nombre>qwee</Nombre>
+    <Contraseña>qwee</Contraseña>
+  </Usuario>
 </Usuarios>

@@ -37,7 +37,8 @@
       },
       "Mapper/1.0.0": {
         "dependencies": {
-          "Entity": "1.0.0"
+          "Entity": "1.0.0",
+          "Seguridad": "1.0.0"
         },
         "runtime": {
           "Mapper.dll": {
@@ -46,9 +47,9 @@
           }
         }
       },
-      "DAL/1.0.0.0": {
+      "Seguridad/1.0.0": {
         "runtime": {
-          "DAL.dll": {
+          "Seguridad.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -77,8 +78,8 @@
       "serviceable": false,
       "sha512": ""
     },
-    "DAL/1.0.0.0": {
-      "type": "reference",
+    "Seguridad/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

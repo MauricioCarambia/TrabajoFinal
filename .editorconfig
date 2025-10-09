@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CS8602: Desreferencia de una referencia posiblemente NULL.
+dotnet_diagnostic.CS8602.severity = none
+
+# CA2200: Iniciar de nuevo para preservar los detalles de la pila
+dotnet_diagnostic.CA2200.severity = none

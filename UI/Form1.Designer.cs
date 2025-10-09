@@ -76,14 +76,15 @@
             // loginToolStripMenuItem
             // 
             loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            loginToolStripMenuItem.Size = new Size(119, 22);
+            loginToolStripMenuItem.Size = new Size(180, 22);
             loginToolStripMenuItem.Text = "Log-In";
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(119, 22);
+            logOutToolStripMenuItem.Size = new Size(180, 22);
             logOutToolStripMenuItem.Text = "Log-Out";
+            logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // reservasToolStripMenuItem
             // 

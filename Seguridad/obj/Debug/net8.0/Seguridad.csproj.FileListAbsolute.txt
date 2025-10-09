@@ -1,0 +1,12 @@
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\bin\Debug\net8.0\Seguridad.deps.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\bin\Debug\net8.0\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\bin\Debug\net8.0\Seguridad.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.GeneratedMSBuildEditorConfig.editorconfig
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.AssemblyInfoInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.AssemblyInfo.cs
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.csproj.CoreCompileInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.sourcelink.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\refint\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\Seguridad.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Seguridad\obj\Debug\net8.0\ref\Seguridad.dll

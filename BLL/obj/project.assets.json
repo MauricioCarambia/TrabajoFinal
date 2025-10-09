@@ -16,13 +16,24 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Entity": "1.0.0"
+          "Entity": "1.0.0",
+          "Seguridad": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Mapper.dll": {}
         },
         "runtime": {
           "bin/placeholder/Mapper.dll": {}
+        }
+      },
+      "Seguridad/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Seguridad.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Seguridad.dll": {}
         }
       }
     }
@@ -37,6 +48,11 @@
       "type": "project",
       "path": "../Mapper/Mapper.csproj",
       "msbuildProject": "../Mapper/Mapper.csproj"
+    },
+    "Seguridad/1.0.0": {
+      "type": "project",
+      "path": "../Seguridad/Seguridad.csproj",
+      "msbuildProject": "../Seguridad/Seguridad.csproj"
     }
   },
   "projectFileDependencyGroups": {
