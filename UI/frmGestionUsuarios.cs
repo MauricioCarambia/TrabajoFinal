@@ -24,7 +24,7 @@ namespace UI
         private MenuStrip menuStrip;
 
 
-        public frmGestionUsuarios()
+        public frmGestionUsuarios(MenuStrip menuStrip)
         {
             InitializeComponent();
             oBEUsuario = new BEUsuario();

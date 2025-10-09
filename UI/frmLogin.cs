@@ -16,7 +16,7 @@ namespace UI
 {
     public partial class frmLogin : Form
     {
-        BEUsuario oBEUsuario;
+        BEUsuario? oBEUsuario;
         BLLUsuario oBLLUsuario;
         Regex nwRegex;
         int intento;
@@ -111,13 +111,15 @@ namespace UI
         {
             txtUsuario.Text = string.Empty.Trim();
             txtPassword.Text = string.Empty.Trim();
-            //ckBxLoginMostrarPassword.Checked = false;
+            chkEncriptado.Checked = false;
         }
 
-        //private void ckBxLoginMostrarPassword_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (ckBxLoginMostrarPassword.Checked == true) { txtPassword.UseSystemPasswordChar = false; }
-        //    else { txtPassword.UseSystemPasswordChar = true; }
-        //}
+        private void chkEncriptado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkEncriptado.Checked == true) { txtPassword.UseSystemPasswordChar = false; }
+               else { txtPassword.UseSystemPasswordChar = true; }
+        }
+
+       
     }
 }

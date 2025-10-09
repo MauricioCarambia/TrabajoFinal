@@ -1,0 +1,12 @@
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\bin\Debug\net8.0\BackUp.deps.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\bin\Debug\net8.0\BackUp.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\bin\Debug\net8.0\BackUp.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.GeneratedMSBuildEditorConfig.editorconfig
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.AssemblyInfoInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.AssemblyInfo.cs
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.csproj.CoreCompileInputs.cache
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.sourcelink.json
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\refint\BackUp.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\BackUp.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\BackUp\obj\Debug\net8.0\ref\BackUp.dll

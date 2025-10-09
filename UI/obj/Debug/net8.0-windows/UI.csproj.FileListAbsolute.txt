@@ -39,3 +39,8 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-wi
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmReserva.resources
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\Seguridad.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\Seguridad.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\BackUp.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\bin\Debug\net8.0-windows\BackUp.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmBackup.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmBitacora.resources
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmRestore.resources

@@ -10,11 +10,11 @@ namespace UI
         BEUsuario oBEUsuario;
         BLLUsuario oBLLUsuario;
         BLLPermiso oBLLPermiso;
-        BERol oBERol;
+        //BERol oBERol;
         BLLRol oBLLRol;
         List<BEPermiso> listaPermisos;
         private MenuStrip oMenuStrip;
-        public frmMDI(BEUsuario oBEUsuarioLogueado)//BEUsuario oBEUsuarioLogueado
+        public frmMDI(BEUsuario oBEUsuarioLogueado)
         {
             InitializeComponent();
             oBLLPermiso = new BLLPermiso();
@@ -83,7 +83,7 @@ namespace UI
 
         private void permisosRolesUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmGestionUsuarios frm = new frmGestionUsuarios();
+            frmGestionUsuarios frm = new frmGestionUsuarios(menuStrip1);
             frm.MdiParent = this;   // le decís que el padre es el MDI actual
             frm.Show();
         }
@@ -175,6 +175,27 @@ namespace UI
         {
             //Verifico si algún permiso en la lista de permisos del usuario coincide con el nombre del ítem (ignorando mayúsculas y minúsculas):
             return permisosUsuario.Any(permiso => permiso.Nombre.Equals(nombreItem, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private void verBitacoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBitacora frm = new frmBitacora();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void hacerBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBackup frm = new frmBackup(oBEUsuario);
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void haverRestoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRestore frm = new frmRestore(oBEUsuario);
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
         }
     }
 }

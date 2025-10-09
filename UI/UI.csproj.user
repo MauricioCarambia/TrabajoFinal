@@ -4,6 +4,12 @@
     <Compile Update="frmABMUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmCargarPedido.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +50,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmReserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmRestore.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

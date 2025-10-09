@@ -52,13 +52,16 @@
             permisosRolesUsuariosToolStripMenuItem = new ToolStripMenuItem();
             dashBoardToolStripMenuItem = new ToolStripMenuItem();
             verToolStripMenuItem = new ToolStripMenuItem();
-            salirToolStripMenuItem = new ToolStripMenuItem();
+            bitacoraToolStripMenuItem = new ToolStripMenuItem();
+            verBitacoraToolStripMenuItem = new ToolStripMenuItem();
+            hacerBackupToolStripMenuItem = new ToolStripMenuItem();
+            haverRestoreToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { inicioToolStripMenuItem, reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, usuariosToolStripMenuItem, dashBoardToolStripMenuItem, salirToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inicioToolStripMenuItem, reservasToolStripMenuItem, inventarioToolStripMenuItem, pedidosToolStripMenuItem, cobrarToolStripMenuItem, cocinaToolStripMenuItem, usuariosToolStripMenuItem, dashBoardToolStripMenuItem, bitacoraToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -219,12 +222,33 @@
             verToolStripMenuItem.Size = new Size(90, 22);
             verToolStripMenuItem.Text = "Ver";
             // 
-            // salirToolStripMenuItem
+            // bitacoraToolStripMenuItem
             // 
-            salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            salirToolStripMenuItem.Size = new Size(41, 20);
-            salirToolStripMenuItem.Text = "Salir";
-            salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
+            bitacoraToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verBitacoraToolStripMenuItem, hacerBackupToolStripMenuItem, haverRestoreToolStripMenuItem });
+            bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
+            bitacoraToolStripMenuItem.Size = new Size(62, 20);
+            bitacoraToolStripMenuItem.Text = "Bitacora";
+            // 
+            // verBitacoraToolStripMenuItem
+            // 
+            verBitacoraToolStripMenuItem.Name = "verBitacoraToolStripMenuItem";
+            verBitacoraToolStripMenuItem.Size = new Size(147, 22);
+            verBitacoraToolStripMenuItem.Text = "Ver Bitacora";
+            verBitacoraToolStripMenuItem.Click += verBitacoraToolStripMenuItem_Click;
+            // 
+            // hacerBackupToolStripMenuItem
+            // 
+            hacerBackupToolStripMenuItem.Name = "hacerBackupToolStripMenuItem";
+            hacerBackupToolStripMenuItem.Size = new Size(147, 22);
+            hacerBackupToolStripMenuItem.Text = "Hacer Backup";
+            hacerBackupToolStripMenuItem.Click += hacerBackupToolStripMenuItem_Click;
+            // 
+            // haverRestoreToolStripMenuItem
+            // 
+            haverRestoreToolStripMenuItem.Name = "haverRestoreToolStripMenuItem";
+            haverRestoreToolStripMenuItem.Size = new Size(147, 22);
+            haverRestoreToolStripMenuItem.Text = "Haver Restore";
+            haverRestoreToolStripMenuItem.Click += haverRestoreToolStripMenuItem_Click;
             // 
             // frmMDI
             // 
@@ -262,7 +286,6 @@
         private ToolStripMenuItem pedidosToolStripMenuItem1;
         private ToolStripMenuItem dashBoardToolStripMenuItem;
         private ToolStripMenuItem verToolStripMenuItem;
-        private ToolStripMenuItem salirToolStripMenuItem;
         private ToolStripMenuItem verInsumosToolStripMenuItem;
         private ToolStripMenuItem registrarMesasToolStripMenuItem;
         private ToolStripMenuItem usuariosToolStripMenuItem;
@@ -271,5 +294,9 @@
         private ToolStripMenuItem loginToolStripMenuItem;
         private ToolStripMenuItem logOutToolStripMenuItem;
         private ToolStripMenuItem permisosRolesUsuariosToolStripMenuItem;
+        private ToolStripMenuItem bitacoraToolStripMenuItem;
+        private ToolStripMenuItem verBitacoraToolStripMenuItem;
+        private ToolStripMenuItem hacerBackupToolStripMenuItem;
+        private ToolStripMenuItem haverRestoreToolStripMenuItem;
     }
 }

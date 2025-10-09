@@ -35,13 +35,14 @@
             label2 = new Label();
             label3 = new Label();
             groupBox1 = new GroupBox();
+            chkEncriptado = new CheckBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnLogin
             // 
             btnLogin.Font = new Font("Segoe UI", 11F);
-            btnLogin.Location = new Point(39, 231);
+            btnLogin.Location = new Point(39, 247);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(148, 37);
             btnLogin.TabIndex = 0;
@@ -97,6 +98,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(chkEncriptado);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(btnLogin);
@@ -109,6 +111,17 @@
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Login";
+            // 
+            // chkEncriptado
+            // 
+            chkEncriptado.AutoSize = true;
+            chkEncriptado.Location = new Point(48, 211);
+            chkEncriptado.Name = "chkEncriptado";
+            chkEncriptado.Size = new Size(130, 19);
+            chkEncriptado.TabIndex = 6;
+            chkEncriptado.Text = "Mostrar Contraseña";
+            chkEncriptado.UseVisualStyleBackColor = true;
+            chkEncriptado.CheckedChanged += chkEncriptado_CheckedChanged;
             // 
             // frmLogin
             // 
@@ -134,5 +147,6 @@
         private Label label2;
         private Label label3;
         private GroupBox groupBox1;
+        private CheckBox chkEncriptado;
     }
 }
