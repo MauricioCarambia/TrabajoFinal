@@ -113,9 +113,9 @@
             groupBox2.Controls.Add(txtNombre);
             groupBox2.Controls.Add(txtDNI);
             groupBox2.Controls.Add(label3);
-            groupBox2.Location = new Point(458, 357);
+            groupBox2.Location = new Point(444, 357);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(413, 244);
+            groupBox2.Size = new Size(345, 244);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos Cliente";
@@ -133,7 +133,7 @@
             // txtIdCliente
             // 
             txtIdCliente.Font = new Font("Segoe UI", 11F);
-            txtIdCliente.Location = new Point(149, 22);
+            txtIdCliente.Location = new Point(48, 22);
             txtIdCliente.Name = "txtIdCliente";
             txtIdCliente.ReadOnly = true;
             txtIdCliente.Size = new Size(147, 27);
@@ -153,7 +153,7 @@
             // btnBuscar
             // 
             btnBuscar.Font = new Font("Segoe UI", 11F);
-            btnBuscar.Location = new Point(302, 65);
+            btnBuscar.Location = new Point(201, 65);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(95, 35);
             btnBuscar.TabIndex = 6;
@@ -202,7 +202,7 @@
             // txtDNI
             // 
             txtDNI.Font = new Font("Segoe UI", 11F);
-            txtDNI.Location = new Point(149, 69);
+            txtDNI.Location = new Point(48, 69);
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(147, 27);
             txtDNI.TabIndex = 1;
@@ -240,7 +240,7 @@
             // btnReservar
             // 
             btnReservar.Font = new Font("Segoe UI", 11F);
-            btnReservar.Location = new Point(48, 182);
+            btnReservar.Location = new Point(31, 182);
             btnReservar.Name = "btnReservar";
             btnReservar.Size = new Size(95, 35);
             btnReservar.TabIndex = 7;
@@ -259,9 +259,9 @@
             groupBox3.Controls.Add(txtPersonas);
             groupBox3.Controls.Add(txtFecha);
             groupBox3.Controls.Add(btnReservar);
-            groupBox3.Location = new Point(458, 26);
+            groupBox3.Location = new Point(444, 26);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(375, 241);
+            groupBox3.Size = new Size(345, 241);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos Reserva";
@@ -269,7 +269,7 @@
             // btnEliminar
             // 
             btnEliminar.Font = new Font("Segoe UI", 11F);
-            btnEliminar.Location = new Point(250, 182);
+            btnEliminar.Location = new Point(233, 182);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(95, 35);
             btnEliminar.TabIndex = 13;
@@ -279,7 +279,7 @@
             // btnModificar
             // 
             btnModificar.Font = new Font("Segoe UI", 11F);
-            btnModificar.Location = new Point(149, 182);
+            btnModificar.Location = new Point(132, 182);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(95, 35);
             btnModificar.TabIndex = 14;
@@ -371,15 +371,15 @@
             dgvReservas.Location = new Point(15, 22);
             dgvReservas.Name = "dgvReservas";
             dgvReservas.ReadOnly = true;
-            dgvReservas.Size = new Size(392, 516);
+            dgvReservas.Size = new Size(474, 516);
             dgvReservas.TabIndex = 10;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(dgvReservas);
-            groupBox4.Location = new Point(877, 26);
+            groupBox4.Location = new Point(795, 31);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(413, 549);
+            groupBox4.Size = new Size(495, 549);
             groupBox4.TabIndex = 11;
             groupBox4.TabStop = false;
             groupBox4.Text = "Reservas";

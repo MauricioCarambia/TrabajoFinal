@@ -22,6 +22,7 @@ namespace BLL
         public BEMesa ListarObjeto(BEMesa BEMesa) { return oMPPMesa.ListarObjeto(BEMesa); }
 
         public BEMesa ListarObjetoPorId(BEMesa BEMesa) { return oMPPMesa.ListarObjetoPorIdMesa(BEMesa); }
+        public BEMesa ListarObjetoPorNumeroMesa(BEMesa BEMesa) { return oMPPMesa.ListarObjetoPorNumeroMesa(BEMesa); }
 
         public List<BEMesa> ListarTodo() { return oMPPMesa.ListarTodo(); }
 

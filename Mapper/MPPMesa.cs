@@ -242,7 +242,59 @@ namespace Mapper
             catch (Exception ex) { throw ex; }
         }
 
+        public BEMesa ListarObjetoPorNumeroMesa(BEMesa oBEMesa)
+        {
+            try
+            {
+                if (CrearXML() == true)
+                {
+                    BDXML = XDocument.Load(ruta);
+                    if (BDXML != null)
+                    {
+                        if (oBEMesa != null)
+                        {
+                            // Buscar por NúmeroMesa (no por IdMesa)
+                            var buscarMesa = from mesa in BDXML.Root.Element("Mesas").Descendants("mesa")
+                                             where int.Parse(mesa.Element("NumeroMesa").Value.Trim()) == oBEMesa.NumeroMesa
+                                             select mesa;
 
+                            if (buscarMesa.Any())
+                            {
+                                var mesaEncontrada = buscarMesa.First();
+
+                                BEMesa mesa = new BEMesa
+                                {
+                                    IdMesa = int.Parse(mesaEncontrada.Attribute("IdMesa").Value.Trim()),
+                                    NumeroMesa = int.Parse(mesaEncontrada.Element("NumeroMesa").Value.Trim()),
+                                    Capacidad = int.Parse(mesaEncontrada.Element("Capacidad").Value.Trim()),
+                                    Estado = Enum.Parse<BEMesa.EstadoMesa>(mesaEncontrada.Element("Estado").Value.Trim())
+                                };
+
+                                return mesa;
+                            }
+                            else
+                            {
+                                throw new Exception("Error: No se encontró ninguna mesa con el número brindado!");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Error: No se pudo obtener los datos de la mesa!");
+                        }
+                    }
+                    else
+                    {
+                        throw new XmlException("Error: No se pudo recuperar la información del XML!");
+                    }
+                }
+                else
+                {
+                    throw new XmlException("Error: No se pudo recuperar el XML!");
+                }
+            }
+            catch (XmlException ex) { throw ex; }
+            catch (Exception ex) { throw ex; }
+        }
         public BEMesa ListarObjetoPorIdMesa(BEMesa oBEMesa)
         {
             try

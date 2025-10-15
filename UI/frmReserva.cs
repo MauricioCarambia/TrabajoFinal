@@ -220,11 +220,12 @@ namespace UI
             //    throw new Exception("Mesa no encontrada.");
 
             // Ahora obtengo la mesa completa usando IdMesa
-            BEMesa mesa = oBLLMesa.ListarObjetoPorId(new BEMesa { IdMesa = numMesa });
+            // Buscar mesa por número
+            BEMesa mesa = oBLLMesa.ListarObjetoPorNumeroMesa(new BEMesa { NumeroMesa = numMesa });
             if (mesa == null)
                 throw new Exception("Mesa no encontrada.");
 
-            reserva.Mesa = mesa; // Ahora tiene IdMesa, NumeroMesa, Capacidad y Estado
+            reserva.Mesa = mesa;
 
             return reserva;
         }
