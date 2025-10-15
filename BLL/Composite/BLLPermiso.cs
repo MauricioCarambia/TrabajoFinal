@@ -14,13 +14,9 @@ namespace BLL.Composite
 
         MPPPermiso oMPPPermiso;
 
-        #region "Constructor"
-
         public BLLPermiso() { oMPPPermiso = new MPPPermiso(); }
 
-        #endregion
-
-        #region "Métodos"
+        
         public bool CrearXML() { throw new NotImplementedException(); }
 
         public bool Eliminar(BEPermiso oBEPermiso) { return oMPPPermiso.Eliminar(oBEPermiso); }
@@ -35,6 +31,5 @@ namespace BLL.Composite
 
         public bool VerificarExistenciaObjeto(BEPermiso oBEPermiso) { return oMPPPermiso.VerificarExistenciaObjeto(oBEPermiso); }
 
-        #endregion
     }
 }

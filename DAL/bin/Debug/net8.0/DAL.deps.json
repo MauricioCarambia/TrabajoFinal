@@ -15,6 +15,14 @@
           "DAL.dll": {}
         }
       },
+      "BackUp/1.0.0": {
+        "runtime": {
+          "BackUp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Entity/1.0.0": {
         "runtime": {
           "Entity.dll": {
@@ -25,6 +33,7 @@
       },
       "Mapper/1.0.0": {
         "dependencies": {
+          "BackUp": "1.0.0",
           "Entity": "1.0.0",
           "Seguridad": "1.0.0"
         },
@@ -47,6 +56,11 @@
   },
   "libraries": {
     "DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BackUp/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

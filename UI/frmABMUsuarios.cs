@@ -25,6 +25,7 @@ namespace UI
             InitializeComponent();
             oBEUsuario = new BEUsuario();
             oBLLUsuario = new BLLUsuario();
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -34,20 +35,20 @@ namespace UI
                 oBEUsuario = ValidarDatos();
                 if (oBEUsuario != null)
                 {
-                    
-                        if (oBEUsuario.Id == 0)
-                        {
-                            
-                                oBLLUsuario.Guardar(oBEUsuario);
-                                oBEUsuario = oBLLUsuario.ListarObjeto(oBEUsuario);
+
+                    if (oBEUsuario.Id == 0)
+                    {
+
+                        oBLLUsuario.Guardar(oBEUsuario);
+                        oBEUsuario = oBLLUsuario.ListarObjeto(oBEUsuario);
                         CargarUsuarios();
                         LimpiarCampos();
-                                MessageBox.Show("Se ha creado correctamente al Usuario", "Confirmación:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            
-                           
-                        }
-                        else { throw new Exception("Error: No se puede dar el alta a un Usuario que ya existe!"); }
-                    
+                        MessageBox.Show("Se ha creado correctamente al Usuario", "Confirmación:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    }
+                    else { throw new Exception("Error: No se puede dar el alta a un Usuario que ya existe!"); }
+
                 }
             }
             catch (CryptographicException ex) { MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -64,6 +65,7 @@ namespace UI
                 dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
             }
             else { dgvUsuarios.DataSource = null; }
+            LimpiarCampos();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -72,24 +74,24 @@ namespace UI
             {
                 if (dgvUsuarios.Rows.Count > 0)
                 {
-                   
-                        oBEUsuario = ValidarDatos();
-                        if (oBEUsuario != null)
+
+                    oBEUsuario = ValidarDatos();
+                    if (oBEUsuario != null)
+                    {
+                        if (oBEUsuario.Id > 0)
                         {
-                            if (oBEUsuario.Id > 0)
-                            {
-                               
-                                    oBLLUsuario.Guardar(oBEUsuario);
+
+                            oBLLUsuario.Guardar(oBEUsuario);
                             CargarUsuarios();
                             LimpiarCampos();
-                                    MessageBox.Show("Se ha modificado correctamente al Usuario!", "Confirmación:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                
-                               
-                            }
-                            else { throw new Exception("Error: no se puede modificar a un Usuario que todavia no esta registrado!"); }
-                        }
+                            MessageBox.Show("Se ha modificado correctamente al Usuario!", "Confirmación:", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    
+
+                        }
+                        else { throw new Exception("Error: no se puede modificar a un Usuario que todavia no esta registrado!"); }
+                    }
+
+
                 }
                 else { throw new Exception("Error: Primero tiene que existir al Menos un Usuario para poder modificarlo!"); }
             }
@@ -104,24 +106,24 @@ namespace UI
             {
                 if (dgvUsuarios.Rows.Count > 0)
                 {
-                    
-                        oBEUsuario = ValidarDatos();
-                        if (oBEUsuario != null)
+
+                    oBEUsuario = ValidarDatos();
+                    if (oBEUsuario != null)
+                    {
+                        if (oBEUsuario.Id > 0)
                         {
-                            if (oBEUsuario.Id > 0)
-                            {
-                                
-                                  
+
+
                             oBLLUsuario.Eliminar(oBEUsuario);
                             CargarUsuarios();
                             LimpiarCampos();
-                                   
-                                
-                               
-                            }
-                            else { throw new Exception("Error: Los datos del Empleado no Coinciden con el del Usuario!"); }
+
+
+
                         }
-                    
+                        else { throw new Exception("Error: Los datos del Empleado no Coinciden con el del Usuario!"); }
+                    }
+
                 }
                 else { throw new Exception("Error: Primero tiene que existir al menos un Usuario para poder Eliminarlo!"); }
             }
@@ -141,11 +143,11 @@ namespace UI
                     txtID.Text = oBEUsuario.Id.ToString().Trim();
                     txtUsuario.Text = oBEUsuario.Usuario.Trim();
                     txtPassword.Text = oBLLUsuario.DesencriptarPassword(oBEUsuario.Password.Trim());
-                    //ABMUsuarioCkBxActivo.Checked = oBEUsuario.Activo;
-                    //ABMUsuarioCkBxBloqueado.Checked = oBEUsuario.Bloqueado;
+                    chkActivo.Checked = oBEUsuario.Activo;
+                    chkBloqueado.Checked = oBEUsuario.Bloqueado;
                     txtPassword.Text = oBEUsuario.Password.Trim();
-                    
-                    
+
+
                 }
                 else
                 {
@@ -158,7 +160,9 @@ namespace UI
             txtID.Text = "";
             txtUsuario.Text = "";
             txtPassword.Text = "";
-            
+            chkActivo.Checked = false;
+            chkBloqueado.Checked = false;
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -168,8 +172,10 @@ namespace UI
 
         private void frmABMUsuarios_Load(object sender, EventArgs e)
         {
+            
             CargarUsuarios();
             LimpiarCampos();
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -195,10 +201,10 @@ namespace UI
                                 else { oBEUsuario.Id = 0; }
                                 oBEUsuario.Usuario = txtUsuario.Text.Trim();
                                 oBEUsuario.Password = txtPassword.Text.Trim();
-                                //if (ABMUsuarioCkBxActivo.Checked == true) { oBEUsuario.Activo = true; }
-                                //else { oBEUsuario.Activo = false; }
-                                //if (ABMUsuarioCkBxBloqueado.Checked == true) { oBEUsuario.Bloqueado = true; }
-                                //else { oBEUsuario.Bloqueado = false; }
+                                if (chkActivo.Checked == true) { oBEUsuario.Activo = true; }
+                                else { oBEUsuario.Activo = false; }
+                                if (chkBloqueado.Checked == true) { oBEUsuario.Bloqueado = true; }
+                                else { oBEUsuario.Bloqueado = false; }
                                 return oBEUsuario;
                             }
                             else { throw new Exception("Error: Error: El Password del Usuario solo acepta palabras y números sin caraceteres especiales únicamente!"); }
@@ -238,5 +244,7 @@ namespace UI
             catch (CryptographicException ex) { MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+      
     }
 }

@@ -79,7 +79,8 @@ namespace UI
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            LimpiarCampos();
+            txtUsuario.Text = "mauri";
+            txtPassword.Text = "1234";
         }
         private BEUsuario ValidarDatos()
         {

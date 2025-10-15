@@ -32,7 +32,6 @@
             btnEliminar = new Button();
             btnModificar = new Button();
             btnSalir = new Button();
-            label1 = new Label();
             label3 = new Label();
             label4 = new Label();
             txtUsuario = new TextBox();
@@ -44,6 +43,8 @@
             btnLimpiar = new Button();
             txtID = new TextBox();
             label2 = new Label();
+            chkActivo = new CheckBox();
+            chkBloqueado = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -93,21 +94,11 @@
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(120, 41);
-            label1.Name = "label1";
-            label1.Size = new Size(98, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Crear Usuario";
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(54, 183);
+            label3.Location = new Point(48, 123);
             label3.Name = "label3";
             label3.Size = new Size(83, 20);
             label3.TabIndex = 6;
@@ -117,7 +108,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(54, 139);
+            label4.Location = new Point(48, 79);
             label4.Name = "label4";
             label4.Size = new Size(59, 20);
             label4.TabIndex = 7;
@@ -126,7 +117,7 @@
             // txtUsuario
             // 
             txtUsuario.Font = new Font("Segoe UI", 11F);
-            txtUsuario.Location = new Point(140, 135);
+            txtUsuario.Location = new Point(134, 75);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(150, 27);
             txtUsuario.TabIndex = 8;
@@ -134,7 +125,7 @@
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 11F);
-            txtPassword.Location = new Point(140, 175);
+            txtPassword.Location = new Point(134, 115);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(150, 27);
             txtPassword.TabIndex = 9;
@@ -156,7 +147,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(dgvUsuarios);
-            groupBox1.Location = new Point(502, 54);
+            groupBox1.Location = new Point(474, 27);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(594, 398);
             groupBox1.TabIndex = 11;
@@ -165,12 +156,13 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(chkBloqueado);
+            groupBox2.Controls.Add(chkActivo);
             groupBox2.Controls.Add(chkEncriptar);
             groupBox2.Controls.Add(btnLimpiar);
             groupBox2.Controls.Add(txtID);
             groupBox2.Controls.Add(btnSalir);
             groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(btnGuardar);
             groupBox2.Controls.Add(txtPassword);
             groupBox2.Controls.Add(btnEliminar);
@@ -178,7 +170,7 @@
             groupBox2.Controls.Add(btnModificar);
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(label3);
-            groupBox2.Location = new Point(56, 54);
+            groupBox2.Location = new Point(28, 27);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(367, 392);
             groupBox2.TabIndex = 12;
@@ -188,7 +180,7 @@
             // chkEncriptar
             // 
             chkEncriptar.AutoSize = true;
-            chkEncriptar.Location = new Point(140, 208);
+            chkEncriptar.Location = new Point(134, 163);
             chkEncriptar.Name = "chkEncriptar";
             chkEncriptar.Size = new Size(144, 19);
             chkEncriptar.TabIndex = 13;
@@ -210,7 +202,7 @@
             // txtID
             // 
             txtID.Font = new Font("Segoe UI", 11F);
-            txtID.Location = new Point(140, 96);
+            txtID.Location = new Point(134, 36);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
             txtID.Size = new Size(150, 27);
@@ -220,20 +212,41 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(54, 100);
+            label2.Location = new Point(48, 40);
             label2.Name = "label2";
             label2.Size = new Size(24, 20);
             label2.TabIndex = 10;
             label2.Text = "ID";
             // 
+            // chkActivo
+            // 
+            chkActivo.AutoSize = true;
+            chkActivo.Location = new Point(134, 188);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(60, 19);
+            chkActivo.TabIndex = 14;
+            chkActivo.Text = "Activo";
+            chkActivo.UseVisualStyleBackColor = true;
+            // 
+            // chkBloqueado
+            // 
+            chkBloqueado.AutoSize = true;
+            chkBloqueado.Location = new Point(134, 213);
+            chkBloqueado.Name = "chkBloqueado";
+            chkBloqueado.Size = new Size(73, 19);
+            chkBloqueado.TabIndex = 15;
+            chkBloqueado.Text = "Bloquear";
+            chkBloqueado.UseVisualStyleBackColor = true;
+            // 
             // frmABMUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1230, 608);
+            ClientSize = new Size(1084, 450);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "frmABMUsuarios";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmABMUsuarios";
             Load += frmABMUsuarios_Load;
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
@@ -249,7 +262,6 @@
         private Button btnEliminar;
         private Button btnModificar;
         private Button btnSalir;
-        private Label label1;
         private Label label3;
         private Label label4;
         private TextBox txtUsuario;
@@ -261,5 +273,7 @@
         private Label label2;
         private Button btnLimpiar;
         private CheckBox chkEncriptar;
+        private CheckBox chkBloqueado;
+        private CheckBox chkActivo;
     }
 }

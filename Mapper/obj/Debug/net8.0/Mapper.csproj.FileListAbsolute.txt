@@ -1,8 +1,12 @@
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Mapper.deps.json
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Mapper.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Mapper.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\BackUp.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Entity.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\BackUp.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Entity.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\Mapper.csproj.AssemblyReference.cache
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\Mapper.GeneratedMSBuildEditorConfig.editorconfig
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\Mapper.AssemblyInfoInputs.cache
@@ -14,7 +18,3 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\refint\Mapper.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\Mapper.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\obj\Debug\net8.0\ref\Mapper.dll
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.dll
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\Seguridad.pdb
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\BackUp.dll
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\Mapper\bin\Debug\net8.0\BackUp.pdb

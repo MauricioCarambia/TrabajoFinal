@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Usuarios>
+    <usuario Id="1">
+      <Usuario>mauri</Usuario>
+      <Password>MQAyADMANAA=</Password>
+      <Activo>True</Activo>
+      <Bloqueado>False</Bloqueado>
+    </usuario>
+    <usuario Id="2">
+      <Usuario>a</Usuario>
+      <Password>MQAyADMANAA=</Password>
+      <Activo>True</Activo>
+      <Bloqueado>False</Bloqueado>
+    </usuario>
+  </Usuarios>
+  <Roles>
+    <rol Id="2">
+      <Nombre>gerente</Nombre>
+    </rol>
+    <rol Id="3">
+      <Nombre>administrador</Nombre>
+    </rol>
+  </Roles>
+  <Permisos>
+    <!-- Inicio -->
+    <permiso Id="1">
+      <Nombre>Log-In</Nombre>
+    </permiso>
+    <!-- Administrador -->
+    <permiso Id="3">
+      <Nombre>Clientes</Nombre>
+    </permiso>
+    <permiso Id="4">
+      <Nombre>Reserva</Nombre>
+    </permiso>
+    <permiso Id="5">
+      <Nombre>Cobrar Pedido</Nombre>
+    </permiso>
+    <!-- Gerente -->
+    <permiso Id="6">
+      <Nombre>Insumos</Nombre>
+    </permiso>
+    <permiso Id="7">
+      <Nombre>Platos</Nombre>
+    </permiso>
+    <permiso Id="8">
+      <Nombre>Promociones</Nombre>
+    </permiso>
+    <permiso Id="9">
+      <Nombre>Proveedor</Nombre>
+    </permiso>
+    <permiso Id="10">
+      <Nombre>Mesas</Nombre>
+    </permiso>
+    <!-- Mozo -->
+    <permiso Id="11">
+      <Nombre>Cargar Pedido</Nombre>
+    </permiso>
+    <!-- Cocina -->
+    <permiso Id="12">
+      <Nombre>Pedidos</Nombre>
+    </permiso>
+    <!-- Usuarios -->
+    <permiso Id="13">
+      <Nombre>Crear Usuario</Nombre>
+    </permiso>
+    <permiso Id="14">
+      <Nombre>Gestionar Usuarios</Nombre>
+    </permiso>
+    <!-- DashBoard -->
+    <permiso Id="15">
+      <Nombre>Ver Informe</Nombre>
+    </permiso>
+    <!-- Bitacora -->
+    <permiso Id="16">
+      <Nombre>Ver Bitacora</Nombre>
+    </permiso>
+    <permiso Id="17">
+      <Nombre>Hacer Backup</Nombre>
+    </permiso>
+    <permiso Id="18">
+      <Nombre>Hacer Restore</Nombre>
+    </permiso>
+    <permiso Id="19">
+      <Nombre>Log-Out</Nombre>
+    </permiso>
+  </Permisos>
+  <Rol_Permisos>
+    <rol_permiso Id="3">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="4">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="5">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="6">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>6</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="7">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>7</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="8">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>8</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="9">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>9</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="10">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>10</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="11">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>11</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="12">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="13">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>13</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="14">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>14</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="15">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>15</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="16">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>16</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="17">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>17</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="18">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>1</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>6</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>7</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>8</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>9</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>10</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>11</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>13</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>14</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>15</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>16</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>17</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>1</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>19</Id_Permiso>
+    </rol_permiso>
+  </Rol_Permisos>
+  <Usuario_Roles>
+    <usuario_rol>
+      <Id_Usuario>1</Id_Usuario>
+      <Id_Rol_Padre>2</Id_Rol_Padre>
+    </usuario_rol>
+    <usuario_rol>
+      <Id_Usuario>2</Id_Usuario>
+      <Id_Rol_Padre>3</Id_Rol_Padre>
+    </usuario_rol>
+  </Usuario_Roles>
+  <Usuario_Permisos />
+  <Roles_Roles />
+  <Clientes />
+</Root>

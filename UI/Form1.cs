@@ -197,5 +197,36 @@ namespace UI
             frm.MdiParent = this;   // le decís que el padre es el MDI actual
             frm.Show();
         }
+
+        private void registrarMesasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMesas frm = new frmMesas();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void cobrarPedidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCocina frm = new frmCocina();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void verToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hacerReservaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReserva frm = new frmReserva(this);
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
     }
 }

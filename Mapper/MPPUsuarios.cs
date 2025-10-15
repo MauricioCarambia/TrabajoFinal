@@ -12,9 +12,7 @@ namespace Mapper
         readonly string ruta = ("BD.xml");
         XDocument BDXML;
 
-        #region "Métodos"
-
-        #region "Métodos Usuario"
+       
 
         public bool CrearXML()
         {
@@ -144,6 +142,7 @@ namespace Mapper
                                     //Actualizo los datos correspondientes:
                                     foreach (XElement usuarioModificado in buscarUsuario)
                                     {
+                                        usuarioModificado.Element("Usuario").Value = oBEUsuario.Usuario.Trim();
                                         string passwordEncriptado = EncriptarPassword(oBEUsuario.Password);
                                         usuarioModificado.Element("Password").Value = passwordEncriptado;
                                         usuarioModificado.Element("Activo").Value = oBEUsuario.Activo.ToString().Trim();
@@ -589,9 +588,7 @@ namespace Mapper
             finally { }
         }
 
-        #endregion
-
-        #region "Métodos Usuario - Permisos"
+        
 
         public bool CrearXMLUsuarioPermiso()
         {
@@ -765,9 +762,7 @@ namespace Mapper
             finally { }
         }
 
-        #endregion
-
-        #region "Métodos Usuario - Roles"
+        
 
         public bool CrearXMLUsuarioRol()
         {
@@ -957,9 +952,7 @@ namespace Mapper
         }
 
 
-        #endregion
-
-        #region "Usuario - Roles Jerarquicos"
+        
 
         private bool BuscarRolEnJerarquia(XElement rolesElement, string rolId)
         {
@@ -1525,9 +1518,5 @@ namespace Mapper
             finally { }
         }
 
-
-        #endregion
-
-        #endregion
     }
 }

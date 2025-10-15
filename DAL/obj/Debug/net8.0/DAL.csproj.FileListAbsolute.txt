@@ -1,10 +1,14 @@
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\DAL.deps.json
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\DAL.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\DAL.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\BackUp.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Entity.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Mapper.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Seguridad.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Entity.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Mapper.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\BackUp.pdb
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Seguridad.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
@@ -16,5 +20,3 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\D
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\refint\DAL.dll
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\DAL.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\obj\Debug\net8.0\ref\DAL.dll
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Seguridad.dll
-E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\DAL\bin\Debug\net8.0\Seguridad.pdb

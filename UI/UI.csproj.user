@@ -25,6 +25,9 @@
     <Compile Update="frmCobrarPedido.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmCocina.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmCocinaPedidos.cs">
       <SubType>Form</SubType>
     </Compile>

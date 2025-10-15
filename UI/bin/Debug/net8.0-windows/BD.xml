@@ -2,64 +2,32 @@
 <Root>
   <Usuarios>
     <usuario Id="1">
-      <Usuario>pepe</Usuario>
-      <Password>cABlAHAAZQA=</Password>
+      <Usuario>mauri</Usuario>
+      <Password>MQAyADMANAA=</Password>
       <Activo>True</Activo>
       <Bloqueado>False</Bloqueado>
     </usuario>
     <usuario Id="2">
-      <Usuario>asd</Usuario>
-      <Password>MQAyADMANAA=</Password>
-      <Activo>False</Activo>
-      <Bloqueado>False</Bloqueado>
-    </usuario>
-    <usuario Id="3">
-      <Usuario>zxc</Usuario>
-      <Password>MQAyADMANAA=</Password>
-      <Activo>False</Activo>
-      <Bloqueado>False</Bloqueado>
-    </usuario>
-    <usuario Id="4">
-      <Usuario>fg</Usuario>
-      <Password>MQAyADMA</Password>
-      <Activo>False</Activo>
-      <Bloqueado>False</Bloqueado>
-    </usuario>
-    <usuario Id="5">
       <Usuario>a</Usuario>
-      <Password>MQA=</Password>
-      <Activo>False</Activo>
-      <Bloqueado>False</Bloqueado>
-    </usuario>
-    <usuario Id="6">
-      <Usuario>fdgfdg</Usuario>
-      <Password>MQAyADMA</Password>
+      <Password>MgA=</Password>
       <Activo>False</Activo>
       <Bloqueado>False</Bloqueado>
     </usuario>
   </Usuarios>
-  <Usuario_Roles>
-    <usuario_rol>
-      <Id_Usuario>1</Id_Usuario>
-      <Id_Rol_Padre>1</Id_Rol_Padre>
-    </usuario_rol>
-  </Usuario_Roles>
-  <Usuario_Permisos />
   <Roles>
-    <rol Id="1">
+    <rol Id="2">
       <Nombre>gerente</Nombre>
     </rol>
-    <rol Id="2">
-      <Nombre>cocinero</Nombre>
+    <rol Id="3">
+      <Nombre>administrador</Nombre>
     </rol>
   </Roles>
   <Permisos>
+    <!-- Inicio -->
     <permiso Id="1">
       <Nombre>Log-In</Nombre>
     </permiso>
-    <permiso Id="2">
-      <Nombre>Log-Out</Nombre>
-    </permiso>
+    <!-- Administrador -->
     <permiso Id="3">
       <Nombre>Clientes</Nombre>
     </permiso>
@@ -67,72 +35,140 @@
       <Nombre>Reserva</Nombre>
     </permiso>
     <permiso Id="5">
-      <Nombre>Crear Usuario</Nombre>
+      <Nombre>Cobrar Pedido</Nombre>
     </permiso>
+    <!-- Gerente -->
     <permiso Id="6">
-      <Nombre>Permisos-Roles Usuarios</Nombre>
-    </permiso>
-    <permiso Id="7">
-      <Nombre>Pedidos</Nombre>
-    </permiso>
-    <permiso Id="8">
       <Nombre>Insumos</Nombre>
     </permiso>
-    <permiso Id="9">
+    <permiso Id="7">
       <Nombre>Platos</Nombre>
     </permiso>
-    <permiso Id="10">
+    <permiso Id="8">
       <Nombre>Promociones</Nombre>
     </permiso>
-    <permiso Id="11">
-      <Nombre>Registrar Proveedor</Nombre>
+    <permiso Id="9">
+      <Nombre>Proveedor</Nombre>
     </permiso>
-    <permiso Id="12">
+    <permiso Id="10">
       <Nombre>Mesas</Nombre>
     </permiso>
-    <permiso Id="13">
+    <!-- Mozo -->
+    <permiso Id="11">
       <Nombre>Cargar Pedido</Nombre>
     </permiso>
-    <permiso Id="14">
-      <Nombre>Ver</Nombre>
+    <!-- Cocina -->
+    <permiso Id="12">
+      <Nombre>Pedidos</Nombre>
     </permiso>
+    <!-- Usuarios -->
+    <permiso Id="13">
+      <Nombre>Crear Usuario</Nombre>
+    </permiso>
+    <permiso Id="14">
+      <Nombre>Gestionar Usuarios</Nombre>
+    </permiso>
+    <!-- DashBoard -->
     <permiso Id="15">
+      <Nombre>Ver Informe</Nombre>
+    </permiso>
+    <!-- Bitacora -->
+    <permiso Id="16">
       <Nombre>Ver Bitacora</Nombre>
     </permiso>
-    <permiso Id="16">
+    <permiso Id="17">
       <Nombre>Hacer Backup</Nombre>
     </permiso>
-    <permiso Id="17">
-      <Nombre>Haver Restore</Nombre>
+    <permiso Id="18">
+      <Nombre>Hacer Restore</Nombre>
+    </permiso>
+    <permiso Id="19">
+      <Nombre>Log-Out</Nombre>
     </permiso>
   </Permisos>
   <Rol_Permisos>
+    <rol_permiso Id="3">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="4">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="5">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="6">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>6</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="7">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>7</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="8">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>8</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="9">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>9</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="10">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>10</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="11">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>11</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="12">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="13">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>13</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="14">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>14</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="15">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>15</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="16">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>16</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="17">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>17</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="18">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
     <rol_permiso Id="1">
       <Id_Rol>2</Id_Rol>
       <Id_Permiso>1</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
-      <Id_Permiso>1</Id_Permiso>
-    </rol_permiso>
-    <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
-      <Id_Permiso>2</Id_Permiso>
-    </rol_permiso>
-    <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>3</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>4</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>5</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>6</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
@@ -140,49 +176,217 @@
       <Id_Permiso>7</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>8</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>9</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>10</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>11</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
-      <Id_Permiso>12</Id_Permiso>
-    </rol_permiso>
-    <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>13</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
-      <Id_Permiso>7</Id_Permiso>
-    </rol_permiso>
-    <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>14</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>15</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>16</Id_Permiso>
     </rol_permiso>
     <rol_permiso Id="1">
-      <Id_Rol>1</Id_Rol>
+      <Id_Rol>2</Id_Rol>
       <Id_Permiso>17</Id_Permiso>
     </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>1</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>19</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>19</Id_Permiso>
+    </rol_permiso>
   </Rol_Permisos>
+  <Usuario_Roles>
+    <usuario_rol>
+      <Id_Usuario>1</Id_Usuario>
+      <Id_Rol_Padre>2</Id_Rol_Padre>
+    </usuario_rol>
+    <usuario_rol>
+      <Id_Usuario>2</Id_Usuario>
+      <Id_Rol_Padre>3</Id_Rol_Padre>
+    </usuario_rol>
+  </Usuario_Roles>
+  <Usuario_Permisos />
   <Roles_Roles />
+  <Clientes>
+    <cliente IdCliente="1">
+      <Nombre>Mauricio</Nombre>
+      <DNI>31462615</DNI>
+      <Telefono>1156410025</Telefono>
+    </cliente>
+    <cliente IdCliente="2">
+      <Nombre>Luciana Perez</Nombre>
+      <DNI>33222111</DNI>
+      <Telefono>223216541</Telefono>
+    </cliente>
+    <cliente IdCliente="3">
+      <Nombre>perez</Nombre>
+      <DNI>1233211</DNI>
+      <Telefono>123</Telefono>
+    </cliente>
+    <cliente IdCliente="4">
+      <Nombre>a</Nombre>
+      <DNI>12312312</DNI>
+      <Telefono>12345612</Telefono>
+    </cliente>
+  </Clientes>
+  <Mesas>
+    <mesa IdMesa="1">
+      <NumeroMesa>1</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="2">
+      <NumeroMesa>2</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="3">
+      <NumeroMesa>3</NumeroMesa>
+      <Capacidad>6</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="4">
+      <NumeroMesa>4</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="5">
+      <NumeroMesa>11</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="6">
+      <NumeroMesa>12</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+  </Mesas>
+  <Reservas>
+    <reserva Id="1">
+      <NumeroReserva>R-20251015-001</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>6</CantidadPersonas>
+      <Mesa IdMesa="3">
+        <NumeroMesa>3</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="2">
+      <NumeroReserva>R-20251016-002</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="2">
+        <NumeroMesa>2</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="3">
+      <NumeroReserva>R-20251015-003</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="4">
+        <NumeroMesa>4</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="4">
+      <NumeroReserva>R-20251016-004</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="5">
+      <NumeroReserva>R-20251017-005</NumeroReserva>
+      <FechaReserva>2025-10-17</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="2">
+        <NumeroMesa>2</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="6">
+      <NumeroReserva>R-20251018-006</NumeroReserva>
+      <FechaReserva>2025-10-18</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>6</CantidadPersonas>
+      <Mesa IdMesa="3">
+        <NumeroMesa>3</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="7">
+      <NumeroReserva>R-20251015-007</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>6</CantidadPersonas>
+      <Mesa IdMesa="3">
+        <NumeroMesa>3</NumeroMesa>
+      </Mesa>
+    </reserva>
+  </Reservas>
 </Root>
