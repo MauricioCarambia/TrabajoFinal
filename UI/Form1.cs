@@ -228,5 +228,19 @@ namespace UI
             frm.MdiParent = this;   // le decís que el padre es el MDI actual
             frm.Show();
         }
+
+        private void cargarPedidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCargarPedido frm = new frmCargarPedido();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void registrarProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProveedores frm = new frmProveedores();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
     }
 }

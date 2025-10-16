@@ -254,7 +254,8 @@ namespace UI
                     txtNumeroMesa.Text = oBEMesa.NumeroMesa.ToString().Trim();
                     txtCapacidad.Text = oBEMesa.Capacidad.ToString().Trim();
                     cmbEstado.SelectedItem = oBEMesa.Estado;
-
+                    if (cmbEstado.Items.Count > 0)
+                        cmbEstado.SelectedIndex = 0;
 
                 }
                 else

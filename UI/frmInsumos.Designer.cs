@@ -34,22 +34,20 @@
             groupBox2 = new GroupBox();
             dgvClientes = new DataGridView();
             groupBox1 = new GroupBox();
+            label5 = new Label();
+            textBox1 = new TextBox();
             btnCerrar = new Button();
             label3 = new Label();
-            label2 = new Label();
-            txtDNI = new TextBox();
             label1 = new Label();
             btnEliminar = new Button();
             btnModificar = new Button();
             btnGuardar = new Button();
             txtNombre = new TextBox();
-            label5 = new Label();
-            textBox1 = new TextBox();
-            numericUpDown1 = new NumericUpDown();
+            textBox2 = new TextBox();
+            btnLimpiar = new Button();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // txtBuscar
@@ -83,7 +81,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(dgvClientes);
-            groupBox2.Location = new Point(431, 69);
+            groupBox2.Location = new Point(495, 69);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(706, 440);
             groupBox2.TabIndex = 9;
@@ -103,68 +101,67 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(numericUpDown1);
+            groupBox1.Controls.Add(btnLimpiar);
+            groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(btnCerrar);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(txtDNI);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Controls.Add(btnModificar);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtNombre);
-            groupBox1.Location = new Point(67, 69);
+            groupBox1.Location = new Point(26, 69);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(272, 398);
+            groupBox1.Size = new Size(345, 398);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "ABM Insumos";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11F);
+            label5.Location = new Point(6, 78);
+            label5.Name = "label5";
+            label5.Size = new Size(112, 20);
+            label5.TabIndex = 9;
+            label5.Text = "Unidad Medida";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 11F);
+            textBox1.Location = new Point(135, 75);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(166, 27);
+            textBox1.TabIndex = 8;
+            // 
             // btnCerrar
             // 
             btnCerrar.Font = new Font("Segoe UI", 11F);
-            btnCerrar.Location = new Point(125, 338);
+            btnCerrar.Location = new Point(237, 338);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(102, 39);
             btnCerrar.TabIndex = 7;
-            btnCerrar.Text = "Cerrar";
+            btnCerrar.Text = "Salir";
             btnCerrar.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(6, 143);
+            label3.Location = new Point(6, 125);
             label3.Name = "label3";
             label3.Size = new Size(69, 20);
             label3.TabIndex = 6;
             label3.Text = "Cantidad";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(6, 80);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 4;
-            label2.Text = "Precio";
-            // 
-            // txtDNI
-            // 
-            txtDNI.Font = new Font("Segoe UI", 11F);
-            txtDNI.Location = new Point(6, 103);
-            txtDNI.Name = "txtDNI";
-            txtDNI.Size = new Size(210, 27);
-            txtDNI.TabIndex = 3;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(6, 22);
+            label1.Location = new Point(6, 29);
             label1.Name = "label1";
             label1.Size = new Size(64, 20);
             label1.TabIndex = 2;
@@ -173,7 +170,7 @@
             // btnEliminar
             // 
             btnEliminar.Font = new Font("Segoe UI", 11F);
-            btnEliminar.Location = new Point(17, 338);
+            btnEliminar.Location = new Point(233, 224);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(102, 39);
             btnEliminar.TabIndex = 1;
@@ -183,7 +180,7 @@
             // btnModificar
             // 
             btnModificar.Font = new Font("Segoe UI", 11F);
-            btnModificar.Location = new Point(125, 293);
+            btnModificar.Location = new Point(125, 224);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(102, 39);
             btnModificar.TabIndex = 1;
@@ -193,7 +190,7 @@
             // btnGuardar
             // 
             btnGuardar.Font = new Font("Segoe UI", 11F);
-            btnGuardar.Location = new Point(17, 293);
+            btnGuardar.Location = new Point(17, 224);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(102, 39);
             btnGuardar.TabIndex = 1;
@@ -203,47 +200,41 @@
             // txtNombre
             // 
             txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(6, 45);
+            txtNombre.Location = new Point(135, 26);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(210, 27);
+            txtNombre.Size = new Size(166, 27);
             txtNombre.TabIndex = 0;
             // 
-            // label5
+            // textBox2
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(6, 207);
-            label5.Name = "label5";
-            label5.Size = new Size(112, 20);
-            label5.TabIndex = 9;
-            label5.Text = "Unidad Medida";
+            textBox2.Font = new Font("Segoe UI", 11F);
+            textBox2.Location = new Point(135, 122);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(166, 27);
+            textBox2.TabIndex = 10;
             // 
-            // textBox1
+            // btnLimpiar
             // 
-            textBox1.Font = new Font("Segoe UI", 11F);
-            textBox1.Location = new Point(6, 230);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(210, 27);
-            textBox1.TabIndex = 8;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(6, 166);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(210, 23);
-            numericUpDown1.TabIndex = 10;
+            btnLimpiar.Font = new Font("Segoe UI", 11F);
+            btnLimpiar.Location = new Point(16, 338);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(102, 39);
+            btnLimpiar.TabIndex = 11;
+            btnLimpiar.Text = "Limpiar Campos";
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // frmInsumos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1299, 717);
+            ClientSize = new Size(1232, 587);
             Controls.Add(txtBuscar);
             Controls.Add(label4);
             Controls.Add(btnBuscar);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "frmInsumos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmInsumos";
             WindowState = FormWindowState.Maximized;
             Load += frmInsumos_Load;
@@ -251,7 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -266,15 +256,14 @@
         private GroupBox groupBox1;
         private Button btnCerrar;
         private Label label3;
-        private Label label2;
-        private TextBox txtDNI;
         private Label label1;
         private Button btnEliminar;
         private Button btnModificar;
         private Button btnGuardar;
         private TextBox txtNombre;
-        private NumericUpDown numericUpDown1;
         private Label label5;
         private TextBox textBox1;
+        private Button btnLimpiar;
+        private TextBox textBox2;
     }
 }

@@ -85,6 +85,21 @@
     <permiso Id="19">
       <Nombre>Log-Out</Nombre>
     </permiso>
+    <permiso Id="20">
+      <Nombre>Solicitud Compra</Nombre>
+    </permiso>
+    <permiso Id="21">
+      <Nombre>Pre Orden de Compra</Nombre>
+    </permiso>
+    <permiso Id="22">
+      <Nombre>Orden de Compra</Nombre>
+    </permiso>
+    <permiso Id="23">
+      <Nombre>Entrega Insumos</Nombre>
+    </permiso>
+    <permiso Id="24">
+      <Nombre>Insumo-Proveedor</Nombre>
+    </permiso>
   </Permisos>
   <Rol_Permisos>
     <rol_permiso Id="3">
@@ -243,6 +258,26 @@
       <Id_Rol>2</Id_Rol>
       <Id_Permiso>19</Id_Permiso>
     </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>20</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>21</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>22</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>23</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>24</Id_Permiso>
+    </rol_permiso>
   </Rol_Permisos>
   <Usuario_Roles>
     <usuario_rol>
@@ -307,11 +342,76 @@
     <mesa IdMesa="6">
       <NumeroMesa>9</NumeroMesa>
       <Capacidad>2</Capacidad>
-      <Estado>Libre</Estado>
+      <Estado>Reservada</Estado>
     </mesa>
     <mesa IdMesa="7">
       <NumeroMesa>12</NumeroMesa>
       <Capacidad>6</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="8">
+      <NumeroMesa>3</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="9">
+      <NumeroMesa>4</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="10">
+      <NumeroMesa>5</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="11">
+      <NumeroMesa>6</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="12">
+      <NumeroMesa>7</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="13">
+      <NumeroMesa>8</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="14">
+      <NumeroMesa>13</NumeroMesa>
+      <Capacidad>6</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="15">
+      <NumeroMesa>14</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="16">
+      <NumeroMesa>16</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="17">
+      <NumeroMesa>17</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="18">
+      <NumeroMesa>18</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="19">
+      <NumeroMesa>19</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="20">
+      <NumeroMesa>20</NumeroMesa>
+      <Capacidad>10</Capacidad>
       <Estado>Libre</Estado>
     </mesa>
   </Mesas>
@@ -325,17 +425,6 @@
       <CantidadPersonas>4</CantidadPersonas>
       <Mesa IdMesa="2">
         <NumeroMesa>2</NumeroMesa>
-      </Mesa>
-    </reserva>
-    <reserva Id="4">
-      <NumeroReserva>R-20251016-004</NumeroReserva>
-      <FechaReserva>2025-10-16</FechaReserva>
-      <Cliente IdCliente="4">
-        <Nombre>a</Nombre>
-      </Cliente>
-      <CantidadPersonas>2</CantidadPersonas>
-      <Mesa IdMesa="5">
-        <NumeroMesa>11</NumeroMesa>
       </Mesa>
     </reserva>
     <reserva Id="12">
@@ -382,5 +471,43 @@
         <NumeroMesa>1</NumeroMesa>
       </Mesa>
     </reserva>
+    <reserva Id="16">
+      <NumeroReserva>R-20251016-006</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="6">
+        <NumeroMesa>9</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="17">
+      <NumeroReserva>R-20251016-007</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="2">
+        <Nombre>Luciana Perez</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="11">
+        <NumeroMesa>6</NumeroMesa>
+      </Mesa>
+    </reserva>
   </Reservas>
+  <Proveedores>
+    <proveedor Id="1">
+      <Nombre>Verduleria</Nombre>
+      <CUIL>20123123125</CUIL>
+      <Domicilio>asd</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>112123122</Telefono>
+    </proveedor>
+    <proveedor Id="2">
+      <Nombre>Carniceria</Nombre>
+      <CUIL>25321321152</CUIL>
+      <Domicilio>avellaneda</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>123123123</Telefono>
+    </proveedor>
+  </Proveedores>
 </Root>

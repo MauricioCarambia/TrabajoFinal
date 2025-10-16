@@ -88,17 +88,18 @@ namespace UI
         private void CargarMesasPorFecha(DateTime fecha)
         {
             flpMesas.Controls.Clear();
-            var listaMesas = oBLLMesa.ListarTodo();
+            var listaMesas = oBLLMesa.ListarTodo()
+                              .OrderBy(m => m.NumeroMesa) // ← Ordenar por número de mesa
+                              .ToList();
             reservasDelDia = oBLLReserva.ListarPorFecha(fecha); // actualizar lista de reservas del día
 
             foreach (var mesa in listaMesas)
             {
                 Button btnMesa = new Button
                 {
-                    Text = $"Mesa {mesa.NumeroMesa} - Capacidad{mesa.Capacidad}",
+                    Text = $"Mesa {mesa.NumeroMesa} - Capacidad {mesa.Capacidad}",
                     Width = 100,
                     Height = 60,
-                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
                     Tag = mesa,
                     Margin = new Padding(8)
                 };
@@ -363,5 +364,14 @@ namespace UI
             }
         }
 
+        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarVista();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
