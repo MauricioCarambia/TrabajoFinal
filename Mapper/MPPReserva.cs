@@ -56,42 +56,33 @@ namespace Mapper
         {
             try
             {
-                if (CrearXML())
-                {
-                    BDXML = XDocument.Load(ruta);
-
-                    if (BDXML != null)
-                    {
-                        // Busco la reserva por su Id
-                        var buscarReserva = from reserva in BDXML.Root.Element("Reservas").Descendants("reserva")
-                                            where reserva.Attribute("Id").Value.Trim() == oBEReserva.Id.ToString().Trim()
-                                            select reserva;
-
-                        if (buscarReserva.Any())
-                        {
-                            var reservaEncontrada = buscarReserva.First();
-                            reservaEncontrada.Remove();
-                            BDXML.Save(ruta);
-                        }
-                        else
-                        {
-                            throw new Exception("Error: No se encontró la reserva con el Id especificado.");
-                        }
-                    }
-                    else
-                    {
-                        throw new XmlException("Error: No se pudo recuperar la información del XML.");
-                    }
-                }
-                else
-                {
+                if (!CrearXML())
                     throw new XmlException("Error: No se pudo crear o acceder al archivo XML.");
-                }
+
+                BDXML = XDocument.Load(ruta);
+                if (BDXML?.Root == null)
+                    throw new XmlException("Error: XML vacío o mal formado.");
+
+                XElement reservasRoot = BDXML.Root.Element("Reservas");
+                if (reservasRoot == null)
+                    throw new Exception("No existen reservas en el XML.");
+
+                // Buscar la reserva por Id
+                var reservaXml = reservasRoot.Elements("reserva")
+                    .FirstOrDefault(r => r.Attribute("Id")?.Value.Trim() == oBEReserva.Id.ToString());
+
+                if (reservaXml == null)
+                    throw new Exception("No se encontró la reserva con el Id especificado.");
+
+                // Eliminar la reserva del XML
+                reservaXml.Remove();
+                BDXML.Save(ruta);
+
+                // Fin del Mapper: aquí **no se toca la mesa**
             }
             catch (XmlException ex) { throw ex; }
             catch (Exception ex) { throw ex; }
         }
-
 
 
         public void Guardar(BEReserva oBEReserva)
@@ -185,19 +176,18 @@ namespace Mapper
                 if (oBEReserva == null)
                     throw new ArgumentNullException(nameof(oBEReserva), "Error: No se proporcionó una reserva válida.");
 
-                // Verifico la existencia del XML
                 if (!CrearXML())
                     throw new XmlException("Error: No se pudo recuperar el XML de reservas.");
 
-                // Cargo el XML
-                BDXML = XDocument.Load(ruta);
-                if (BDXML == null)
-                    throw new XmlException("Error: No se pudo recuperar la información del XML.");
+                BDXML = XDocument.Load(ruta) ?? throw new XmlException("Error: No se pudo cargar la información del XML.");
 
-                // Busco la reserva por Id o NúmeroReserva
-                var buscarReserva = from res in BDXML.Root.Element("Reservas").Descendants("reserva")
-                                    where (oBEReserva.Id != 0 && res.Attribute("Id").Value.Trim() == oBEReserva.Id.ToString()) ||
-                                          (!string.IsNullOrEmpty(oBEReserva.NumeroReserva) && res.Element("NumeroReserva").Value.Trim() == oBEReserva.NumeroReserva)
+                XElement reservasRoot = BDXML.Root.Element("Reservas");
+                if (reservasRoot == null)
+                    throw new Exception("Error: No existen reservas en el XML.");
+
+                var buscarReserva = from res in reservasRoot.Descendants("reserva")
+                                    where (oBEReserva.Id != 0 && res.Attribute("Id")?.Value.Trim() == oBEReserva.Id.ToString()) ||
+                                          (!string.IsNullOrEmpty(oBEReserva.NumeroReserva) && res.Element("NumeroReserva")?.Value.Trim() == oBEReserva.NumeroReserva)
                                     select res;
 
                 if (!buscarReserva.Any())
@@ -205,26 +195,26 @@ namespace Mapper
 
                 var reservaEncontrada = buscarReserva.First();
 
-                // Construyo el objeto Reserva
+                // Construir el objeto BEReserva con comprobaciones de null
                 BEReserva reserva = new BEReserva
                 {
                     Id = int.Parse(reservaEncontrada.Attribute("Id").Value.Trim()),
-                    NumeroReserva = reservaEncontrada.Element("NumeroReserva").Value.Trim(),
-                    FechaReserva = DateTime.Parse(reservaEncontrada.Element("FechaReserva").Value.Trim()),
-                    CantidadPersonas = int.Parse(reservaEncontrada.Element("CantidadPersonas").Value.Trim()),
+                    NumeroReserva = reservaEncontrada.Element("NumeroReserva")?.Value.Trim() ?? "",
+                    FechaReserva = DateTime.Parse(reservaEncontrada.Element("FechaReserva")?.Value.Trim() ?? DateTime.MinValue.ToString()),
+                    CantidadPersonas = int.Parse(reservaEncontrada.Element("CantidadPersonas")?.Value.Trim() ?? "0"),
                     Cliente = new BECliente
                     {
-                        IdCliente = int.Parse(reservaEncontrada.Element("Cliente").Attribute("IdCliente").Value.Trim()),
-                        Nombre = reservaEncontrada.Element("Cliente").Element("Nombre").Value.Trim(),
-                        DNI = reservaEncontrada.Element("Cliente").Element("DNI").Value.Trim(),
-                        Telefono = reservaEncontrada.Element("Cliente").Element("Telefono").Value.Trim()
+                        IdCliente = int.Parse(reservaEncontrada.Element("Cliente")?.Attribute("IdCliente")?.Value.Trim() ?? "0"),
+                        Nombre = reservaEncontrada.Element("Cliente")?.Element("Nombre")?.Value.Trim() ?? "",
+                        DNI = reservaEncontrada.Element("Cliente")?.Element("DNI")?.Value.Trim() ?? "",
+                        Telefono = reservaEncontrada.Element("Cliente")?.Element("Telefono")?.Value.Trim() ?? ""
                     },
                     Mesa = new BEMesa
                     {
-                        IdMesa = int.Parse(reservaEncontrada.Element("Mesa").Attribute("IdMesa").Value.Trim()),
-                        NumeroMesa = int.Parse(reservaEncontrada.Element("Mesa").Element("NumeroMesa").Value.Trim()), // Convertir a int
-                        Capacidad = int.Parse(reservaEncontrada.Element("Mesa").Element("Capacidad").Value.Trim()), // Convertir a int
-                        Estado = (EstadoMesa)Enum.Parse(typeof(EstadoMesa), reservaEncontrada.Element("Mesa").Element("Estado").Value.Trim())
+                        IdMesa = int.Parse(reservaEncontrada.Element("Mesa")?.Attribute("IdMesa")?.Value.Trim() ?? "0"),
+                        NumeroMesa = int.Parse(reservaEncontrada.Element("Mesa")?.Element("NumeroMesa")?.Value.Trim() ?? "0"),
+                        Capacidad = int.Parse(reservaEncontrada.Element("Mesa")?.Element("Capacidad")?.Value.Trim() ?? "0"),
+                        Estado = Enum.TryParse(reservaEncontrada.Element("Mesa")?.Element("Estado")?.Value.Trim(), out EstadoMesa estado) ? estado : EstadoMesa.Libre
                     }
                 };
 
@@ -285,6 +275,50 @@ namespace Mapper
             catch (Exception ex) { throw ex; }
         }
 
+        public List<BEReserva> ListarPorFecha(DateTime fecha)
+        {
+            try
+            {
+                // Verifico la existencia del XML de reservas
+                if (!CrearXML())
+                    throw new XmlException("Error: No se pudo recuperar o crear el XML de reservas.");
+
+                BDXML = XDocument.Load(ruta);
+                if (BDXML == null)
+                    throw new XmlException("Error: No se pudo cargar el XML de reservas.");
+
+                List<BEReserva> listaReservas = new List<BEReserva>();
+
+                // 🔹 Busco solo las reservas que coincidan con la fecha indicada
+                var lista = from r in BDXML.Root.Element("Reservas").Elements("reserva")
+                            where DateTime.Parse(r.Element("FechaReserva").Value.Trim()).Date == fecha.Date
+                            select new BEReserva
+                            {
+                                Id = int.Parse(r.Attribute("Id").Value.Trim()),
+                                NumeroReserva = r.Element("NumeroReserva").Value.Trim(),
+                                FechaReserva = DateTime.Parse(r.Element("FechaReserva").Value.Trim()),
+                                CantidadPersonas = int.Parse(r.Element("CantidadPersonas").Value.Trim()),
+
+                                Cliente = new BECliente
+                                {
+                                    IdCliente = int.Parse(r.Element("Cliente").Attribute("IdCliente").Value.Trim()),
+                                    Nombre = r.Element("Cliente").Element("Nombre").Value.Trim()
+                                },
+
+                                Mesa = new BEMesa
+                                {
+                                    IdMesa = int.Parse(r.Element("Mesa").Attribute("IdMesa").Value.Trim()),
+                                    NumeroMesa = int.Parse(r.Element("Mesa").Element("NumeroMesa").Value.Trim())
+                                }
+                            };
+
+                listaReservas = lista.ToList();
+
+                return listaReservas;
+            }
+            catch (XmlException ex) { throw ex; }
+            catch (Exception ex) { throw ex; }
+        }
 
 
         public List<BEReserva> ListarTodo()

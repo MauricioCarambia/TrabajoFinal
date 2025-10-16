@@ -11,6 +11,8 @@ namespace BLL
     public class BLLReserva
     {
         private MPPReserva oMPPReserva = new MPPReserva();
+        private BLLCliente oBLLCliente = new BLLCliente();
+        private BLLMesa oBLLMesa = new BLLMesa();
 
         public bool CrearXML() { throw new NotImplementedException(); }
 
@@ -27,5 +29,19 @@ namespace BLL
         public int ObtenerUltimoId() { throw new NotImplementedException(); }
 
         public bool VerificarExistenciaObjeto(BEReserva objeto) { throw new NotImplementedException(); }
+        public List<BEReserva> ListarPorFecha(DateTime fecha)
+        {
+            var reservas = oMPPReserva.ListarPorFecha(fecha);
+
+            foreach (var r in reservas)
+            {
+                // Completa los datos del cliente y la mesa
+                r.Cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = r.Cliente.IdCliente });
+                r.Mesa = oBLLMesa.ListarObjetoPorNumeroMesa(new BEMesa { NumeroMesa = r.Mesa.NumeroMesa });
+
+            }
+
+            return reservas;
+        }
     }
 }

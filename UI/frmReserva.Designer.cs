@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flpMesas = new FlowLayoutPanel();
             groupBox1 = new GroupBox();
             dtpFecha = new DateTimePicker();
             txtCantidadPer = new TextBox();
@@ -47,39 +47,42 @@
             label2 = new Label();
             btnReservar = new Button();
             groupBox3 = new GroupBox();
-            btnEliminar = new Button();
-            btnModificar = new Button();
             label9 = new Label();
             txtMesa = new TextBox();
             label6 = new Label();
             label7 = new Label();
             txtPersonas = new TextBox();
             txtFecha = new TextBox();
+            btnEliminar = new Button();
             btnAnterior = new Button();
             btnSiguiente = new Button();
             dgvReservas = new DataGridView();
             groupBox4 = new GroupBox();
+            label8 = new Label();
+            txtNumeroReserva = new TextBox();
+            groupBox5 = new GroupBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReservas).BeginInit();
             groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flpMesas
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(6, 22);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(412, 448);
-            flowLayoutPanel1.TabIndex = 0;
+            flpMesas.AutoScroll = true;
+            flpMesas.Location = new Point(6, 22);
+            flpMesas.Name = "flpMesas";
+            flpMesas.Size = new Size(412, 448);
+            flpMesas.TabIndex = 0;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(flowLayoutPanel1);
+            groupBox1.Controls.Add(flpMesas);
             groupBox1.Location = new Point(12, 123);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(426, 478);
+            groupBox1.Size = new Size(426, 482);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Mesas";
@@ -113,7 +116,7 @@
             groupBox2.Controls.Add(txtNombre);
             groupBox2.Controls.Add(txtDNI);
             groupBox2.Controls.Add(label3);
-            groupBox2.Location = new Point(444, 357);
+            groupBox2.Location = new Point(444, 361);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(345, 244);
             groupBox2.TabIndex = 4;
@@ -240,7 +243,7 @@
             // btnReservar
             // 
             btnReservar.Font = new Font("Segoe UI", 11F);
-            btnReservar.Location = new Point(31, 182);
+            btnReservar.Location = new Point(31, 163);
             btnReservar.Name = "btnReservar";
             btnReservar.Size = new Size(95, 35);
             btnReservar.TabIndex = 7;
@@ -250,8 +253,6 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(btnEliminar);
-            groupBox3.Controls.Add(btnModificar);
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(txtMesa);
             groupBox3.Controls.Add(label6);
@@ -261,30 +262,10 @@
             groupBox3.Controls.Add(btnReservar);
             groupBox3.Location = new Point(444, 26);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(345, 241);
+            groupBox3.Size = new Size(345, 213);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos Reserva";
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Font = new Font("Segoe UI", 11F);
-            btnEliminar.Location = new Point(233, 182);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(95, 35);
-            btnEliminar.TabIndex = 13;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            // 
-            // btnModificar
-            // 
-            btnModificar.Font = new Font("Segoe UI", 11F);
-            btnModificar.Location = new Point(132, 182);
-            btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(95, 35);
-            btnModificar.TabIndex = 14;
-            btnModificar.Text = "Modificar";
-            btnModificar.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -343,6 +324,17 @@
             txtFecha.Size = new Size(147, 27);
             txtFecha.TabIndex = 9;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.Font = new Font("Segoe UI", 11F);
+            btnEliminar.Location = new Point(201, 60);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(95, 35);
+            btnEliminar.TabIndex = 13;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // btnAnterior
             // 
             btnAnterior.Location = new Point(123, 26);
@@ -368,27 +360,60 @@
             dgvReservas.AllowUserToAddRows = false;
             dgvReservas.AllowUserToDeleteRows = false;
             dgvReservas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReservas.Location = new Point(15, 22);
+            dgvReservas.Location = new Point(6, 22);
             dgvReservas.Name = "dgvReservas";
             dgvReservas.ReadOnly = true;
-            dgvReservas.Size = new Size(474, 516);
+            dgvReservas.Size = new Size(537, 546);
             dgvReservas.TabIndex = 10;
+            dgvReservas.SelectionChanged += dgvReservas_SelectionChanged;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(dgvReservas);
-            groupBox4.Location = new Point(795, 31);
+            groupBox4.Location = new Point(795, 25);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(495, 549);
+            groupBox4.Size = new Size(549, 580);
             groupBox4.TabIndex = 11;
             groupBox4.TabStop = false;
             groupBox4.Text = "Reservas";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11F);
+            label8.Location = new Point(6, 30);
+            label8.Name = "label8";
+            label8.Size = new Size(118, 20);
+            label8.TabIndex = 17;
+            label8.Text = "Numero Reserva";
+            // 
+            // txtNumeroReserva
+            // 
+            txtNumeroReserva.Font = new Font("Segoe UI", 11F);
+            txtNumeroReserva.Location = new Point(149, 27);
+            txtNumeroReserva.Name = "txtNumeroReserva";
+            txtNumeroReserva.ReadOnly = true;
+            txtNumeroReserva.Size = new Size(147, 27);
+            txtNumeroReserva.TabIndex = 16;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(btnEliminar);
+            groupBox5.Controls.Add(label8);
+            groupBox5.Controls.Add(txtNumeroReserva);
+            groupBox5.Location = new Point(444, 245);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(345, 110);
+            groupBox5.TabIndex = 18;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Eliminar Reserva";
             // 
             // frmReserva
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1302, 645);
+            ClientSize = new Size(1356, 645);
+            Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(btnSiguiente);
             Controls.Add(btnAnterior);
@@ -410,13 +435,15 @@
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReservas).EndInit();
             groupBox4.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flpMesas;
         private GroupBox groupBox1;
         private DateTimePicker dtpFecha;
         private TextBox txtCantidadPer;
@@ -444,8 +471,10 @@
         private DataGridView dgvReservas;
         private GroupBox groupBox4;
         private Button btnEliminar;
-        private Button btnModificar;
         private Label label10;
         private TextBox txtIdCliente;
+        private Label label8;
+        private TextBox txtNumeroReserva;
+        private GroupBox groupBox5;
     }
 }

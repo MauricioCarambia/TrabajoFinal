@@ -291,7 +291,7 @@
     </mesa>
     <mesa IdMesa="3">
       <NumeroMesa>10</NumeroMesa>
-      <Capacidad>5</Capacidad>
+      <Capacidad>4</Capacidad>
       <Estado>Libre</Estado>
     </mesa>
     <mesa IdMesa="4">
@@ -301,27 +301,21 @@
     </mesa>
     <mesa IdMesa="5">
       <NumeroMesa>11</NumeroMesa>
-      <Capacidad>2</Capacidad>
-      <Estado>Reservada</Estado>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
     </mesa>
     <mesa IdMesa="6">
       <NumeroMesa>9</NumeroMesa>
       <Capacidad>2</Capacidad>
-      <Estado>Reservada</Estado>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="7">
+      <NumeroMesa>12</NumeroMesa>
+      <Capacidad>6</Capacidad>
+      <Estado>Libre</Estado>
     </mesa>
   </Mesas>
   <Reservas>
-    <reserva Id="1">
-      <NumeroReserva>R-20251015-001</NumeroReserva>
-      <FechaReserva>2025-10-15</FechaReserva>
-      <Cliente IdCliente="4">
-        <Nombre>a</Nombre>
-      </Cliente>
-      <CantidadPersonas>4</CantidadPersonas>
-      <Mesa IdMesa="1">
-        <NumeroMesa>1</NumeroMesa>
-      </Mesa>
-    </reserva>
     <reserva Id="2">
       <NumeroReserva>R-20251016-002</NumeroReserva>
       <FechaReserva>2025-10-16</FechaReserva>
@@ -333,17 +327,6 @@
         <NumeroMesa>2</NumeroMesa>
       </Mesa>
     </reserva>
-    <reserva Id="3">
-      <NumeroReserva>R-20251015-003</NumeroReserva>
-      <FechaReserva>2025-10-15</FechaReserva>
-      <Cliente IdCliente="4">
-        <Nombre>a</Nombre>
-      </Cliente>
-      <CantidadPersonas>2</CantidadPersonas>
-      <Mesa IdMesa="6">
-        <NumeroMesa>9</NumeroMesa>
-      </Mesa>
-    </reserva>
     <reserva Id="4">
       <NumeroReserva>R-20251016-004</NumeroReserva>
       <FechaReserva>2025-10-16</FechaReserva>
@@ -353,6 +336,50 @@
       <CantidadPersonas>2</CantidadPersonas>
       <Mesa IdMesa="5">
         <NumeroMesa>11</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="12">
+      <NumeroReserva>R-20251017-012</NumeroReserva>
+      <FechaReserva>2025-10-17</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="6">
+        <NumeroMesa>9</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="13">
+      <NumeroReserva>R-20251017-013</NumeroReserva>
+      <FechaReserva>2025-10-17</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="14">
+      <NumeroReserva>R-20251015-007</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="2">
+        <NumeroMesa>2</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="15">
+      <NumeroReserva>R-20251015-006</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
       </Mesa>
     </reserva>
   </Reservas>

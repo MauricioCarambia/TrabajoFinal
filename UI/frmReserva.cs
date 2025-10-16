@@ -2,29 +2,30 @@
 using Entity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
+using static Entity.BEMesa;
 
 namespace UI
 {
     public partial class frmReserva : Form
     {
-        Regex nwRegex;
-        BECliente oBECliente;
-        BLLCliente oBLLCliente;
-        BEMesa oBEMesa;
-        BLLMesa oBLLMesa;
-        BEReserva oBEReserva;
-        BLLReserva oBLLReserva;
+        private Regex nwRegex;
+        private BECliente oBECliente;
+        private BLLCliente oBLLCliente;
+        private BEMesa oBEMesa;
+        private BLLMesa oBLLMesa;
+        private BEReserva oBEReserva;
+        private BLLReserva oBLLReserva;
         private frmMDI mdiParent;
+
+        // Lista de reservas cargadas del día para evitar múltiples llamadas al BLL
+        private List<BEReserva> reservasDelDia = new List<BEReserva>();
+
         public frmReserva(frmMDI mdiParent)
         {
             oBECliente = new BECliente();
@@ -39,54 +40,139 @@ namespace UI
 
         private void frmReserva_Load(object sender, EventArgs e)
         {
-            CargarMesas();
-            CargarReservas();
-             txtFecha.Text = dtpFecha.Value.ToShortDateString();
+            ActualizarVista();
         }
-        private void CargarMesas()
+
+        #region Métodos auxiliares
+
+        private DateTime FechaSeleccionada() => dtpFecha.Value.Date;
+
+        private BECliente ObtenerClienteSeleccionado()
         {
-            flowLayoutPanel1.Controls.Clear();
+            if (!int.TryParse(txtIdCliente.Text.Trim(), out int idCliente))
+                throw new Exception("Debe seleccionar un cliente válido.");
 
-            List<BEMesa> listaMesas = oBLLMesa.ListarTodo();
+            var cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = idCliente });
+            if (cliente == null)
+                throw new Exception("Cliente no encontrado.");
 
-            foreach (var m in listaMesas)
+            return cliente;
+        }
+
+        private void LimpiarCamposReserva()
+        {
+            txtMesa.Clear();
+            txtPersonas.Clear();
+            txtNumeroReserva.Clear();
+        }
+
+        private void LimpiarCamposCliente()
+        {
+            txtIdCliente.Clear();
+            txtNombre.Clear();
+            txtTelefono.Clear();
+            txtDNI.Clear();
+        }
+
+        private void ActualizarVista()
+        {
+            CargarMesasPorFecha(FechaSeleccionada());
+            CargarReservas();
+            txtFecha.Text = FechaSeleccionada().ToShortDateString();
+        }
+
+        #endregion
+
+        #region Carga de Mesas
+
+        private void CargarMesasPorFecha(DateTime fecha)
+        {
+            flpMesas.Controls.Clear();
+            var listaMesas = oBLLMesa.ListarTodo();
+            reservasDelDia = oBLLReserva.ListarPorFecha(fecha); // actualizar lista de reservas del día
+
+            foreach (var mesa in listaMesas)
             {
-                Button btn = new Button();
-                btn.Text = $"Mesa {m.NumeroMesa}\nCapacidad: {m.Capacidad}";
-                btn.Width = 100;
-                btn.Height = 60;
-                btn.Tag = m.IdMesa;
-                btn.BackColor = ObtenerColorEstado(m.Estado);
-
-                btn.Click += (s, e) =>
+                Button btnMesa = new Button
                 {
-                    txtMesa.Text = m.NumeroMesa.ToString();
-                    txtPersonas.Text = m.Capacidad.ToString();
+                    Text = $"Mesa {mesa.NumeroMesa} - Capacidad{mesa.Capacidad}",
+                    Width = 100,
+                    Height = 60,
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                    Tag = mesa,
+                    Margin = new Padding(8)
                 };
 
-                flowLayoutPanel1.Controls.Add(btn);
+                var reservaMesa = reservasDelDia.FirstOrDefault(r => r.Mesa.IdMesa == mesa.IdMesa);
+
+                if (reservaMesa != null)
+                    btnMesa.BackColor = Color.Goldenrod; // reservada
+                else if (mesa.Estado == BEMesa.EstadoMesa.Ocupada)
+                    btnMesa.BackColor = Color.IndianRed; // ocupada
+                else
+                    btnMesa.BackColor = Color.LightGreen; // libre
+
+                btnMesa.Click += BtnMesa_Click;
+                flpMesas.Controls.Add(btnMesa);
             }
         }
 
-        private Color ObtenerColorEstado(BEMesa.EstadoMesa estado)
+        private void BtnMesa_Click(object sender, EventArgs e)
         {
-            switch (estado)
+            try
             {
-                case BEMesa.EstadoMesa.Libre:
-                    return Color.LightGreen;
-                case BEMesa.EstadoMesa.Reservada:
-                    return Color.Yellow;
-                case BEMesa.EstadoMesa.Ocupada:
-                    return Color.IndianRed;
-                default:
-                    return Color.LightGray;
+                var btn = sender as Button;
+                var mesa = btn.Tag as BEMesa;
+                if (mesa == null) return;
+
+                txtMesa.Text = mesa.NumeroMesa.ToString();
+
+                // Buscar reserva de la mesa en el día seleccionado
+                var reservaMesa = reservasDelDia.FirstOrDefault(r => r.Mesa.IdMesa == mesa.IdMesa);
+
+                // Cantidad de personas: si hay reserva, mostrar cantidad; si no, mostrar capacidad de la mesa
+                txtPersonas.Text = reservaMesa?.CantidadPersonas.ToString() ?? mesa.Capacidad.ToString();
+
+                // Número de reserva
+                txtNumeroReserva.Text = reservaMesa?.NumeroReserva ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al seleccionar la mesa: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        #endregion
+
+        #region Cambio de fecha
+
+        private void dtpFechaReserva_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarVista();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            dtpFecha.Value = dtpFecha.Value.AddDays(1);
+            ActualizarVista();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            dtpFecha.Value = dtpFecha.Value.AddDays(-1);
+            ActualizarVista();
+        }
+
+        #endregion
+
+        #region Cliente
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            frmClientes frmClientes = new frmClientes();
-            frmClientes.MdiParent = mdiParent;
+            frmClientes frmClientes = new frmClientes
+            {
+                MdiParent = mdiParent
+            };
             frmClientes.Show();
         }
 
@@ -95,177 +181,187 @@ namespace UI
             try
             {
                 ValidarDatosCliente();
-
-            }
-            catch (XmlException ex) { MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
-        private void ValidarDatosCliente()
-        {
-            try
-            {
-                if (txtDNI.Text.Length > 0)
-                {
-                    // Validar que el DNI tenga entre 6 y 8 dígitos
-                    nwRegex = new Regex(@"^[0-9]{6,8}$");
-
-                    if (nwRegex.IsMatch(txtDNI.Text.Trim()))
-                    {
-                        oBECliente = new BECliente();
-                        oBECliente.DNI = txtDNI.Text.Trim();
-
-                        var clienteEncontrado = oBLLCliente.ListarObjeto(oBECliente);
-
-                        if (clienteEncontrado != null)
-                        {
-                            txtIdCliente.Text = clienteEncontrado.IdCliente.ToString();
-                            txtNombre.Text = clienteEncontrado.Nombre;
-                            txtTelefono.Text = clienteEncontrado.Telefono;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontró ningún cliente con ese DNI.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El DNI ingresado no es válido. Debe tener entre 6 y 8 dígitos numéricos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Debe ingresar un DNI para realizar la búsqueda.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al validar cliente: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnSiguiente_Click(object sender, EventArgs e)
+        private void ValidarDatosCliente()
         {
-            dtpFecha.Value = dtpFecha.Value.AddDays(1);
-            txtFecha.Text = dtpFecha.Value.ToShortDateString();
+            if (string.IsNullOrEmpty(txtDNI.Text))
+            {
+                MessageBox.Show("Debe ingresar un DNI para realizar la búsqueda.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Opcional: volver a cargar las mesas o reservas de esa fecha
-            // CargarMesasPorFecha(dtpFecha.Value);
+            nwRegex = new Regex(@"^[0-9]{6,8}$");
+            if (!nwRegex.IsMatch(txtDNI.Text.Trim()))
+            {
+                MessageBox.Show("El DNI ingresado no es válido. Debe tener entre 6 y 8 dígitos numéricos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            oBECliente = new BECliente { DNI = txtDNI.Text.Trim() };
+            var clienteEncontrado = oBLLCliente.ListarObjeto(oBECliente);
+
+            if (clienteEncontrado != null)
+            {
+                txtIdCliente.Text = clienteEncontrado.IdCliente.ToString();
+                txtNombre.Text = clienteEncontrado.Nombre;
+                txtTelefono.Text = clienteEncontrado.Telefono;
+            }
+            else
+            {
+                MessageBox.Show("No se encontró ningún cliente con ese DNI.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void btnAnterior_Click(object sender, EventArgs e)
-        {
-            // Retrocede un día
-            dtpFecha.Value = dtpFecha.Value.AddDays(-1);
-            txtFecha.Text = dtpFecha.Value.ToShortDateString();
+        #endregion
 
-            // Opcional: volver a cargar las mesas o reservas de esa fecha
-            //CargarMesasPorFecha(dtpFecha.Value);
-        }
+        #region Reservas
 
         private void btnReservar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validar datos
-                BEReserva reserva = ValidarDatosReserva();
+                var reserva = ValidarDatosReserva();
+                DateTime fecha = reserva.FechaReserva.Date;
 
-                // Guardar reserva
+                ValidarMesaDisponible(reserva, fecha);
+                ValidarClienteSinReserva(reserva, fecha);
+
                 oBLLReserva.Guardar(reserva);
 
-                // Cambiar estado de la mesa a "Reservada"
                 reserva.Mesa.Estado = BEMesa.EstadoMesa.Reservada;
-                oBLLMesa.Guardar(reserva.Mesa); // Actualiza el XML de mesas
+                oBLLMesa.Guardar(reserva.Mesa);
 
-                // Refrescar visualmente las mesas
-                CargarMesas();
+                ActualizarVista();
+                LimpiarCamposCliente();
+                LimpiarCamposReserva();
 
-                LimpiarCampos();
                 MessageBox.Show("Reserva guardada correctamente. La mesa fue marcada como 'Reservada'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al reservar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private BEReserva ValidarDatosReserva()
+        {
+            var reserva = new BEReserva();
+
+            if (!DateTime.TryParse(txtFecha.Text.Trim(), out DateTime fecha))
+                throw new Exception("La fecha no es válida.");
+            reserva.FechaReserva = fecha;
+
+            reserva.Cliente = ObtenerClienteSeleccionado();
+
+            if (!int.TryParse(txtPersonas.Text.Trim(), out int cant) || cant <= 0)
+                throw new Exception("Cantidad de personas inválida.");
+            reserva.CantidadPersonas = cant;
+
+            if (!int.TryParse(txtMesa.Text.Trim(), out int numMesa))
+                throw new Exception("Número de mesa inválido.");
+
+            var mesa = oBLLMesa.ListarObjetoPorNumeroMesa(new BEMesa { NumeroMesa = numMesa });
+            if (mesa == null)
+                throw new Exception("Mesa no encontrada.");
+            reserva.Mesa = mesa;
+
+            return reserva;
+        }
+
+        private void ValidarMesaDisponible(BEReserva reserva, DateTime fecha)
+        {
+            var reservaMesa = reservasDelDia.FirstOrDefault(r => r.Mesa.IdMesa == reserva.Mesa.IdMesa);
+            if (reserva.Mesa.Estado == BEMesa.EstadoMesa.Ocupada || reservaMesa != null)
+                throw new Exception($"No se puede reservar la mesa {reserva.Mesa.NumeroMesa}. {(reservaMesa != null ? "Ya está reservada" : "Está ocupada")}.");
+        }
+
+        private void ValidarClienteSinReserva(BEReserva reserva, DateTime fecha)
+        {
+            var reservaCliente = reservasDelDia.FirstOrDefault(r => r.Cliente.IdCliente == reserva.Cliente.IdCliente);
+            if (reservaCliente != null)
+                throw new Exception($"El cliente {reserva.Cliente.Nombre} ya tiene una reserva para esta fecha.");
+        }
+
+        private void CargarReservas()
+        {
+            reservasDelDia = oBLLReserva.ListarPorFecha(FechaSeleccionada());
+
+            var mostrar = reservasDelDia.Select(r => new
+            {
+                r.Id,
+                r.NumeroReserva,
+                Fecha = r.FechaReserva.ToString("yyyy-MM-dd"),
+                Cliente = r.Cliente.Nombre,
+                Mesa = r.Mesa.NumeroMesa,
+                r.CantidadPersonas
+            }).ToList();
+
+            dgvReservas.DataSource = mostrar;
+            dgvReservas.AutoResizeColumns();
+            dgvReservas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReservas.MultiSelect = false;
+
+            if (reservasDelDia.Count == 0)
+                LimpiarCamposReserva();
+        }
+
+        private void dgvReservas_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvReservas.CurrentRow != null)
+            {
+                txtNumeroReserva.Text = dgvReservas.CurrentRow.Cells["NumeroReserva"].Value.ToString();
+            }
+            else
+            {
+                txtNumeroReserva.Clear();
+            }
+        }
+
+        #endregion
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvReservas.Rows.Count == 0)
+                    throw new Exception("Primero debe existir al menos una reserva para poder eliminarla.");
+
+                string numeroReserva = txtNumeroReserva.Text.Trim();
+                if (string.IsNullOrEmpty(numeroReserva))
+                    throw new Exception("Debe ingresar un número de reserva válido para eliminar.");
+
+                BEReserva oBEReserva = oBLLReserva.ListarObjeto(new BEReserva { NumeroReserva = numeroReserva });
+                if (oBEReserva == null)
+                    throw new Exception("No se encontró la reserva con el número especificado.");
+
+                // Obtener la mesa real y solo liberar el estado
+                BEMesa mesaReal = oBLLMesa.ListarObjeto(new BEMesa { IdMesa = oBEReserva.Mesa.IdMesa });
+                if (mesaReal != null)
+                {
+                    mesaReal.Estado = EstadoMesa.Libre;
+                    oBLLMesa.Guardar(mesaReal); // Solo cambia el estado
+                }
+
+                // Eliminar la reserva
+                oBLLReserva.Eliminar(oBEReserva);
+
+                // Refrescar UI
+                ActualizarVista();
+                LimpiarCamposReserva();
+
+                MessageBox.Show("Reserva eliminada correctamente y la mesa ha sido liberada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private BEReserva ValidarDatosReserva()
-        {
-            BEReserva reserva = new BEReserva();
 
-            // Parseo de fecha
-            if (!DateTime.TryParse(txtFecha.Text.Trim(), out DateTime fecha))
-                throw new Exception("La fecha no es válida.");
-            reserva.FechaReserva = fecha;
-
-            // Validar cliente usando IdCliente
-            if (!int.TryParse(txtIdCliente.Text.Trim(), out int idCliente))
-                throw new Exception("Debe seleccionar un cliente válido.");
-
-            BECliente cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = idCliente });
-            if (cliente == null)
-                throw new Exception("Cliente no encontrado.");
-            reserva.Cliente = cliente; // Ahora tiene IdCliente y Nombre
-
-            // Cantidad de personas
-            if (!int.TryParse(txtPersonas.Text.Trim(), out int cant) || cant <= 0)
-                throw new Exception("Cantidad de personas inválida.");
-            reserva.CantidadPersonas = cant;
-
-            // Validar mesa usando número de mesa
-            if (!int.TryParse(txtMesa.Text.Trim(), out int numMesa))
-                throw new Exception("Número de mesa inválido.");
-
-            //// Primero obtener la IdMesa a partir del número de mesa
-            //BEMesa mesaNumero = oBLLMesa.ListarObjeto(new BEMesa { NumeroMesa = numMesa });
-            //if (mesaNumero == null)
-            //    throw new Exception("Mesa no encontrada.");
-
-            // Ahora obtengo la mesa completa usando IdMesa
-            // Buscar mesa por número
-            BEMesa mesa = oBLLMesa.ListarObjetoPorNumeroMesa(new BEMesa { NumeroMesa = numMesa });
-            if (mesa == null)
-                throw new Exception("Mesa no encontrada.");
-
-            reserva.Mesa = mesa;
-
-            return reserva;
-        }
-
-        private void LimpiarCampos()
-        {
-            txtPersonas.Text = "";
-            txtMesa.Text = "";
-            txtMesa.Tag = null;
-            txtFecha.Text = "";
-            CargarReservas();
-        }
-        private void CargarReservas()
-        {
-            try
-            {
-                List<BEReserva> listaReservas = oBLLReserva.ListarTodo(); // obtiene todas las reservas
-
-                // Proyección a un tipo que el DataGrid puede mostrar fácilmente
-                var mostrar = listaReservas.Select(r => new
-                {
-                    r.Id,
-                    r.NumeroReserva,
-                    Fecha = r.FechaReserva.ToString("yyyy-MM-dd"),
-                    Cliente = r.Cliente.Nombre, // mostramos nombre del cliente
-                    Mesa = r.Mesa.NumeroMesa,   // mostramos número de mesa
-                    r.CantidadPersonas
-                }).ToList();
-
-                dgvReservas.DataSource = mostrar;
-                dgvReservas.AutoResizeColumns();
-                dgvReservas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvReservas.MultiSelect = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar las reservas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
-
-    
 }
