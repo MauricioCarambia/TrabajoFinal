@@ -8,12 +8,12 @@ namespace Entity
 {
     public class BEProveedorInsumo
     {
-        public int IdProveedor { get; set; }
-        public int IdInsumo { get; set; }
-        public decimal PrecioCompra { get; set; } // Precio por unidad (kg, litro, etc.)
-        public int CantidadPorUnidad { get; set; } // Ejemplo: bolsa de 5 kg
-
-        public BEProveedor Proveedor { get; set; }
+        public int Id { get; set; }
         public BEInsumo Insumo { get; set; }
+        public BEProveedor Proveedor { get; set; }
+
+        public decimal PrecioCompra { get; set; }     // Precio unitario al que el proveedor vende
+        public decimal Cantidad { get; set; }         // Cantidad que comprás al proveedor
+        public DateTime Fecha { get; set; }
     }
 }

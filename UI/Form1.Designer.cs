@@ -50,17 +50,17 @@
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             crearUsuarioToolStripMenuItem = new ToolStripMenuItem();
             permisosRolesUsuariosToolStripMenuItem = new ToolStripMenuItem();
-            dashBoardToolStripMenuItem = new ToolStripMenuItem();
-            verToolStripMenuItem = new ToolStripMenuItem();
-            bitacoraToolStripMenuItem = new ToolStripMenuItem();
-            verBitacoraToolStripMenuItem = new ToolStripMenuItem();
-            hacerBackupToolStripMenuItem = new ToolStripMenuItem();
-            haverRestoreToolStripMenuItem = new ToolStripMenuItem();
             compraInsumosToolStripMenuItem = new ToolStripMenuItem();
             solicitudCompraToolStripMenuItem = new ToolStripMenuItem();
             preOrdenDeCompraToolStripMenuItem = new ToolStripMenuItem();
             ordenDeCompraToolStripMenuItem = new ToolStripMenuItem();
             entregaInsumosToolStripMenuItem = new ToolStripMenuItem();
+            bitacoraToolStripMenuItem = new ToolStripMenuItem();
+            verBitacoraToolStripMenuItem = new ToolStripMenuItem();
+            hacerBackupToolStripMenuItem = new ToolStripMenuItem();
+            haverRestoreToolStripMenuItem = new ToolStripMenuItem();
+            dashBoardToolStripMenuItem = new ToolStripMenuItem();
+            verToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -161,6 +161,7 @@
             insumoProveedorToolStripMenuItem.Name = "insumoProveedorToolStripMenuItem";
             insumoProveedorToolStripMenuItem.Size = new Size(180, 22);
             insumoProveedorToolStripMenuItem.Text = "Insumo-Proveedor";
+            insumoProveedorToolStripMenuItem.Click += insumoProveedorToolStripMenuItem_Click;
             // 
             // registrarMesasToolStripMenuItem
             // 
@@ -219,48 +220,6 @@
             permisosRolesUsuariosToolStripMenuItem.Text = "Gestionar Usuarios";
             permisosRolesUsuariosToolStripMenuItem.Click += permisosRolesUsuariosToolStripMenuItem_Click;
             // 
-            // dashBoardToolStripMenuItem
-            // 
-            dashBoardToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verToolStripMenuItem });
-            dashBoardToolStripMenuItem.Name = "dashBoardToolStripMenuItem";
-            dashBoardToolStripMenuItem.Size = new Size(76, 20);
-            dashBoardToolStripMenuItem.Text = "DashBoard";
-            // 
-            // verToolStripMenuItem
-            // 
-            verToolStripMenuItem.Name = "verToolStripMenuItem";
-            verToolStripMenuItem.Size = new Size(180, 22);
-            verToolStripMenuItem.Text = "Ver Informe";
-            verToolStripMenuItem.Click += verToolStripMenuItem_Click;
-            // 
-            // bitacoraToolStripMenuItem
-            // 
-            bitacoraToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verBitacoraToolStripMenuItem, hacerBackupToolStripMenuItem, haverRestoreToolStripMenuItem });
-            bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
-            bitacoraToolStripMenuItem.Size = new Size(62, 20);
-            bitacoraToolStripMenuItem.Text = "Bitacora";
-            // 
-            // verBitacoraToolStripMenuItem
-            // 
-            verBitacoraToolStripMenuItem.Name = "verBitacoraToolStripMenuItem";
-            verBitacoraToolStripMenuItem.Size = new Size(180, 22);
-            verBitacoraToolStripMenuItem.Text = "Ver Bitacora";
-            verBitacoraToolStripMenuItem.Click += verBitacoraToolStripMenuItem_Click;
-            // 
-            // hacerBackupToolStripMenuItem
-            // 
-            hacerBackupToolStripMenuItem.Name = "hacerBackupToolStripMenuItem";
-            hacerBackupToolStripMenuItem.Size = new Size(180, 22);
-            hacerBackupToolStripMenuItem.Text = "Hacer Backup";
-            hacerBackupToolStripMenuItem.Click += hacerBackupToolStripMenuItem_Click;
-            // 
-            // haverRestoreToolStripMenuItem
-            // 
-            haverRestoreToolStripMenuItem.Name = "haverRestoreToolStripMenuItem";
-            haverRestoreToolStripMenuItem.Size = new Size(180, 22);
-            haverRestoreToolStripMenuItem.Text = "Hacer Restore";
-            haverRestoreToolStripMenuItem.Click += haverRestoreToolStripMenuItem_Click;
-            // 
             // compraInsumosToolStripMenuItem
             // 
             compraInsumosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { solicitudCompraToolStripMenuItem, preOrdenDeCompraToolStripMenuItem, ordenDeCompraToolStripMenuItem, entregaInsumosToolStripMenuItem });
@@ -291,6 +250,48 @@
             entregaInsumosToolStripMenuItem.Name = "entregaInsumosToolStripMenuItem";
             entregaInsumosToolStripMenuItem.Size = new Size(189, 22);
             entregaInsumosToolStripMenuItem.Text = "Entrega Insumos";
+            // 
+            // bitacoraToolStripMenuItem
+            // 
+            bitacoraToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verBitacoraToolStripMenuItem, hacerBackupToolStripMenuItem, haverRestoreToolStripMenuItem });
+            bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
+            bitacoraToolStripMenuItem.Size = new Size(62, 20);
+            bitacoraToolStripMenuItem.Text = "Bitacora";
+            // 
+            // verBitacoraToolStripMenuItem
+            // 
+            verBitacoraToolStripMenuItem.Name = "verBitacoraToolStripMenuItem";
+            verBitacoraToolStripMenuItem.Size = new Size(147, 22);
+            verBitacoraToolStripMenuItem.Text = "Ver Bitacora";
+            verBitacoraToolStripMenuItem.Click += verBitacoraToolStripMenuItem_Click;
+            // 
+            // hacerBackupToolStripMenuItem
+            // 
+            hacerBackupToolStripMenuItem.Name = "hacerBackupToolStripMenuItem";
+            hacerBackupToolStripMenuItem.Size = new Size(147, 22);
+            hacerBackupToolStripMenuItem.Text = "Hacer Backup";
+            hacerBackupToolStripMenuItem.Click += hacerBackupToolStripMenuItem_Click;
+            // 
+            // haverRestoreToolStripMenuItem
+            // 
+            haverRestoreToolStripMenuItem.Name = "haverRestoreToolStripMenuItem";
+            haverRestoreToolStripMenuItem.Size = new Size(147, 22);
+            haverRestoreToolStripMenuItem.Text = "Hacer Restore";
+            haverRestoreToolStripMenuItem.Click += haverRestoreToolStripMenuItem_Click;
+            // 
+            // dashBoardToolStripMenuItem
+            // 
+            dashBoardToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verToolStripMenuItem });
+            dashBoardToolStripMenuItem.Name = "dashBoardToolStripMenuItem";
+            dashBoardToolStripMenuItem.Size = new Size(76, 20);
+            dashBoardToolStripMenuItem.Text = "DashBoard";
+            // 
+            // verToolStripMenuItem
+            // 
+            verToolStripMenuItem.Name = "verToolStripMenuItem";
+            verToolStripMenuItem.Size = new Size(135, 22);
+            verToolStripMenuItem.Text = "Ver Informe";
+            verToolStripMenuItem.Click += verToolStripMenuItem_Click;
             // 
             // frmMDI
             // 

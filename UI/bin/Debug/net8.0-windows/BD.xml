@@ -510,4 +510,18 @@
       <Telefono>123123123</Telefono>
     </proveedor>
   </Proveedores>
+  <Insumos>
+    <insumo Id="1">
+      <Nombre>Tomate</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>20</Cantidad>
+      <Precio>1500,00</Precio>
+    </insumo>
+    <insumo Id="2">
+      <Nombre>Harina</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>30,00</Cantidad>
+      <Precio>2500,00</Precio>
+    </insumo>
+  </Insumos>
 </Root>

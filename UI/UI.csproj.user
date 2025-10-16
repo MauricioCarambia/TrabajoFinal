@@ -37,6 +37,9 @@
     <Compile Update="frmGestionUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmInsumoProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmInsumos.cs">
       <SubType>Form</SubType>
     </Compile>

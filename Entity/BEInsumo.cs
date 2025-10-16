@@ -10,8 +10,18 @@ namespace Entity
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string UnidadMedida { get; set; } 
-        public decimal StockActual { get; set; }
+        public UnidadesMedida UnidadMedida { get; set; } 
+        public decimal Cantidad { get; set; }
+        public decimal Precio { get; set; }
+
+        public enum UnidadesMedida
+        {
+            Kg,
+            G,
+            Lt,
+            Ml,
+            U
+        }
 
         public List<BEProveedorInsumo> ListaProveedores { get; set; } = new List<BEProveedorInsumo>();
     }

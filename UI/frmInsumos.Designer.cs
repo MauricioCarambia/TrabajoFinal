@@ -32,21 +32,25 @@
             label4 = new Label();
             btnBuscar = new Button();
             groupBox2 = new GroupBox();
-            dgvClientes = new DataGridView();
+            dgvInsumos = new DataGridView();
             groupBox1 = new GroupBox();
+            cmbUnidadMedida = new ComboBox();
+            label6 = new Label();
+            txtIdInsumo = new TextBox();
+            txtPrecio = new TextBox();
+            label2 = new Label();
+            btnLimpiar = new Button();
+            txtCantidad = new TextBox();
             label5 = new Label();
-            textBox1 = new TextBox();
-            btnCerrar = new Button();
+            btnSalir = new Button();
             label3 = new Label();
             label1 = new Label();
             btnEliminar = new Button();
             btnModificar = new Button();
             btnGuardar = new Button();
             txtNombre = new TextBox();
-            textBox2 = new TextBox();
-            btnLimpiar = new Button();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvInsumos).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -80,154 +84,204 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dgvClientes);
-            groupBox2.Location = new Point(495, 69);
+            groupBox2.Controls.Add(dgvInsumos);
+            groupBox2.Location = new Point(495, 34);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(706, 440);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "Insumos";
             // 
-            // dgvClientes
+            // dgvInsumos
             // 
-            dgvClientes.AllowUserToAddRows = false;
-            dgvClientes.AllowUserToDeleteRows = false;
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(6, 22);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.ReadOnly = true;
-            dgvClientes.Size = new Size(687, 405);
-            dgvClientes.TabIndex = 2;
+            dgvInsumos.AllowUserToAddRows = false;
+            dgvInsumos.AllowUserToDeleteRows = false;
+            dgvInsumos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvInsumos.Location = new Point(6, 22);
+            dgvInsumos.MultiSelect = false;
+            dgvInsumos.Name = "dgvInsumos";
+            dgvInsumos.ReadOnly = true;
+            dgvInsumos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvInsumos.Size = new Size(687, 405);
+            dgvInsumos.TabIndex = 2;
+            dgvInsumos.SelectionChanged += dgvInsumos_SelectionChanged_1;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cmbUnidadMedida);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(txtIdInsumo);
+            groupBox1.Controls.Add(txtPrecio);
+            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnLimpiar);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(txtCantidad);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(btnCerrar);
+            groupBox1.Controls.Add(btnSalir);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Controls.Add(btnModificar);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtNombre);
-            groupBox1.Location = new Point(26, 69);
+            groupBox1.Location = new Point(25, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(345, 398);
+            groupBox1.Size = new Size(345, 462);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "ABM Insumos";
             // 
+            // cmbUnidadMedida
+            // 
+            cmbUnidadMedida.FormattingEnabled = true;
+            cmbUnidadMedida.Location = new Point(135, 130);
+            cmbUnidadMedida.Name = "cmbUnidadMedida";
+            cmbUnidadMedida.Size = new Size(166, 23);
+            cmbUnidadMedida.TabIndex = 16;
+            cmbUnidadMedida.SelectedIndexChanged += cmbUnidadesMedida_SelectedIndexChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10F);
+            label6.Location = new Point(6, 35);
+            label6.Name = "label6";
+            label6.Size = new Size(23, 19);
+            label6.TabIndex = 15;
+            label6.Text = "ID";
+            // 
+            // txtIdInsumo
+            // 
+            txtIdInsumo.Font = new Font("Segoe UI", 10F);
+            txtIdInsumo.Location = new Point(135, 32);
+            txtIdInsumo.Name = "txtIdInsumo";
+            txtIdInsumo.ReadOnly = true;
+            txtIdInsumo.Size = new Size(166, 25);
+            txtIdInsumo.TabIndex = 14;
+            // 
+            // txtPrecio
+            // 
+            txtPrecio.Font = new Font("Segoe UI", 10F);
+            txtPrecio.Location = new Point(135, 218);
+            txtPrecio.Name = "txtPrecio";
+            txtPrecio.Size = new Size(166, 25);
+            txtPrecio.TabIndex = 13;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.Location = new Point(6, 221);
+            label2.Name = "label2";
+            label2.Size = new Size(46, 19);
+            label2.TabIndex = 12;
+            label2.Text = "Precio";
+            // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Font = new Font("Segoe UI", 10F);
+            btnLimpiar.Location = new Point(16, 378);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(102, 51);
+            btnLimpiar.TabIndex = 11;
+            btnLimpiar.Text = "Limpiar Campos";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
+            // txtCantidad
+            // 
+            txtCantidad.Font = new Font("Segoe UI", 10F);
+            txtCantidad.Location = new Point(135, 174);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(166, 25);
+            txtCantidad.TabIndex = 10;
+            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(6, 78);
+            label5.Font = new Font("Segoe UI", 10F);
+            label5.Location = new Point(6, 130);
             label5.Name = "label5";
-            label5.Size = new Size(112, 20);
+            label5.Size = new Size(103, 19);
             label5.TabIndex = 9;
             label5.Text = "Unidad Medida";
             // 
-            // textBox1
+            // btnSalir
             // 
-            textBox1.Font = new Font("Segoe UI", 11F);
-            textBox1.Location = new Point(135, 75);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(166, 27);
-            textBox1.TabIndex = 8;
-            // 
-            // btnCerrar
-            // 
-            btnCerrar.Font = new Font("Segoe UI", 11F);
-            btnCerrar.Location = new Point(237, 338);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(102, 39);
-            btnCerrar.TabIndex = 7;
-            btnCerrar.Text = "Salir";
-            btnCerrar.UseVisualStyleBackColor = true;
+            btnSalir.Font = new Font("Segoe UI", 10F);
+            btnSalir.Location = new Point(237, 390);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(102, 39);
+            btnSalir.TabIndex = 7;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(6, 125);
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.Location = new Point(6, 177);
             label3.Name = "label3";
-            label3.Size = new Size(69, 20);
+            label3.Size = new Size(64, 19);
             label3.TabIndex = 6;
             label3.Text = "Cantidad";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(6, 29);
+            label1.Font = new Font("Segoe UI", 10F);
+            label1.Location = new Point(6, 81);
             label1.Name = "label1";
-            label1.Size = new Size(64, 20);
+            label1.Size = new Size(59, 19);
             label1.TabIndex = 2;
             label1.Text = "Nombre";
             // 
             // btnEliminar
             // 
-            btnEliminar.Font = new Font("Segoe UI", 11F);
-            btnEliminar.Location = new Point(233, 224);
+            btnEliminar.Font = new Font("Segoe UI", 10F);
+            btnEliminar.Location = new Point(233, 276);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(102, 39);
             btnEliminar.TabIndex = 1;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnModificar
             // 
-            btnModificar.Font = new Font("Segoe UI", 11F);
-            btnModificar.Location = new Point(125, 224);
+            btnModificar.Font = new Font("Segoe UI", 10F);
+            btnModificar.Location = new Point(125, 276);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(102, 39);
             btnModificar.TabIndex = 1;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Font = new Font("Segoe UI", 11F);
-            btnGuardar.Location = new Point(17, 224);
+            btnGuardar.Font = new Font("Segoe UI", 10F);
+            btnGuardar.Location = new Point(17, 276);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(102, 39);
             btnGuardar.TabIndex = 1;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // txtNombre
             // 
-            txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(135, 26);
+            txtNombre.Font = new Font("Segoe UI", 10F);
+            txtNombre.Location = new Point(135, 78);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(166, 27);
+            txtNombre.Size = new Size(166, 25);
             txtNombre.TabIndex = 0;
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 11F);
-            textBox2.Location = new Point(135, 122);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(166, 27);
-            textBox2.TabIndex = 10;
-            // 
-            // btnLimpiar
-            // 
-            btnLimpiar.Font = new Font("Segoe UI", 11F);
-            btnLimpiar.Location = new Point(16, 338);
-            btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(102, 39);
-            btnLimpiar.TabIndex = 11;
-            btnLimpiar.Text = "Limpiar Campos";
-            btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // frmInsumos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1232, 587);
+            ClientSize = new Size(1226, 516);
             Controls.Add(txtBuscar);
             Controls.Add(label4);
             Controls.Add(btnBuscar);
@@ -235,11 +289,10 @@
             Controls.Add(groupBox1);
             Name = "frmInsumos";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "frmInsumos";
-            WindowState = FormWindowState.Maximized;
+            Text = "Insumos";
             Load += frmInsumos_Load;
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvInsumos).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -252,9 +305,9 @@
         private Label label4;
         private Button btnBuscar;
         private GroupBox groupBox2;
-        private DataGridView dgvClientes;
+        private DataGridView dgvInsumos;
         private GroupBox groupBox1;
-        private Button btnCerrar;
+        private Button btnSalir;
         private Label label3;
         private Label label1;
         private Button btnEliminar;
@@ -262,8 +315,12 @@
         private Button btnGuardar;
         private TextBox txtNombre;
         private Label label5;
-        private TextBox textBox1;
         private Button btnLimpiar;
-        private TextBox textBox2;
+        private TextBox txtCantidad;
+        private TextBox txtPrecio;
+        private Label label2;
+        private Label label6;
+        private TextBox txtIdInsumo;
+        private ComboBox cmbUnidadMedida;
     }
 }
