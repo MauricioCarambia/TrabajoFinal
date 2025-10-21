@@ -509,6 +509,13 @@
       <Email>asd@asd.com</Email>
       <Telefono>123123123</Telefono>
     </proveedor>
+    <proveedor Id="3">
+      <Nombre>Super</Nombre>
+      <CUIL>20321321125</CUIL>
+      <Domicilio>asd</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>123123121</Telefono>
+    </proveedor>
   </Proveedores>
   <Insumos>
     <insumo Id="1">
@@ -520,8 +527,40 @@
     <insumo Id="2">
       <Nombre>Harina</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>30,00</Cantidad>
-      <Precio>2500,00</Precio>
+      <Cantidad>12,00</Cantidad>
+      <Precio>123,00</Precio>
+    </insumo>
+    <insumo Id="3">
+      <Nombre>Muzzarella</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>50</Cantidad>
+      <Precio>1500,00</Precio>
     </insumo>
   </Insumos>
+  <ProveedorInsumos>
+    <proveedorInsumo Id="2">
+      <Proveedor>2</Proveedor>
+      <Insumo>2</Insumo>
+      <Cantidad>1111,00</Cantidad>
+      <Precio>11111,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="3">
+      <Proveedor>2</Proveedor>
+      <Insumo>1</Insumo>
+      <Cantidad>15,00</Cantidad>
+      <Precio>150,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="4">
+      <Proveedor>1</Proveedor>
+      <Insumo>3</Insumo>
+      <Cantidad>111,00</Cantidad>
+      <Precio>111,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="5">
+      <Proveedor>1</Proveedor>
+      <Insumo>2</Insumo>
+      <Cantidad>12,00</Cantidad>
+      <Precio>222,00</Precio>
+    </proveedorInsumo>
+  </ProveedorInsumos>
 </Root>

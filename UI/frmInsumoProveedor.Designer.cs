@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            dgvInsumos = new DataGridView();
             groupBox2 = new GroupBox();
-            dataGridView1 = new DataGridView();
-            dataGridView2 = new DataGridView();
+            dgvProveedorInsumo = new DataGridView();
             groupBox3 = new GroupBox();
-            groupBox4 = new GroupBox();
+            label12 = new Label();
+            cmbProveedores = new ComboBox();
             txtDomicilioProveedor = new TextBox();
             label6 = new Label();
             txtEmailProveedor = new TextBox();
@@ -46,7 +47,9 @@
             txtNombreProveedor = new TextBox();
             label4 = new Label();
             label3 = new Label();
-            cmbUnidadMedida = new ComboBox();
+            groupBox4 = new GroupBox();
+            label13 = new Label();
+            txtUnidadMedida = new TextBox();
             label7 = new Label();
             txtIdInsumo = new TextBox();
             txtPrecio = new TextBox();
@@ -55,68 +58,72 @@
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
-            txtNombre = new TextBox();
+            txtNombreInsumo = new TextBox();
             btnLimpiar = new Button();
             btnVincularInsumo = new Button();
             btnModificarInsumo = new Button();
             btnDesvincularInsumo = new Button();
             btnSalir = new Button();
-            comboBox1 = new ComboBox();
-            label12 = new Label();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvInsumos).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedorInsumo).BeginInit();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dataGridView1);
-            groupBox1.Location = new Point(381, 12);
+            groupBox1.Controls.Add(dgvInsumos);
+            groupBox1.Location = new Point(648, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(617, 218);
+            groupBox1.Size = new Size(617, 429);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Productos";
             // 
+            // dgvInsumos
+            // 
+            dgvInsumos.AllowUserToAddRows = false;
+            dgvInsumos.AllowUserToDeleteRows = false;
+            dgvInsumos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvInsumos.Location = new Point(6, 22);
+            dgvInsumos.MultiSelect = false;
+            dgvInsumos.Name = "dgvInsumos";
+            dgvInsumos.ReadOnly = true;
+            dgvInsumos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvInsumos.Size = new Size(605, 401);
+            dgvInsumos.TabIndex = 0;
+            dgvInsumos.SelectionChanged += dgvInsumos_SelectionChanged;
+            // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Location = new Point(381, 297);
+            groupBox2.Controls.Add(dgvProveedorInsumo);
+            groupBox2.Location = new Point(12, 296);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(617, 271);
+            groupBox2.Size = new Size(617, 367);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Productos Proveedor";
             // 
-            // dataGridView1
+            // dgvProveedorInsumo
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 22);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(605, 181);
-            dataGridView1.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.AllowUserToAddRows = false;
-            dataGridView2.AllowUserToDeleteRows = false;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(6, 19);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.ReadOnly = true;
-            dataGridView2.Size = new Size(595, 246);
-            dataGridView2.TabIndex = 1;
+            dgvProveedorInsumo.AllowUserToAddRows = false;
+            dgvProveedorInsumo.AllowUserToDeleteRows = false;
+            dgvProveedorInsumo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProveedorInsumo.Location = new Point(6, 19);
+            dgvProveedorInsumo.MultiSelect = false;
+            dgvProveedorInsumo.Name = "dgvProveedorInsumo";
+            dgvProveedorInsumo.ReadOnly = true;
+            dgvProveedorInsumo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProveedorInsumo.Size = new Size(605, 342);
+            dgvProveedorInsumo.TabIndex = 1;
+            dgvProveedorInsumo.SelectionChanged += dgvProveedorInsumo_SelectionChanged;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(label12);
-            groupBox3.Controls.Add(comboBox1);
+            groupBox3.Controls.Add(cmbProveedores);
             groupBox3.Controls.Add(txtDomicilioProveedor);
             groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(txtEmailProveedor);
@@ -129,31 +136,31 @@
             groupBox3.Controls.Add(txtNombreProveedor);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label3);
-            groupBox3.Location = new Point(34, 12);
+            groupBox3.Location = new Point(12, 12);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(320, 278);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos Proveedor";
             // 
-            // groupBox4
+            // label12
             // 
-            groupBox4.Controls.Add(cmbUnidadMedida);
-            groupBox4.Controls.Add(label7);
-            groupBox4.Controls.Add(txtIdInsumo);
-            groupBox4.Controls.Add(txtPrecio);
-            groupBox4.Controls.Add(label8);
-            groupBox4.Controls.Add(txtCantidad);
-            groupBox4.Controls.Add(label9);
-            groupBox4.Controls.Add(label10);
-            groupBox4.Controls.Add(label11);
-            groupBox4.Controls.Add(txtNombre);
-            groupBox4.Location = new Point(34, 297);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(320, 271);
-            groupBox4.TabIndex = 3;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Datos Insumos";
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10F);
+            label12.Location = new Point(6, 37);
+            label12.Name = "label12";
+            label12.Size = new Size(72, 19);
+            label12.TabIndex = 31;
+            label12.Text = "Proveedor";
+            // 
+            // cmbProveedores
+            // 
+            cmbProveedores.FormattingEnabled = true;
+            cmbProveedores.Location = new Point(121, 36);
+            cmbProveedores.Name = "cmbProveedores";
+            cmbProveedores.Size = new Size(166, 23);
+            cmbProveedores.TabIndex = 30;
+            cmbProveedores.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // txtDomicilioProveedor
             // 
@@ -269,13 +276,44 @@
             label3.TabIndex = 23;
             label3.Text = "CUIL";
             // 
-            // cmbUnidadMedida
+            // groupBox4
             // 
-            cmbUnidadMedida.FormattingEnabled = true;
-            cmbUnidadMedida.Location = new Point(121, 130);
-            cmbUnidadMedida.Name = "cmbUnidadMedida";
-            cmbUnidadMedida.Size = new Size(166, 23);
-            cmbUnidadMedida.TabIndex = 26;
+            groupBox4.Controls.Add(label13);
+            groupBox4.Controls.Add(txtUnidadMedida);
+            groupBox4.Controls.Add(label7);
+            groupBox4.Controls.Add(txtIdInsumo);
+            groupBox4.Controls.Add(txtPrecio);
+            groupBox4.Controls.Add(label8);
+            groupBox4.Controls.Add(txtCantidad);
+            groupBox4.Controls.Add(label9);
+            groupBox4.Controls.Add(label10);
+            groupBox4.Controls.Add(label11);
+            groupBox4.Controls.Add(txtNombreInsumo);
+            groupBox4.Location = new Point(344, 12);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(298, 278);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Datos Insumos";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 7F);
+            label13.Location = new Point(121, 246);
+            label13.Name = "label13";
+            label13.Size = new Size(111, 12);
+            label13.TabIndex = 27;
+            label13.Text = "*Precio Venta Proveedor";
+            // 
+            // txtUnidadMedida
+            // 
+            txtUnidadMedida.Font = new Font("Segoe UI", 10F);
+            txtUnidadMedida.Location = new Point(121, 127);
+            txtUnidadMedida.Name = "txtUnidadMedida";
+            txtUnidadMedida.ReadOnly = true;
+            txtUnidadMedida.Size = new Size(166, 25);
+            txtUnidadMedida.TabIndex = 26;
             // 
             // label7
             // 
@@ -310,9 +348,9 @@
             label8.Font = new Font("Segoe UI", 10F);
             label8.Location = new Point(6, 221);
             label8.Name = "label8";
-            label8.Size = new Size(46, 19);
+            label8.Size = new Size(52, 19);
             label8.TabIndex = 22;
-            label8.Text = "Precio";
+            label8.Text = "*Precio";
             // 
             // txtCantidad
             // 
@@ -352,83 +390,70 @@
             label11.TabIndex = 18;
             label11.Text = "Nombre";
             // 
-            // txtNombre
+            // txtNombreInsumo
             // 
-            txtNombre.Font = new Font("Segoe UI", 10F);
-            txtNombre.Location = new Point(121, 78);
-            txtNombre.Name = "txtNombre";
-            txtNombre.ReadOnly = true;
-            txtNombre.Size = new Size(166, 25);
-            txtNombre.TabIndex = 17;
+            txtNombreInsumo.Font = new Font("Segoe UI", 10F);
+            txtNombreInsumo.Location = new Point(121, 78);
+            txtNombreInsumo.Name = "txtNombreInsumo";
+            txtNombreInsumo.ReadOnly = true;
+            txtNombreInsumo.Size = new Size(166, 25);
+            txtNombreInsumo.TabIndex = 17;
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(786, 248);
+            btnLimpiar.Location = new Point(1103, 492);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(103, 42);
             btnLimpiar.TabIndex = 4;
             btnLimpiar.Text = "Limpia Campos";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click_1;
             // 
             // btnVincularInsumo
             // 
-            btnVincularInsumo.Location = new Point(381, 248);
+            btnVincularInsumo.Location = new Point(730, 492);
             btnVincularInsumo.Name = "btnVincularInsumo";
             btnVincularInsumo.Size = new Size(103, 42);
             btnVincularInsumo.TabIndex = 5;
             btnVincularInsumo.Text = "Vincular Insumo";
             btnVincularInsumo.UseVisualStyleBackColor = true;
+            btnVincularInsumo.Click += btnVincularInsumo_Click;
             // 
             // btnModificarInsumo
             // 
-            btnModificarInsumo.Location = new Point(490, 248);
+            btnModificarInsumo.Location = new Point(853, 492);
             btnModificarInsumo.Name = "btnModificarInsumo";
             btnModificarInsumo.Size = new Size(103, 42);
             btnModificarInsumo.TabIndex = 6;
-            btnModificarInsumo.Text = "Modificar Insumo";
+            btnModificarInsumo.Text = "Modificar Cantidad";
             btnModificarInsumo.UseVisualStyleBackColor = true;
+            btnModificarInsumo.Click += btnModificarInsumo_Click;
             // 
             // btnDesvincularInsumo
             // 
-            btnDesvincularInsumo.Location = new Point(599, 248);
+            btnDesvincularInsumo.Location = new Point(979, 492);
             btnDesvincularInsumo.Name = "btnDesvincularInsumo";
             btnDesvincularInsumo.Size = new Size(103, 42);
             btnDesvincularInsumo.TabIndex = 7;
             btnDesvincularInsumo.Text = "Desvincular Insumo";
             btnDesvincularInsumo.UseVisualStyleBackColor = true;
+            btnDesvincularInsumo.Click += btnDesvincularInsumo_Click;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(895, 248);
+            btnSalir.Location = new Point(1156, 615);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(103, 42);
             btnSalir.TabIndex = 8;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(121, 36);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(166, 23);
-            comboBox1.TabIndex = 30;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 10F);
-            label12.Location = new Point(6, 37);
-            label12.Name = "label12";
-            label12.Size = new Size(72, 19);
-            label12.TabIndex = 31;
-            label12.Text = "Proveedor";
+            btnSalir.Click += btnSalir_Click;
             // 
             // frmInsumoProveedor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1033, 581);
+            ClientSize = new Size(1271, 675);
             Controls.Add(btnSalir);
             Controls.Add(btnDesvincularInsumo);
             Controls.Add(btnModificarInsumo);
@@ -441,10 +466,11 @@
             Name = "frmInsumoProveedor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Proveedor insumos";
+            Load += frmInsumoProveedor_Load;
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvInsumos).EndInit();
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedorInsumo).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -455,9 +481,9 @@
         #endregion
 
         private GroupBox groupBox1;
-        private DataGridView dataGridView1;
+        private DataGridView dgvInsumos;
         private GroupBox groupBox2;
-        private DataGridView dataGridView2;
+        private DataGridView dgvProveedorInsumo;
         private GroupBox groupBox3;
         private GroupBox groupBox4;
         private TextBox txtDomicilioProveedor;
@@ -472,7 +498,6 @@
         private TextBox txtNombreProveedor;
         private Label label4;
         private Label label3;
-        private ComboBox cmbUnidadMedida;
         private Label label7;
         private TextBox txtIdInsumo;
         private TextBox txtPrecio;
@@ -481,13 +506,15 @@
         private Label label9;
         private Label label10;
         private Label label11;
-        private TextBox txtNombre;
+        private TextBox txtNombreInsumo;
         private Label label12;
-        private ComboBox comboBox1;
+        private ComboBox cmbProveedores;
         private Button btnLimpiar;
         private Button btnVincularInsumo;
         private Button btnModificarInsumo;
         private Button btnDesvincularInsumo;
         private Button btnSalir;
+        private TextBox txtUnidadMedida;
+        private Label label13;
     }
 }

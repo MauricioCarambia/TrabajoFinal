@@ -85,9 +85,9 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(dgvInsumos);
-            groupBox2.Location = new Point(495, 34);
+            groupBox2.Location = new Point(396, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(706, 440);
+            groupBox2.Size = new Size(706, 462);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "Insumos";
@@ -102,7 +102,7 @@
             dgvInsumos.Name = "dgvInsumos";
             dgvInsumos.ReadOnly = true;
             dgvInsumos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInsumos.Size = new Size(687, 405);
+            dgvInsumos.Size = new Size(687, 434);
             dgvInsumos.TabIndex = 2;
             dgvInsumos.SelectionChanged += dgvInsumos_SelectionChanged_1;
             // 
@@ -281,7 +281,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1226, 516);
+            ClientSize = new Size(1132, 504);
             Controls.Add(txtBuscar);
             Controls.Add(label4);
             Controls.Add(btnBuscar);

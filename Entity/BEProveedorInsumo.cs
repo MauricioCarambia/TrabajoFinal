@@ -12,7 +12,7 @@ namespace Entity
         public BEInsumo Insumo { get; set; }
         public BEProveedor Proveedor { get; set; }
 
-        public decimal PrecioCompra { get; set; }     // Precio unitario al que el proveedor vende
+        public decimal Precio { get; set; }     // Precio unitario al que el proveedor vende
         public decimal Cantidad { get; set; }         // Cantidad que comprás al proveedor
         public DateTime Fecha { get; set; }
     }

@@ -45,3 +45,4 @@ E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-wi
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.pdb
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.genruntimeconfig.cache
 E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\ref\UI.dll
+E:\UAI\Trabajo final\3 entrega\Trabajo_Final\TrabajoFinal\UI\obj\Debug\net8.0-windows\UI.frmInsumoProveedor.resources

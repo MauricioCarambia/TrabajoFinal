@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using static Entity.BEInsumo;
 
 namespace Mapper
 {
@@ -69,22 +70,22 @@ namespace Mapper
                         {
                             var proveedorEncontrado = buscarProveedor.First();
                             //Si tiene productos no se puede ELiminar:
-                            //if (proveedorEncontrado.Element("Productos") == null)
-                            //{
+                            if (proveedorEncontrado.Element("Insumos") == null)
+                            {
                                 //Si esta por lo menos en una Solicitud de Cotizacion tampoco se puede eliminar:
-                                //var buscarSolicitudDeCotizacionConPRoveedor = from solicitudesCotizaciones in BDXML.Root.Element("Solicitudes_Cotizaciones").Descendants("solicitud_cotizacion")
-                                //                                              where solicitudesCotizaciones.Element("proveedor").Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
-                                //                                              select solicitudesCotizaciones;
-                                //if (buscarSolicitudDeCotizacionConPRoveedor.Any()) { throw new Exception("Error: No se puede eliminar un Proveedor que tiene asociado una Solicitud de Cotización!"); }
-                                //else
-                                //{
+                                var buscarSolicitudDeCotizacionConPRoveedor = from solicitudesCotizaciones in BDXML.Root.Element("Solicitudes_Cotizaciones").Descendants("solicitud_cotizacion")
+                                                                              where solicitudesCotizaciones.Element("proveedor").Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
+                                                                              select solicitudesCotizaciones;
+                                if (buscarSolicitudDeCotizacionConPRoveedor.Any()) { throw new Exception("Error: No se puede eliminar un Proveedor que tiene asociado una Solicitud de Cotización!"); }
+                                else
+                                {
                                     proveedorEncontrado.Remove();
                                     BDXML.Save(ruta);
                                     return true;
-                                //}
-                            //}
-                            //else { throw new Exception("Error: No se puede Eliminar un Proveedor que tiene asociados Productos!"); }
                         }
+                    }
+                    else { throw new Exception("Error: No se puede Eliminar un Proveedor que tiene asociados Productos!"); }
+                }
                         else { throw new Exception("Error: No se encontro el Proveedor que trata de Eliminar!"); }
                     }
                     else { throw new XmlException("Error: No se pudo recuperar los datos del XML!"); }
@@ -100,259 +101,270 @@ namespace Mapper
         {
             try
             {
-                //Verifico si esta creado el XML:
-                if (CrearXML() == true)
+                if (!CrearXML())
+                    throw new XmlException("Error: No se pudo recuperar el XML!");
+
+                BDXML = XDocument.Load(ruta);
+                if (BDXML == null)
+                    throw new XmlException("Error: No se pudo recuperar los datos del XML!");
+
+                // --- ALTA ---
+                if (oBEProveedor.Id == 0)
                 {
-                    //Cargo la ruta del XML:
-                    BDXML = XDocument.Load(ruta);
-                    if (BDXML != null)
+                    if (VerificarExistenciaObjeto(oBEProveedor))
+                        throw new Exception("Error: El proveedor ya existe!");
+
+                    int nuevoId = ObtenerUltimoId() + 1;
+                    oBEProveedor.Id = nuevoId;
+
+                    XElement nuevoProveedor = new XElement("proveedor",
+                        new XAttribute("Id", oBEProveedor.Id.ToString().Trim()),
+                        new XElement("Nombre", oBEProveedor.Nombre.Trim()),
+                        new XElement("CUIL", oBEProveedor.CUIL.ToString().Trim()),
+                        new XElement("Domicilio", oBEProveedor.Domicilio.Trim()),
+                        new XElement("Email", oBEProveedor.Email.Trim()),
+                        new XElement("Telefono", oBEProveedor.Telefono.Trim())
+                    );
+
+                    // --- Agregar lista de insumos ---
+                    XElement insumosElement = new XElement("Insumos");
+                    foreach (var insumo in oBEProveedor.ListaInsumos)
                     {
-                        //Verifico si es el alta de un nuevo Proveedor:
-                        if (oBEProveedor.Id == 0)
-                        {
-                            //Verifico antes de darle el alta, de que no exista el Proveedor:
-                            if (VerificarExistenciaObjeto(oBEProveedor) == false)
-                            {
-                                //Busco el id mas grande que existe en el XML y le asigno el siguiente:
-                                int nuevoId = ObtenerUltimoId() + 1;
-                                oBEProveedor.Id = nuevoId;
-                                BDXML.Root.Element("Proveedores").Add(new XElement("proveedor",
-                                    new XAttribute("Id", oBEProveedor.Id.ToString().Trim()),
-                                    new XElement("Nombre", oBEProveedor.Nombre.Trim()),
-                                    new XElement("CUIL", oBEProveedor.CUIL.ToString().Trim()),
-                                    new XElement("Domicilio", oBEProveedor.Domicilio.Trim()),
-                                    new XElement("Email", oBEProveedor.Email.Trim()),
-                                    new XElement("Telefono", oBEProveedor.Telefono.Trim())));
-                                //Le creo el Elemento de lista de Productos:
-                                var productosElement = new XElement("Productos");
-                                //foreach (var producto in oBEProveedor.listaProductos)
-                                //{
-                                //    XElement nuevoProducto;
-                                //    nuevoProducto = new XElement("producto",
-                                //        new XAttribute("Id", producto.Id.ToString().Trim()));
-                                //    productosElement.Add(nuevoProducto);
-                                //    BDXML.Root.Element("Proveedores").Add(productosElement);
-                                //}
-                                BDXML.Save(ruta);
-                                return true;
-                            }
-                            else { throw new Exception("Error: No se puede dar el alta a un Proveedor que ya existe!"); }
-                        }
-                        //En caso de que existe, lo modifico:
-                        else
-                        {
-                            //Busco al Proveedor:
-                            var buscarProveedor = from proveedor in BDXML.Root.Element("Proveedores").Descendants("proveedor")
-                                                  where proveedor.Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
-                                                  select proveedor;
-                            if (buscarProveedor != null)
-                            {
-                                foreach (XElement proveedorModificado in buscarProveedor)
-                                {
-                                    //Le asigno los nuevos valores correspondientes al Proveedor:
-                                    proveedorModificado.Element("Nombre").Value = oBEProveedor.Nombre.Trim();
-                                    proveedorModificado.Element("Domicilio").Value = oBEProveedor.Domicilio.Trim();
-                                    proveedorModificado.Element("Email").Value = oBEProveedor.Email.Trim();
-                                    proveedorModificado.Element("Telefono").Value = oBEProveedor.Telefono.Trim();
-                                }
-                                BDXML.Save(ruta);
-                                return true;
-                            }
-                            else { throw new Exception("Error: No se pudo recuperar los datos del Proveedor con el Id brindado!"); }
-                        }
+                        XElement nuevoInsumo = new XElement("insumo",
+                            new XAttribute("Id", insumo.Id.ToString().Trim()),
+                            new XElement("Cantidad", insumo.Cantidad),
+                            new XElement("Precio", insumo.Precio)
+                        );
+                        insumosElement.Add(nuevoInsumo);
                     }
-                    else { throw new XmlException("Error: No se pudo recuperar los datos del XML!"); }
+
+                    nuevoProveedor.Add(insumosElement);
+                    BDXML.Root.Element("Proveedores").Add(nuevoProveedor);
+                    BDXML.Save(ruta);
+                    return true;
                 }
-                else { throw new XmlException("Error: No se pudo recuperar el XML!"); }
+
+                // --- MODIFICACIÓN ---
+                else
+                {
+                    var buscarProveedor = from proveedor in BDXML.Root.Element("Proveedores").Descendants("proveedor")
+                                          where proveedor.Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
+                                          select proveedor;
+
+                    if (!buscarProveedor.Any())
+                        throw new Exception("Error: No se pudo recuperar el proveedor con el Id brindado!");
+
+                    XElement proveedorModificado = buscarProveedor.First();
+
+                    proveedorModificado.Element("Nombre").Value = oBEProveedor.Nombre.Trim();
+                    proveedorModificado.Element("Domicilio").Value = oBEProveedor.Domicilio.Trim();
+                    proveedorModificado.Element("Email").Value = oBEProveedor.Email.Trim();
+                    proveedorModificado.Element("Telefono").Value = oBEProveedor.Telefono.Trim();
+
+                    // Actualizar lista de insumos
+                    XElement insumosElement = new XElement("Insumos");
+                    foreach (var insumo in oBEProveedor.ListaInsumos)
+                    {
+                        XElement nuevoInsumo = new XElement("insumo",
+                            new XAttribute("Id", insumo.Id.ToString().Trim()),
+                            new XElement("Cantidad", insumo.Cantidad),
+                            new XElement("Precio", insumo.Precio)
+                        );
+                        insumosElement.Add(nuevoInsumo);
+                    }
+                    proveedorModificado.Element("Insumos")?.Remove();
+                    proveedorModificado.Add(insumosElement);
+
+                    BDXML.Save(ruta);
+                    return true;
+                }
             }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public BEProveedor ListarObjeto(BEProveedor oBEProveedor)
         {
             try
             {
-                //Verifico que exista el XML:
-                if (CrearXML() == true)
+                // Verifico que exista el XML
+                if (CrearXML())
                 {
-                    //Recupero la información del XML:
+                    // Cargo el XML
                     BDXML = XDocument.Load(ruta);
                     if (BDXML != null)
                     {
-                        //Busco el Proveedor:
+                        // Busco el proveedor por CUIL o Id
                         var buscarProveedor = from proveedor in BDXML.Root.Element("Proveedores").Descendants("proveedor")
-                                              where proveedor.Element("CUIL").Value.Trim() == oBEProveedor.CUIL.ToString().Trim() ||
-                                              proveedor.Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
+                                              where proveedor.Element("CUIL").Value.Trim() == oBEProveedor.CUIL.ToString().Trim()
+                                                 || proveedor.Attribute("Id").Value.Trim() == oBEProveedor.Id.ToString().Trim()
                                               select proveedor;
-                        //Verifico que exista el proveedor:
+
+                        // Verifico que exista el proveedor
                         if (buscarProveedor.Any())
                         {
                             var proveedorEncontrado = buscarProveedor.First();
-                            //Si se encontró el Proveedor recupero la información:
-                            if (proveedorEncontrado != null)
+
+                            // Recupero la lista de insumos asociados al proveedor
+                            var ListaInsumos = proveedorEncontrado.Element("Insumos")?.Descendants("insumo");
+
+                            // Creo el objeto proveedor base
+                            BEProveedor oProveedor = new BEProveedor
                             {
-                                var listaProductos = proveedorEncontrado.Element("Productos")?.Descendants("producto");
-                                if (listaProductos == null || !listaProductos.Any())
+                                Id = int.Parse(proveedorEncontrado.Attribute("Id").Value.Trim()),
+                                Nombre = proveedorEncontrado.Element("Nombre").Value.Trim(),
+                                CUIL = long.Parse(proveedorEncontrado.Element("CUIL").Value.Trim()),
+                                Domicilio = proveedorEncontrado.Element("Domicilio").Value.Trim(),
+                                Email = proveedorEncontrado.Element("Email").Value.Trim(),
+                                Telefono = proveedorEncontrado.Element("Telefono").Value.Trim(),
+                                ListaInsumos = new List<BEProveedorInsumo>() 
+                            };
+
+                            // Si no tiene insumos, devuelvo el proveedor vacío
+                            if (ListaInsumos == null || !ListaInsumos.Any())
+                                return oProveedor;
+
+                            // Si tiene insumos asociados
+                            foreach (var insumo in ListaInsumos)
+                            {
+                                // Busco el insumo global por Id
+                                var insumoGlobal = (from ig in BDXML.Root.Element("Insumos").Descendants("insumo")
+                                                    where ig.Attribute("Id").Value.Trim() == insumo.Attribute("Id").Value.Trim()
+                                                    select ig).FirstOrDefault();
+
+                                if (insumoGlobal != null)
                                 {
-                                    BEProveedor proveedorSinProductos = new BEProveedor
+                                    BEInsumo oBEInsumo = new BEInsumo
                                     {
-                                        Id = int.Parse(proveedorEncontrado.Attribute("Id").Value.Trim()),
-                                        Nombre = proveedorEncontrado.Element("Nombre").Value.Trim(),
-                                        CUIL = long.Parse(proveedorEncontrado.Element("CUIL").Value.Trim()),
-                                        Domicilio = proveedorEncontrado.Element("Domicilio").Value.Trim(),
-                                        Email = proveedorEncontrado.Element("Email").Value.Trim(),
-                                        Telefono = proveedorEncontrado.Element("Telefono").Value.Trim(),
-                                        //listaProductos = new List<BEProducto>()
+                                        Id = int.Parse(insumoGlobal.Attribute("Id").Value.Trim()),
+                                        Nombre = insumoGlobal.Element("Nombre").Value.Trim(),
+                                        UnidadMedida = (UnidadesMedida)Enum.Parse(typeof(UnidadesMedida), insumoGlobal.Element("UnidadMedida").Value.Trim()),
+                                        Cantidad = int.Parse(insumoGlobal.Element("Cantidad").Value.Trim()),
+                                        Precio = decimal.Parse(insumoGlobal.Element("Precio").Value.Trim())
                                     };
-                                    return proveedorSinProductos;
-                                }
-                                //En caso de que tenga productos Asociado:
-                                else
-                                {
-                                    BEProveedor proveedorConProductos = new BEProveedor
+
+                                    // ✅ En lugar de agregar el insumo directo, agregamos un BEProveedorInsumo
+                                    oProveedor.ListaInsumos.Add(new BEProveedorInsumo
                                     {
-                                        Id = int.Parse(proveedorEncontrado.Attribute("Id").Value.Trim()),
-                                        Nombre = proveedorEncontrado.Element("Nombre").Value.Trim(),
-                                        CUIL = long.Parse(proveedorEncontrado.Element("CUIL").Value.Trim()),
-                                        Domicilio = proveedorEncontrado.Element("Domicilio").Value.Trim(),
-                                        Email = proveedorEncontrado.Element("Email").Value.Trim(),
-                                        Telefono = proveedorEncontrado.Element("Telefono").Value.Trim(),
-                                        //listaProductos = new List<BEProducto>()
-                                    };
-                                    foreach (var producto in listaProductos)
-                                    {
-                                        var buscarProductoGlobal = from productoGlobal in BDXML.Root.Element("Productos").Descendants("producto")
-                                                                   where productoGlobal.Attribute("Id").Value.Trim() == producto.Attribute("Id").Value.Trim()
-                                                                   select productoGlobal;
-                                        if (buscarProductoGlobal.Any())
-                                        {
-                                            var productoGlobalEncontrado = buscarProductoGlobal.First();
-                                            var stockId = productoGlobalEncontrado.Element("stock_producto").Attribute("Id").Value.Trim();
-                                            var precioId = productoGlobalEncontrado.Element("precio_producto").Attribute("Id").Value.Trim();
-                                            //Busco el stock del producto:
-                                            var stockProductoGlobal = from stockProducto in BDXML.Root.Element("Stocks_Productos").Descendants("stock_producto")
-                                                                      where stockProducto.Attribute("Id").Value.Trim() == stockId
-                                                                      select stockProducto;
-                                            //Busco el precio del producto:
-                                            var precioProductoGlobal = from precioProducto in BDXML.Root.Element("Precios_Productos").Descendants("precio_producto")
-                                                                       where precioProducto.Attribute("Id").Value.Trim() == precioId
-                                                                       select precioProducto;
-                                            //if (stockProductoGlobal.Any() && precioProductoGlobal.Any())
-                                            //{
-                                            //    var stockProductoEncontrado = stockProductoGlobal.First();
-                                            //    var precioProductoEncontrado = precioProductoGlobal.First();
-                                            //    BEProducto oBEProducto = new BEProducto
-                                            //    {
-                                            //        Id = long.Parse(productoGlobalEncontrado.Attribute("Id").Value.Trim()),
-                                            //        Nombre = productoGlobalEncontrado.Element("Nombre").Value.Trim(),
-                                            //        Marca = productoGlobalEncontrado.Element("Marca").Value.Trim(),
-                                            //        Anio = Convert.ToInt32(productoGlobalEncontrado.Element("Anio").Value.Trim()),
-                                            //        Modelo = Convert.ToInt32(productoGlobalEncontrado.Element("Modelo").Value.Trim()),
-                                            //        oBEPrecioProductoProveedor = new BEPrecioProductoProveedor
-                                            //        (
-                                            //            long.Parse(precioProductoEncontrado.Attribute("Id").Value.Trim()),
-                                            //            double.Parse(precioProductoEncontrado.Element("Precio").Value.Trim())
-                                            //        ),
-                                            //        oBEStockProductoProveedor = new BEStockProductoProveedor
-                                            //        (
-                                            //            long.Parse(stockProductoEncontrado.Attribute("Id").Value.Trim()),
-                                            //            Convert.ToInt32(stockProductoEncontrado.Element("Cantidad").Value.Trim())
-                                            //        )
-                                            //    };
-                                            //    proveedorConProductos.listaProductos.Add(oBEProducto);
-                                            //}
-                                        }
-                                    }
-                                    return proveedorConProductos;
+                                        Proveedor = oProveedor,
+                                        Insumo = oBEInsumo
+                                    });
                                 }
                             }
-                            else { throw new Exception("Error: No existe el Proveedor con el Id brindado!"); }
+
+                            return oProveedor;
                         }
-                        else { throw new Exception("Error: No se encontró el Proveedor con el CUIL brindado!"); }
+                        else
+                        {
+                            throw new Exception("Error: No se encontró el Proveedor con el CUIL o Id brindado.");
+                        }
                     }
-                    else { throw new XmlException("Error: No se pudo recuperar la información del XML!"); }
+                    else
+                    {
+                        throw new XmlException("Error: No se pudo cargar el archivo XML.");
+                    }
                 }
-                else { throw new XmlException("Error: No se pudo recuperar el XML!"); }
+                else
+                {
+                    throw new XmlException("Error: No se pudo crear o acceder al XML.");
+                }
             }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { }
+            catch (XmlException ex)
+            {
+                throw new XmlException("Error en el XML: " + ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar proveedor: " + ex.Message, ex);
+            }
         }
+
+
 
         public List<BEProveedor> ListarTodo()
         {
             try
             {
-                //Verifico que el XML exista:
-                if (CrearXML() == true)
-                {
-                    //Recupero la información del XML:
-                    BDXML = XDocument.Load(ruta);
-                    if (BDXML != null)
-                    {
-                        //Recupero la lista global de productos:
-                        //var productosGlobales = BDXML.Root.Element("Productos").Descendants("producto")
-                        //    .ToDictionary(
-                        //        p => int.Parse(p.Attribute("Id").Value.Trim()),
-                        //        p => new BEProducto
-                        //        {
-                        //            Id = int.Parse(p.Attribute("Id").Value.Trim()),
-                        //            Nombre = p.Element("Nombre").Value.Trim(),
-                        //            Marca = p.Element("Marca").Value.Trim(),
-                        //            Modelo = Convert.ToInt32(p.Element("Modelo").Value.Trim()),
-                        //            Anio = Convert.ToInt32(p.Element("Anio").Value.Trim())
-                        //        }
-                        //    );
-                        //Recupero la lista de proveedores y sus productos asociados:
-                        var listaProveedores = (from proveedor in BDXML.Root.Element("Proveedores").Descendants("proveedor")
-                                                select new BEProveedor
-                                                {
-                                                    Id = int.Parse(proveedor.Attribute("Id").Value.Trim()),
-                                                    Nombre = proveedor.Element("Nombre").Value.Trim(),
-                                                    CUIL = long.Parse(proveedor.Element("CUIL").Value.Trim()),
-                                                    Domicilio = proveedor.Element("Domicilio").Value.Trim(),
-                                                    Email = proveedor.Element("Email").Value.Trim(),
-                                                    Telefono = proveedor.Element("Telefono").Value.Trim(),
-                                                    //listaProductos = (proveedor.Element("Productos") != null
-                                                    //    ? (from producto in proveedor.Element("Productos").Elements("producto")
-                                                    //       select new BEProducto
-                                                    //       {
-                                                    //           Id = long.Parse(producto.Attribute("Id").Value.Trim())
-                                                    //       }).ToList()
-                                                    //    : new List<BEProducto>())
-                                                }).ToList();
-                        //Combino los datos de listaProductos con los detalles de productosGlobales:
-                        foreach (var proveedor in listaProveedores)
+                if (!CrearXML())
+                    throw new Exception("Error: No se pudo crear o acceder al XML.");
+
+                BDXML = XDocument.Load(ruta);
+                if (BDXML == null)
+                    throw new Exception("Error: No se pudo cargar el archivo XML.");
+
+                // Recupero la lista global de insumos
+                var insumosGlobales = BDXML.Root.Element("Insumos")?
+                    .Descendants("insumo")
+                    .ToDictionary(
+                        p => int.Parse(p.Attribute("Id").Value.Trim()),
+                        p => new BEInsumo
                         {
-                            //var listaProductosCombinados = new List<BEProducto>();
-                            //foreach (var producto in proveedor.listaProductos)
-                            //{
-                            //    if (productosGlobales.TryGetValue(producto.Id, out BEProducto productoGlobal))
-                            //    {
-                            //        listaProductosCombinados.Add(new BEProducto
-                            //        {
-                            //            Id = producto.Id,
-                            //            Nombre = productoGlobal.Nombre,
-                            //            Marca = productoGlobal.Marca,
-                            //            Modelo = productoGlobal.Modelo,
-                            //            Anio = productoGlobal.Anio
-                            //        });
-                            //    }
-                            //}
-                            //proveedor.listaProductos = listaProductosCombinados;
+                            Id = int.Parse(p.Attribute("Id").Value.Trim()),
+                            Nombre = p.Element("Nombre").Value.Trim(),
+                            UnidadMedida = (UnidadesMedida)Enum.Parse(typeof(UnidadesMedida), p.Element("UnidadMedida").Value.Trim()),
+                            Cantidad = decimal.Parse(p.Element("Cantidad").Value.Trim()),
+                            Precio = decimal.Parse(p.Element("Precio").Value.Trim())
                         }
-                        return listaProveedores;
+                    );
+
+                if (insumosGlobales == null)
+                    throw new Exception("Error: No se encontró la lista de insumos en el XML.");
+
+                // Recupero la lista de proveedores
+                var listaProveedores = (
+                    from proveedor in BDXML.Root.Element("Proveedores").Descendants("proveedor")
+                    select new BEProveedor
+                    {
+                        Id = int.Parse(proveedor.Attribute("Id").Value.Trim()),
+                        Nombre = proveedor.Element("Nombre").Value.Trim(),
+                        CUIL = long.Parse(proveedor.Element("CUIL").Value.Trim()),
+                        Domicilio = proveedor.Element("Domicilio").Value.Trim(),
+                        Email = proveedor.Element("Email").Value.Trim(),
+                        Telefono = proveedor.Element("Telefono").Value.Trim(),
+                        ListaInsumos = new List<BEProveedorInsumo>()
+                    }).ToList();
+
+                // Combino los insumos asociados a cada proveedor
+                foreach (var proveedor in listaProveedores)
+                {
+                    var nodoProveedor = BDXML.Root.Element("Proveedores")
+                        .Descendants("proveedor")
+                        .FirstOrDefault(p => p.Attribute("Id").Value == proveedor.Id.ToString());
+
+                    if (nodoProveedor?.Element("Insumos") != null)
+                    {
+                        foreach (var insumo in nodoProveedor.Element("Insumos").Elements("insumo"))
+                        {
+                            int idInsumo = int.Parse(insumo.Attribute("Id").Value.Trim());
+
+                            if (insumosGlobales.TryGetValue(idInsumo, out BEInsumo insumoGlobal))
+                            {
+                                var proveedorInsumo = new BEProveedorInsumo
+                                {
+                                    Proveedor = proveedor,
+                                    Insumo = insumoGlobal
+                                };
+
+                                proveedor.ListaInsumos.Add(proveedorInsumo);
+                            }
+                        }
                     }
-                    else { throw new Exception("Error: No se pudo recuperar los datos del XML!"); }
                 }
-                else { throw new Exception("Error: No se pudo recuperar el XML!"); }
+
+                return listaProveedores;
             }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { }
+            catch (XmlException ex)
+            {
+                throw new XmlException("Error en el XML: " + ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar todos los proveedores: " + ex.Message, ex);
+            }
         }
+
 
         public int ObtenerUltimoId()
         {
@@ -420,75 +432,75 @@ namespace Mapper
         }
 
 
-        public bool CrearXMLStockProductoProveedor()
-        {
-            try
-            {
-                //Verifico que exista el XML:
-                if (!(File.Exists(ruta)))
-                {
-                    //Si no existe, lo creo:
-                    BDXML = new XDocument(new XElement("Root",
-                    new XElement("Stocks_Productos_Proveedores")));
-                    BDXML.Save(ruta);
-                    return true;
-                }
-                else
-                {
-                    //En caso que exista el XML, verifico que exista el Elemento Stocks_Productos_Proveedores:
-                    BDXML = XDocument.Load(ruta);
-                    XElement stockProductoProveedor = BDXML.Root.Element("Stocks_Productos_Proveedores");
-                    //Si existe, devuelvo true:
-                    if (stockProductoProveedor != null) { return true; }
-                    //Si no, lo creo:
-                    else
-                    {
-                        stockProductoProveedor = new XElement("Stocks_Productos_Proveedores");
-                        BDXML.Root.Add(stockProductoProveedor);
-                        BDXML.Save(ruta);
-                        return true;
-                    }
-                }
-            }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { }
-        }
+        //public bool CrearXMLStockInsumosProveedor()
+        //{
+        //    try
+        //    {
+        //        //Verifico que exista el XML:
+        //        if (!(File.Exists(ruta)))
+        //        {
+        //            //Si no existe, lo creo:
+        //            BDXML = new XDocument(new XElement("Root",
+        //            new XElement("Stocks_Insumos_Proveedores")));
+        //            BDXML.Save(ruta);
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            //En caso que exista el XML, verifico que exista el Elemento Stocks_Productos_Proveedores:
+        //            BDXML = XDocument.Load(ruta);
+        //            XElement stockInsumosProveedor = BDXML.Root.Element("Stocks_Insumos_Proveedores");
+        //            //Si existe, devuelvo true:
+        //            if (stockInsumosProveedor != null) { return true; }
+        //            //Si no, lo creo:
+        //            else
+        //            {
+        //                stockInsumosProveedor = new XElement("Stocks_Insumos_Proveedores");
+        //                BDXML.Root.Add(stockInsumosProveedor);
+        //                BDXML.Save(ruta);
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    catch (XmlException ex) { throw ex; }
+        //    catch (Exception ex) { throw ex; }
+        //    finally { }
+        //}
 
-        public bool CrearXMLPrecioProductoProveedor()
-        {
-            try
-            {
-                //Verifico que exista el XML:
-                if (!(File.Exists(ruta)))
-                {
-                    //Si no existe, lo creo:
-                    BDXML = new XDocument(new XElement("Root",
-                    new XElement("Precios_Productos_Proveedores")));
-                    BDXML.Save(ruta);
-                    return true;
-                }
-                else
-                {
-                    //En caso que exista el XML, verifico que exista el Elemento Precio_Producto_Proveedor:
-                    BDXML = XDocument.Load(ruta);
-                    XElement precioProductoProveedor = BDXML.Root.Element("Precios_Productos_Proveedores");
-                    //Si existe, devuelvo true:
-                    if (precioProductoProveedor != null) { return true; }
-                    //Si no, lo creo:
-                    else
-                    {
-                        precioProductoProveedor = new XElement("Precios_Productos_Proveedores");
-                        BDXML.Root.Add(precioProductoProveedor);
-                        BDXML.Save(ruta);
-                        return true;
-                    }
-                }
-            }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
-            finally { }
-        }
+        //public bool CrearXMLPrecioProductoProveedor()
+        //{
+        //    try
+        //    {
+        //        //Verifico que exista el XML:
+        //        if (!(File.Exists(ruta)))
+        //        {
+        //            //Si no existe, lo creo:
+        //            BDXML = new XDocument(new XElement("Root",
+        //            new XElement("Precios_Insumos_Proveedores")));
+        //            BDXML.Save(ruta);
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            //En caso que exista el XML, verifico que exista el Elemento Precio_Producto_Proveedor:
+        //            BDXML = XDocument.Load(ruta);
+        //            XElement precioInsumoProveedor = BDXML.Root.Element("Precios_Insumos_Proveedores");
+        //            //Si existe, devuelvo true:
+        //            if (precioInsumoProveedor != null) { return true; }
+        //            //Si no, lo creo:
+        //            else
+        //            {
+        //                precioInsumoProveedor = new XElement("Precios_Insumos_Proveedores");
+        //                BDXML.Root.Add(precioInsumoProveedor);
+        //                BDXML.Save(ruta);
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    catch (XmlException ex) { throw ex; }
+        //    catch (Exception ex) { throw ex; }
+        //    finally { }
+        //}
 
         //public bool AsociarProveedorProducto(BEProveedor oBEProveedor, BEProducto oBEProducto, BEStockProductoProveedor oBEStockProductoProveedor, BEPrecioProductoProveedor oBEPrecioProductoProveedor)
         //{
@@ -521,21 +533,21 @@ namespace Mapper
         //                            {
         //                                var proveedorEncontrado = buscarProveedor.First();
         //                                //Actualizo los datos del Producto Global asociando la Cantidad y el Stock del Producto proveedor:
-        //                                var productoGlobalEncontrado = buscarProductoGlobal.First();
-        //                                var stockProductoProveedor = productoGlobalEncontrado.Element("stock_producto_proveedor");
+        //                                var insumoGlobalEncontrado = buscarProductoGlobal.First();
+        //                                var stockProductoProveedor = insumoGlobalEncontrado.Element("stock_producto_proveedor");
         //                                // Si el Stock del Producto del proveedor no existe en el Producto lo asocio:
         //                                if (stockProductoProveedor == null)
         //                                {
-        //                                    productoGlobalEncontrado.Add(new XElement("stock_producto_proveedor",
+        //                                    insumoGlobalEncontrado.Add(new XElement("stock_producto_proveedor",
         //                                        new XAttribute("Id", oBEStockProductoProveedor.Id.ToString().Trim())));
         //                                    BDXML.Save(ruta);
         //                                }
         //                                else { throw new Exception("Error: El Producto del Proveedor ya se encuentra asociado al Proveedor!"); }
         //                                // Si el Precio del Producto del proveedor no existe en el Producto lo asocio:
-        //                                var precioProductoProveedor = productoGlobalEncontrado.Element("precio_producto_proveedor");
+        //                                var precioProductoProveedor = insumoGlobalEncontrado.Element("precio_producto_proveedor");
         //                                if (precioProductoProveedor == null)
         //                                {
-        //                                    productoGlobalEncontrado.Add(new XElement("precio_producto_proveedor",
+        //                                    insumoGlobalEncontrado.Add(new XElement("precio_producto_proveedor",
         //                                        new XAttribute("Id", oBEPrecioProductoProveedor.Id.ToString().Trim())));
         //                                    BDXML.Save(ruta);
         //                                }
@@ -671,10 +683,10 @@ namespace Mapper
         //                            {
         //                                var proveedorEncontrado = buscarProveedor.First();
         //                                //Actualizo los datos del Producto Global asociando la Cantidad y el Stock del Producto proveedor:
-        //                                var productoGlobalEncontrado = buscarProductoGlobal.First();
-        //                                var stockProductoGlobalProveedor = productoGlobalEncontrado.Element("stock_producto_proveedor");
-        //                                var precioProductoGlobalProveedor = productoGlobalEncontrado.Element("precio_producto_proveedor");
-        //                                if (productoGlobalEncontrado != null && stockProductoGlobalProveedor != null && precioProductoGlobalProveedor != null)
+        //                                var insumoGlobalEncontrado = buscarProductoGlobal.First();
+        //                                var stockProductoGlobalProveedor = insumoGlobalEncontrado.Element("stock_producto_proveedor");
+        //                                var precioProductoGlobalProveedor = insumoGlobalEncontrado.Element("precio_producto_proveedor");
+        //                                if (insumoGlobalEncontrado != null && stockProductoGlobalProveedor != null && precioProductoGlobalProveedor != null)
         //                                {
         //                                    var productoEnProveedor = from productoProveedor in proveedorEncontrado.Element("Productos").Descendants("producto")
         //                                                              where productoProveedor.Attribute("Id").Value.Trim() == oBEProducto.Id.ToString().Trim()
@@ -834,13 +846,13 @@ namespace Mapper
 
         //                            if (buscarProductoGlobal.Any())
         //                            {
-        //                                var productoGlobalEncontrado = buscarProductoGlobal.First();
-        //                                var stockProductoProveedor = productoGlobalEncontrado.Element("stock_producto_proveedor");
-        //                                var precioProductoProveedor = productoGlobalEncontrado.Element("precio_producto_proveedor");
+        //                                var insumoGlobalEncontrado = buscarProductoGlobal.First();
+        //                                var stockProductoProveedor = insumoGlobalEncontrado.Element("stock_producto_proveedor");
+        //                                var precioProductoProveedor = insumoGlobalEncontrado.Element("precio_producto_proveedor");
         //                                if (stockProductoProveedor != null && precioProductoProveedor != null)
         //                                {
-        //                                    var stockId = productoGlobalEncontrado.Element("stock_producto_proveedor")?.Attribute("Id")?.Value.Trim();
-        //                                    var precioId = productoGlobalEncontrado.Element("precio_producto_proveedor")?.Attribute("Id")?.Value.Trim();
+        //                                    var stockId = insumoGlobalEncontrado.Element("stock_producto_proveedor")?.Attribute("Id")?.Value.Trim();
+        //                                    var precioId = insumoGlobalEncontrado.Element("precio_producto_proveedor")?.Attribute("Id")?.Value.Trim();
 
         //                                    var stockProductoGlobal = from stockProducto in BDXML.Root.Element("Stocks_Productos_Proveedores").Descendants("stock_producto_proveedor")
         //                                                              where stockProducto.Attribute("Id").Value.Trim() == stockId
@@ -857,11 +869,11 @@ namespace Mapper
 
         //                                        BEProducto oBEProducto = new BEProducto
         //                                        {
-        //                                            Id = long.Parse(productoGlobalEncontrado.Attribute("Id").Value.Trim()),
-        //                                            Nombre = productoGlobalEncontrado.Element("Nombre").Value.Trim(),
-        //                                            Marca = productoGlobalEncontrado.Element("Marca").Value.Trim(),
-        //                                            Anio = Convert.ToInt32(productoGlobalEncontrado.Element("Anio").Value.Trim()),
-        //                                            Modelo = Convert.ToInt32(productoGlobalEncontrado.Element("Modelo").Value.Trim()),
+        //                                            Id = long.Parse(insumoGlobalEncontrado.Attribute("Id").Value.Trim()),
+        //                                            Nombre = insumoGlobalEncontrado.Element("Nombre").Value.Trim(),
+        //                                            Marca = insumoGlobalEncontrado.Element("Marca").Value.Trim(),
+        //                                            Anio = Convert.ToInt32(insumoGlobalEncontrado.Element("Anio").Value.Trim()),
+        //                                            Modelo = Convert.ToInt32(insumoGlobalEncontrado.Element("Modelo").Value.Trim()),
         //                                            oBEPrecioProductoProveedor = new BEPrecioProductoProveedor
         //                                            {
         //                                                Id = long.Parse(precioProductoEncontrado.Attribute("Id").Value.Trim()),
