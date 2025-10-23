@@ -25,6 +25,10 @@ namespace BLL
         public long ObtenerUltimoId() { throw new NotImplementedException(); }
 
         public bool VerificarExistenciaObjeto(BEInsumo oBEInsumo) { throw new NotImplementedException(); }
+        public void DescontarStock(int idInsumo, decimal cantidadADescontar)
+        {
+            oMPPInsumo.DescontarStock(idInsumo, cantidadADescontar);
+        }
 
         //public bool AsociarProveedorProducto(BEProveedor oBEProveedor, BEProducto oBEProducto, BEStockProductoProveedor oBEStockProductoProveedor, BEPrecioProductoProveedor oBEPrecioProductoProveedor) { return oMPPProveedor.AsociarProveedorProducto(oBEProveedor, oBEProducto, oBEStockProductoProveedor, oBEPrecioProductoProveedor); }
 

@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Usuarios>
+    <usuario Id="1">
+      <Usuario>mauri</Usuario>
+      <Password>MQAyADMANAA=</Password>
+      <Activo>True</Activo>
+      <Bloqueado>False</Bloqueado>
+    </usuario>
+    <usuario Id="2">
+      <Usuario>a</Usuario>
+      <Password>MgA=</Password>
+      <Activo>False</Activo>
+      <Bloqueado>False</Bloqueado>
+    </usuario>
+  </Usuarios>
+  <Roles>
+    <rol Id="2">
+      <Nombre>gerente</Nombre>
+    </rol>
+    <rol Id="3">
+      <Nombre>administrador</Nombre>
+    </rol>
+  </Roles>
+  <Permisos>
+    <!-- Inicio -->
+    <permiso Id="1">
+      <Nombre>Log-In</Nombre>
+    </permiso>
+    <!-- Administrador -->
+    <permiso Id="3">
+      <Nombre>Clientes</Nombre>
+    </permiso>
+    <permiso Id="4">
+      <Nombre>Reserva</Nombre>
+    </permiso>
+    <permiso Id="5">
+      <Nombre>Cobrar Pedido</Nombre>
+    </permiso>
+    <!-- Gerente -->
+    <permiso Id="6">
+      <Nombre>Insumos</Nombre>
+    </permiso>
+    <permiso Id="8">
+      <Nombre>Promociones</Nombre>
+    </permiso>
+    <permiso Id="9">
+      <Nombre>Proveedor</Nombre>
+    </permiso>
+    <permiso Id="10">
+      <Nombre>Mesas</Nombre>
+    </permiso>
+    <!-- Mozo -->
+    <!-- Cocina -->
+    <permiso Id="12">
+      <Nombre>Pedidos</Nombre>
+    </permiso>
+    <!-- Usuarios -->
+    <permiso Id="13">
+      <Nombre>Crear Usuario</Nombre>
+    </permiso>
+    <permiso Id="14">
+      <Nombre>Gestionar Usuarios</Nombre>
+    </permiso>
+    <!-- DashBoard -->
+    <permiso Id="15">
+      <Nombre>Ver Informe</Nombre>
+    </permiso>
+    <!-- Bitacora -->
+    <permiso Id="16">
+      <Nombre>Ver Bitacora</Nombre>
+    </permiso>
+    <permiso Id="17">
+      <Nombre>Hacer Backup</Nombre>
+    </permiso>
+    <permiso Id="18">
+      <Nombre>Hacer Restore</Nombre>
+    </permiso>
+    <permiso Id="19">
+      <Nombre>Log-Out</Nombre>
+    </permiso>
+    <permiso Id="20">
+      <Nombre>Solicitud Compra</Nombre>
+    </permiso>
+    <permiso Id="21">
+      <Nombre>Pre Orden de Compra</Nombre>
+    </permiso>
+    <permiso Id="22">
+      <Nombre>Orden de Compra</Nombre>
+    </permiso>
+    <permiso Id="23">
+      <Nombre>Entrega Insumos</Nombre>
+    </permiso>
+    <permiso Id="24">
+      <Nombre>Insumo-Proveedor</Nombre>
+    </permiso>
+    <permiso Id="25">
+      <Nombre>Platos</Nombre>
+    </permiso>
+    <permiso Id="26">
+      <Nombre>Cargar Pedido</Nombre>
+    </permiso>
+  </Permisos>
+  <Rol_Permisos>
+    <rol_permiso Id="3">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="4">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="5">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="6">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>6</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="8">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>8</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="9">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>9</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="10">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>10</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="12">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="13">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>13</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="14">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>14</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="15">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>15</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="16">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>16</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="17">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>17</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="18">
+      <Id_Rol>1</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>6</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>8</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>9</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>10</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>13</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>14</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>15</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>16</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>17</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>18</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>12</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>1</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>3</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>4</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>5</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>3</Id_Rol>
+      <Id_Permiso>19</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>20</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>21</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>22</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>23</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>24</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>25</Id_Permiso>
+    </rol_permiso>
+    <rol_permiso Id="1">
+      <Id_Rol>2</Id_Rol>
+      <Id_Permiso>26</Id_Permiso>
+    </rol_permiso>
+  </Rol_Permisos>
+  <Usuario_Roles>
+    <usuario_rol>
+      <Id_Usuario>1</Id_Usuario>
+      <Id_Rol_Padre>2</Id_Rol_Padre>
+    </usuario_rol>
+    <usuario_rol>
+      <Id_Usuario>2</Id_Usuario>
+      <Id_Rol_Padre>3</Id_Rol_Padre>
+    </usuario_rol>
+  </Usuario_Roles>
+  <Usuario_Permisos>
+    <usuario_permiso>
+      <Id_Usuario>1</Id_Usuario>
+      <Id_Permiso>1</Id_Permiso>
+    </usuario_permiso>
+    <usuario_permiso>
+      <Id_Usuario>1</Id_Usuario>
+      <Id_Permiso>19</Id_Permiso>
+    </usuario_permiso>
+  </Usuario_Permisos>
+  <Roles_Roles />
+  <Clientes>
+    <cliente IdCliente="1">
+      <Nombre>Mauricio</Nombre>
+      <DNI>31462615</DNI>
+      <Telefono>1156410025</Telefono>
+    </cliente>
+    <cliente IdCliente="2">
+      <Nombre>Luciana Perez</Nombre>
+      <DNI>33222111</DNI>
+      <Telefono>223216541</Telefono>
+    </cliente>
+    <cliente IdCliente="3">
+      <Nombre>perez</Nombre>
+      <DNI>1233211</DNI>
+      <Telefono>123</Telefono>
+    </cliente>
+    <cliente IdCliente="4">
+      <Nombre>a</Nombre>
+      <DNI>12312312</DNI>
+      <Telefono>12345612</Telefono>
+    </cliente>
+  </Clientes>
+  <Mesas>
+    <mesa IdMesa="1">
+      <NumeroMesa>1</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="2">
+      <NumeroMesa>2</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="3">
+      <NumeroMesa>10</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="4">
+      <NumeroMesa>15</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="5">
+      <NumeroMesa>11</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="6">
+      <NumeroMesa>9</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="7">
+      <NumeroMesa>12</NumeroMesa>
+      <Capacidad>6</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="8">
+      <NumeroMesa>3</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="9">
+      <NumeroMesa>4</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="10">
+      <NumeroMesa>5</NumeroMesa>
+      <Capacidad>2</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="11">
+      <NumeroMesa>6</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Reservada</Estado>
+    </mesa>
+    <mesa IdMesa="12">
+      <NumeroMesa>7</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="13">
+      <NumeroMesa>8</NumeroMesa>
+      <Capacidad>5</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="14">
+      <NumeroMesa>13</NumeroMesa>
+      <Capacidad>6</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="15">
+      <NumeroMesa>14</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="16">
+      <NumeroMesa>16</NumeroMesa>
+      <Capacidad>4</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="17">
+      <NumeroMesa>17</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="18">
+      <NumeroMesa>18</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="19">
+      <NumeroMesa>19</NumeroMesa>
+      <Capacidad>8</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+    <mesa IdMesa="20">
+      <NumeroMesa>20</NumeroMesa>
+      <Capacidad>10</Capacidad>
+      <Estado>Libre</Estado>
+    </mesa>
+  </Mesas>
+  <Reservas>
+    <reserva Id="2">
+      <NumeroReserva>R-20251016-002</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="2">
+        <NumeroMesa>2</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="12">
+      <NumeroReserva>R-20251017-012</NumeroReserva>
+      <FechaReserva>2025-10-17</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="6">
+        <NumeroMesa>9</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="13">
+      <NumeroReserva>R-20251017-013</NumeroReserva>
+      <FechaReserva>2025-10-17</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="14">
+      <NumeroReserva>R-20251015-007</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="2">
+        <NumeroMesa>2</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="15">
+      <NumeroReserva>R-20251015-006</NumeroReserva>
+      <FechaReserva>2025-10-15</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="16">
+      <NumeroReserva>R-20251016-006</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="6">
+        <NumeroMesa>9</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="17">
+      <NumeroReserva>R-20251016-007</NumeroReserva>
+      <FechaReserva>2025-10-16</FechaReserva>
+      <Cliente IdCliente="2">
+        <Nombre>Luciana Perez</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="11">
+        <NumeroMesa>6</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="18">
+      <NumeroReserva>R-20251023-008</NumeroReserva>
+      <FechaReserva>2025-10-23</FechaReserva>
+      <Cliente IdCliente="1">
+        <Nombre>Mauricio</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
+    <reserva Id="19">
+      <NumeroReserva>R-20251023-009</NumeroReserva>
+      <FechaReserva>2025-10-23</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>2</CantidadPersonas>
+      <Mesa IdMesa="8">
+        <NumeroMesa>3</NumeroMesa>
+      </Mesa>
+    </reserva>
+  </Reservas>
+  <Proveedores>
+    <proveedor Id="1">
+      <Nombre>Verduleria</Nombre>
+      <CUIL>20123123125</CUIL>
+      <Domicilio>asd</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>112123122</Telefono>
+    </proveedor>
+    <proveedor Id="2">
+      <Nombre>Carniceria</Nombre>
+      <CUIL>25321321152</CUIL>
+      <Domicilio>avellaneda</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>123123123</Telefono>
+    </proveedor>
+    <proveedor Id="3">
+      <Nombre>Super</Nombre>
+      <CUIL>20321321125</CUIL>
+      <Domicilio>asd</Domicilio>
+      <Email>asd@asd.com</Email>
+      <Telefono>123123121</Telefono>
+    </proveedor>
+  </Proveedores>
+  <Insumos>
+    <insumo Id="1">
+      <Nombre>Tomate</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>19,2</Cantidad>
+      <Precio>1500,00</Precio>
+    </insumo>
+    <insumo Id="2">
+      <Nombre>Harina</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>19,00</Cantidad>
+      <Precio>123,00</Precio>
+    </insumo>
+    <insumo Id="3">
+      <Nombre>Muzzarella</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>48,6</Cantidad>
+      <Precio>1500,00</Precio>
+    </insumo>
+    <insumo Id="4">
+      <Nombre>Coca Cola</Nombre>
+      <UnidadMedida>Kg</UnidadMedida>
+      <Cantidad>22</Cantidad>
+      <Precio>1250,00</Precio>
+    </insumo>
+  </Insumos>
+  <ProveedorInsumos>
+    <proveedorInsumo Id="2">
+      <Proveedor>2</Proveedor>
+      <Insumo>2</Insumo>
+      <Cantidad>1111,00</Cantidad>
+      <Precio>11111,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="3">
+      <Proveedor>2</Proveedor>
+      <Insumo>1</Insumo>
+      <Cantidad>15,00</Cantidad>
+      <Precio>150,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="4">
+      <Proveedor>1</Proveedor>
+      <Insumo>3</Insumo>
+      <Cantidad>111,00</Cantidad>
+      <Precio>111,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="5">
+      <Proveedor>1</Proveedor>
+      <Insumo>2</Insumo>
+      <Cantidad>12,00</Cantidad>
+      <Precio>222,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="6">
+      <Proveedor>3</Proveedor>
+      <Insumo>2</Insumo>
+      <Cantidad>25,00</Cantidad>
+      <Precio>1500,00</Precio>
+    </proveedorInsumo>
+    <proveedorInsumo Id="7">
+      <Proveedor>3</Proveedor>
+      <Insumo>4</Insumo>
+      <Cantidad>50,00</Cantidad>
+      <Precio>1100,00</Precio>
+    </proveedorInsumo>
+  </ProveedorInsumos>
+  <Platos>
+    <Plato Id="5">
+      <Nombre>Asado</Nombre>
+      <Categoria>Carnes</Categoria>
+      <PorcentajeGanancia>8</PorcentajeGanancia>
+      <PrecioCosto>3365,00</PrecioCosto>
+      <PrecioVenta>3634,20</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+    <Plato Id="1">
+      <Nombre>Fideos al Pesto</Nombre>
+      <Categoria>Pastas</Categoria>
+      <PorcentajeGanancia>40</PorcentajeGanancia>
+      <PrecioCosto>750,00</PrecioCosto>
+      <PrecioVenta>1050,00</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+    <Plato Id="6">
+      <Nombre>Rabas</Nombre>
+      <Categoria>Entrada</Categoria>
+      <PorcentajeGanancia>15</PorcentajeGanancia>
+      <PrecioCosto>61,50</PrecioCosto>
+      <PrecioVenta>70,73</PrecioVenta>
+      <Activo>false</Activo>
+    </Plato>
+    <Plato Id="7">
+      <Nombre>Papa Fritas</Nombre>
+      <Categoria>Entrada</Categoria>
+      <PorcentajeGanancia>11</PorcentajeGanancia>
+      <PrecioCosto>723,00</PrecioCosto>
+      <PrecioVenta>802,53</PrecioVenta>
+      <Activo>false</Activo>
+    </Plato>
+    <Plato Id="3">
+      <Nombre>Sorrentinos</Nombre>
+      <Categoria>Pastas</Categoria>
+      <PorcentajeGanancia>8</PorcentajeGanancia>
+      <PrecioCosto>1500,00</PrecioCosto>
+      <PrecioVenta>1620,00</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+    <Plato Id="2">
+      <Nombre>Muzarella</Nombre>
+      <Categoria>Pizzas</Categoria>
+      <PorcentajeGanancia>25</PorcentajeGanancia>
+      <PrecioCosto>1500,00</PrecioCosto>
+      <PrecioVenta>1875,00</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+    <Plato Id="4">
+      <Nombre>Coca Cola</Nombre>
+      <Categoria>Bebida</Categoria>
+      <PorcentajeGanancia>3</PorcentajeGanancia>
+      <PrecioCosto>2000,00</PrecioCosto>
+      <PrecioVenta>2060,00</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+  </Platos>
+  <PlatoInsumos>
+    <PlatoInsumo>
+      <IdPlato>5</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>5</IdPlato>
+      <IdInsumo>4</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1250,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>5</IdPlato>
+      <IdInsumo>2</IdInsumo>
+      <Cantidad>5,00</Cantidad>
+      <CostoUnitario>123,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>1</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>0,50</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>6</IdPlato>
+      <IdInsumo>1</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>6</IdPlato>
+      <IdInsumo>2</IdInsumo>
+      <Cantidad>0,50</Cantidad>
+      <CostoUnitario>123,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>7</IdPlato>
+      <IdInsumo>2</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>123,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>7</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>0,40</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>3</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>0,50</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>3</IdPlato>
+      <IdInsumo>1</IdInsumo>
+      <Cantidad>0,50</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>2</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>4</IdPlato>
+      <IdInsumo>4</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1250,00</CostoUnitario>
+    </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>4</IdPlato>
+      <IdInsumo>3</IdInsumo>
+      <Cantidad>0,50</Cantidad>
+      <CostoUnitario>1500,00</CostoUnitario>
+    </PlatoInsumo>
+  </PlatoInsumos>
+</Root>

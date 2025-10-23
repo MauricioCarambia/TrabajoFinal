@@ -3,12 +3,17 @@
   <Bitacoras>
     <bitacora Id="1">
       <Detalle>backup</Detalle>
-      <Fecha_Registro>15/10/2025 10:33:36</Fecha_Registro>
+      <Fecha_Registro>22/10/2025 09:40:12</Fecha_Registro>
       <usuario Id="1" />
     </bitacora>
     <bitacora Id="2">
+      <Detalle>backup</Detalle>
+      <Fecha_Registro>23/10/2025 11:38:16</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
+    <bitacora Id="3">
       <Detalle>restore</Detalle>
-      <Fecha_Registro>15/10/2025 10:35:46</Fecha_Registro>
+      <Fecha_Registro>23/10/2025 11:38:46</Fecha_Registro>
       <usuario Id="1" />
     </bitacora>
   </Bitacoras>

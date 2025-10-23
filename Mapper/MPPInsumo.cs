@@ -1,6 +1,7 @@
 ﻿using Entity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -376,7 +377,32 @@ namespace Mapper
             catch (Exception ex) { throw ex; }
             finally { }
         }
+        public void DescontarStock(int idInsumo, decimal cantidadADescontar)
+        {
+            if (!CrearXML()) return;
 
+            XDocument xml = XDocument.Load(ruta);
+
+            var insumo = xml.Descendants("insumo")
+                            .FirstOrDefault(i => (int)i.Attribute("Id") == idInsumo);
+
+            if (insumo != null)
+            {
+                // Parseamos el stock actual usando la cultura es-AR
+                decimal stockActual = decimal.Parse(insumo.Element("Cantidad").Value, new CultureInfo("es-AR"));
+
+                // Ajustamos el stock: si cantidadADescontar es positivo, resta; si es negativo, suma
+                decimal nuevoStock = stockActual - cantidadADescontar;
+
+                // Evitamos stock negativo
+                if (nuevoStock < 0) nuevoStock = 0;
+
+                // Guardamos con 2 decimales y coma como separador decimal
+                insumo.Element("Cantidad").Value = nuevoStock.ToString("0.##", new CultureInfo("es-AR"));
+
+                xml.Save(ruta);
+            }
+        }
 
     }
 }
