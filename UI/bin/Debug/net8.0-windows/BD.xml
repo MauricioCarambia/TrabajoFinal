@@ -515,6 +515,17 @@
         <NumeroMesa>3</NumeroMesa>
       </Mesa>
     </reserva>
+    <reserva Id="20">
+      <NumeroReserva>R-20251024-010</NumeroReserva>
+      <FechaReserva>2025-10-24</FechaReserva>
+      <Cliente IdCliente="4">
+        <Nombre>a</Nombre>
+      </Cliente>
+      <CantidadPersonas>4</CantidadPersonas>
+      <Mesa IdMesa="1">
+        <NumeroMesa>1</NumeroMesa>
+      </Mesa>
+    </reserva>
   </Reservas>
   <Proveedores>
     <proveedor Id="1">
@@ -543,25 +554,25 @@
     <insumo Id="1">
       <Nombre>Tomate</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>16</Cantidad>
+      <Cantidad>20</Cantidad>
       <Precio>1500,00</Precio>
     </insumo>
     <insumo Id="2">
       <Nombre>Harina</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>4</Cantidad>
+      <Cantidad>18</Cantidad>
       <Precio>123,00</Precio>
     </insumo>
     <insumo Id="3">
       <Nombre>Muzzarella</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>13</Cantidad>
+      <Cantidad>17</Cantidad>
       <Precio>1500,00</Precio>
     </insumo>
     <insumo Id="4">
       <Nombre>Coca Cola</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>17</Cantidad>
+      <Cantidad>20</Cantidad>
       <Precio>1250,00</Precio>
     </insumo>
   </Insumos>
@@ -737,33 +748,18 @@
   </PlatoInsumos>
   <Pedidos>
     <pedido Id="1">
-      <ReservaId>18</ReservaId>
-      <ClienteId>1</ClienteId>
-      <Fecha>2025-10-23 23:49:30</Fecha>
+      <ReservaId>20</ReservaId>
+      <ClienteId>4</ClienteId>
+      <Fecha>2025-10-24 00:26:54</Fecha>
       <Estado>Abierto</Estado>
       <PedidoPlatos>
         <pedidoPlato Id="1">
           <PlatoId>7</PlatoId>
           <Cantidad>1</Cantidad>
-          <Estado>Pendiente</Estado>
+          <Estado>Preparacion</Estado>
         </pedidoPlato>
         <pedidoPlato Id="2">
-          <PlatoId>6</PlatoId>
-          <Cantidad>2</Cantidad>
-          <Estado>Pendiente</Estado>
-        </pedidoPlato>
-        <pedidoPlato Id="3">
-          <PlatoId>5</PlatoId>
-          <Cantidad>1</Cantidad>
-          <Estado>Pendiente</Estado>
-        </pedidoPlato>
-        <pedidoPlato Id="4">
-          <PlatoId>1</PlatoId>
-          <Cantidad>1</Cantidad>
-          <Estado>Pendiente</Estado>
-        </pedidoPlato>
-        <pedidoPlato Id="5">
-          <PlatoId>4</PlatoId>
+          <PlatoId>2</PlatoId>
           <Cantidad>1</Cantidad>
           <Estado>Pendiente</Estado>
         </pedidoPlato>

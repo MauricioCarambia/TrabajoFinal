@@ -255,6 +255,10 @@ namespace Mapper
 
             foreach (var pedidoPlato in pedido.ListaPlatos)
             {
+                // Solo descontar si el plato está Confirmado
+                if (pedidoPlato.Estado != BEPedidoPlato.EstadoPlato.Pendiente)
+                    continue;
+
                 if (pedidoPlato.Plato?.ListaInsumos == null) continue;
 
                 foreach (var platoInsumo in pedidoPlato.Plato.ListaInsumos)
@@ -262,7 +266,6 @@ namespace Mapper
                     int idInsumo = platoInsumo.Insumo.Id;
                     decimal cantidadUsada = platoInsumo.Cantidad * pedidoPlato.Cantidad;
 
-                    // Buscar insumo en XML
                     var insumoXml = xml.Root.Element("Insumos")?
                                         .Elements("insumo")
                                         .FirstOrDefault(i => (int)i.Attribute("Id") == idInsumo);
@@ -271,15 +274,28 @@ namespace Mapper
                     {
                         decimal cantidadActual = decimal.Parse(insumoXml.Element("Cantidad").Value.Trim());
                         cantidadActual -= cantidadUsada;
+                        if (cantidadActual < 0) cantidadActual = 0; // opcional
 
-                        if (cantidadActual < 0) cantidadActual = 0; // opcional: no permitir negativo
                         insumoXml.Element("Cantidad").SetValue(cantidadActual.ToString("0.##"));
                     }
                 }
+
+                // Opcional: marcar en XML que este plato ya descontó stock
+                var pedidoXml = xml.Root.Element("Pedidos")?
+                                  .Elements("pedido")
+                                  .FirstOrDefault(p => (int)p.Attribute("Id") == pedido.Id);
+
+                var pedidoPlatoXml = pedidoXml?.Element("PedidoPlatos")?
+                                       .Elements("pedidoPlato")
+                                       .FirstOrDefault(pp => (int)pp.Element("PlatoId") == pedidoPlato.Plato.Id);
+
+                if (pedidoPlatoXml != null)
+                    pedidoPlatoXml.SetElementValue("Estado", pedidoPlato.Estado.ToString());
             }
 
             xml.Save("BD.xml");
         }
+
     }
 }
 
