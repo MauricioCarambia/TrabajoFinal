@@ -11,8 +11,7 @@ namespace Mapper
 {
     public class MPPPedidoPlato
     {
-        readonly string ruta = ("BD.xml");
-        XDocument BDXML;
+        
 
         
     }

@@ -543,25 +543,25 @@
     <insumo Id="1">
       <Nombre>Tomate</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>19,2</Cantidad>
+      <Cantidad>16</Cantidad>
       <Precio>1500,00</Precio>
     </insumo>
     <insumo Id="2">
       <Nombre>Harina</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>18</Cantidad>
+      <Cantidad>4</Cantidad>
       <Precio>123,00</Precio>
     </insumo>
     <insumo Id="3">
       <Nombre>Muzzarella</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>47</Cantidad>
+      <Cantidad>13</Cantidad>
       <Precio>1500,00</Precio>
     </insumo>
     <insumo Id="4">
       <Nombre>Coca Cola</Nombre>
       <UnidadMedida>Kg</UnidadMedida>
-      <Cantidad>23,25</Cantidad>
+      <Cantidad>17</Cantidad>
       <Precio>1250,00</Precio>
     </insumo>
   </Insumos>
@@ -644,20 +644,20 @@
       <PrecioVenta>3603,06</PrecioVenta>
       <Activo>true</Activo>
     </Plato>
-    <Plato Id="4">
-      <Nombre>Coca Cola</Nombre>
-      <Categoria>Bebida</Categoria>
-      <PorcentajeGanancia>26</PorcentajeGanancia>
-      <PrecioCosto>625,00</PrecioCosto>
-      <PrecioVenta>787,50</PrecioVenta>
-      <Activo>true</Activo>
-    </Plato>
     <Plato Id="6">
       <Nombre>Rabas</Nombre>
       <Categoria>Entrada</Categoria>
       <PorcentajeGanancia>15</PorcentajeGanancia>
       <PrecioCosto>1561,50</PrecioCosto>
       <PrecioVenta>1795,73</PrecioVenta>
+      <Activo>true</Activo>
+    </Plato>
+    <Plato Id="4">
+      <Nombre>Coca Cola</Nombre>
+      <Categoria>Bebida</Categoria>
+      <PorcentajeGanancia>26</PorcentajeGanancia>
+      <PrecioCosto>1250,00</PrecioCosto>
+      <PrecioVenta>1575,00</PrecioVenta>
       <Activo>true</Activo>
     </Plato>
   </Platos>
@@ -717,12 +717,6 @@
       <CostoUnitario>1500,00</CostoUnitario>
     </PlatoInsumo>
     <PlatoInsumo>
-      <IdPlato>4</IdPlato>
-      <IdInsumo>4</IdInsumo>
-      <Cantidad>0,50</Cantidad>
-      <CostoUnitario>1250,00</CostoUnitario>
-    </PlatoInsumo>
-    <PlatoInsumo>
       <IdPlato>6</IdPlato>
       <IdInsumo>1</IdInsumo>
       <Cantidad>1,00</Cantidad>
@@ -734,6 +728,46 @@
       <Cantidad>0,50</Cantidad>
       <CostoUnitario>123,00</CostoUnitario>
     </PlatoInsumo>
+    <PlatoInsumo>
+      <IdPlato>4</IdPlato>
+      <IdInsumo>4</IdInsumo>
+      <Cantidad>1,00</Cantidad>
+      <CostoUnitario>1250,00</CostoUnitario>
+    </PlatoInsumo>
   </PlatoInsumos>
-  <Pedidos />
+  <Pedidos>
+    <pedido Id="1">
+      <ReservaId>18</ReservaId>
+      <ClienteId>1</ClienteId>
+      <Fecha>2025-10-23 23:49:30</Fecha>
+      <Estado>Abierto</Estado>
+      <PedidoPlatos>
+        <pedidoPlato Id="1">
+          <PlatoId>7</PlatoId>
+          <Cantidad>1</Cantidad>
+          <Estado>Pendiente</Estado>
+        </pedidoPlato>
+        <pedidoPlato Id="2">
+          <PlatoId>6</PlatoId>
+          <Cantidad>2</Cantidad>
+          <Estado>Pendiente</Estado>
+        </pedidoPlato>
+        <pedidoPlato Id="3">
+          <PlatoId>5</PlatoId>
+          <Cantidad>1</Cantidad>
+          <Estado>Pendiente</Estado>
+        </pedidoPlato>
+        <pedidoPlato Id="4">
+          <PlatoId>1</PlatoId>
+          <Cantidad>1</Cantidad>
+          <Estado>Pendiente</Estado>
+        </pedidoPlato>
+        <pedidoPlato Id="5">
+          <PlatoId>4</PlatoId>
+          <Cantidad>1</Cantidad>
+          <Estado>Pendiente</Estado>
+        </pedidoPlato>
+      </PedidoPlatos>
+    </pedido>
+  </Pedidos>
 </Root>

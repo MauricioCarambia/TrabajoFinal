@@ -20,10 +20,17 @@ namespace BLL
 
         //public BEPedido ListarObjeto(BEPedido oBEPedido) { return oMPPPedido.ListarObjeto(oBEPedido); }
 
-        //public BEPedido ListarObjetoPorId(BEPedido oBEPedido) { return oMPPPedido.ListarObjetoPorIdMesa(oBEPedido); }
-        //public BEPedido ListarObjetoPorNumeroMesa(BEPedido oBEPedido) { return oMPPPedido.ListarObjetoPorNumeroMesa(oBEPedido); }
+        public BEPedido ListarObjetoPorId(BEPedido oBEPedido) { return oMPPPedido.ListarObjetoPorId(oBEPedido); }
+        public void DescontarStockInsumos(BEPedido oBEPedido)
+        {
+            oMPPPedido.DescontarStockInsumos(oBEPedido);
+        }
 
-        //public List<BEPedido> ListarTodo() { return oMPPPedido.ListarTodo(); }
+        public BEPedido ListarTodo(int reservaId)
+        {
+            return oMPPPedido.ListarPorReserva(reservaId);
+        }
+        //public List<BEPedido> ListarTodo() { return oMPPPedido.ListarPorReserva(); }
 
         public int ObtenerUltimoId() { throw new NotImplementedException(); }
 

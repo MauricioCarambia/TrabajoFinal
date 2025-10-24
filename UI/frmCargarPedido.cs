@@ -142,43 +142,31 @@ namespace UI
 
                 int reservaId = Convert.ToInt32(cmbReservas.SelectedValue);
 
-                // Crear objeto BEReserva con el Id para la BLL
-                BEReserva filtro = new BEReserva { Id = reservaId };
-
                 // Obtener la reserva completa desde la BLL
-                BEReserva reserva = oBLLReserva.ListarObjetoPorId(filtro);
+                BEReserva reserva = oBLLReserva.ListarObjetoPorId(new BEReserva { Id = reservaId });
+                if (reserva == null) return;
 
-                if (reserva != null)
+                // Mostrar datos de reserva
+                txtReserva.Text = reserva.NumeroReserva.ToString();
+                txtCliente.Text = reserva.Cliente?.Nombre ?? "";
+                txtMesa.Text = reserva.Mesa?.NumeroMesa.ToString() ?? "";
+
+                // Traer pedido existente para esta reserva (si ya existe)
+                oBEPedido = oBLLPedido.ListarTodo(reservaId); // Ahora devuelve BEPedido completo
+                if (oBEPedido == null)
                 {
-                    // Llenar los TextBox con los datos correctos
-                    txtReserva.Text = reserva.NumeroReserva.ToString();
-                    txtCliente.Text = reserva.Cliente?.Nombre ?? "";
-                    txtMesa.Text = reserva.Mesa?.NumeroMesa.ToString() ?? "";
-
-                    // Crear pedido si no existe
-                    if (oBEPedido == null)
+                    // Si no existe, creamos uno nuevo
+                    oBEPedido = new BEPedido
                     {
-                        oBEPedido = new BEPedido
-                        {
-                            Reserva = reserva,
-                            Cliente = reserva.Cliente,
-                            ListaPlatos = new List<BEPedidoPlato>()
-                        };
-                        listaPedidos.Add(oBEPedido);
-                    }
-                    else
-                    {
-                        // Si ya existe el pedido, actualizar la reserva y el cliente
-                        oBEPedido.Reserva = reserva;
-                        oBEPedido.Cliente = reserva.Cliente;
-
-                        // Asegurarse de que la lista de platos no sea null
-                        if (oBEPedido.ListaPlatos == null)
-                            oBEPedido.ListaPlatos = new List<BEPedidoPlato>();
-                    }
-
-                    ActualizarDgvPedidos();
+                        Reserva = reserva,
+                        Cliente = reserva.Cliente,
+                        ListaPlatos = new List<BEPedidoPlato>(),
+                        Estado = BEPedido.EstadoPedido.Abierto
+                    };
                 }
+
+                // Ahora dgvPedidos mostrará los platos que ya tiene
+                ActualizarDgvPedidos();
             }
             catch (Exception ex)
             {
@@ -222,25 +210,23 @@ namespace UI
         {
             try
             {
-                // Validar cantidad y devolver valor parseado
                 if (!ValidarAgregarPlato(out int cantidad))
                     return;
 
-                // Obtener el plato seleccionado
-                BEPlato platoSeleccionado = dgvPlatos.CurrentRow.Tag as BEPlato;
+                BEPlato platoSeleccionado = dgvPlatos.CurrentRow?.Tag as BEPlato;
                 if (platoSeleccionado == null) return;
 
-                // Verificar si el plato ya está en el pedido
+                // Verificar si el plato ya existe
                 var platoExistente = oBEPedido.ListaPlatos.FirstOrDefault(p => p.Plato.Id == platoSeleccionado.Id);
 
                 if (platoExistente != null)
                 {
-                    // Si ya existe, sumamos la cantidad pero mantenemos el estado
+                    // Sumar cantidad
                     platoExistente.Cantidad += cantidad;
                 }
                 else
                 {
-                    // Si es nuevo, agregamos con estado inicial Pendiente
+                    // Agregar nuevo plato
                     oBEPedido.ListaPlatos.Add(new BEPedidoPlato
                     {
                         Plato = platoSeleccionado,
@@ -249,7 +235,7 @@ namespace UI
                     });
                 }
 
-                // Actualizar DataGridView del pedido
+                // Actualizar la vista
                 ActualizarDgvPedidos();
             }
             catch (Exception ex)
@@ -366,33 +352,36 @@ namespace UI
         {
             try
             {
+                // 🔹 Validar antes de continuar
                 if (!ValidarConfirmarPedido())
                     return;
 
-                // Cambiar estado general del pedido
-                oBEPedido.Estado = BEPedido.EstadoPedido.Cerrado;
+                // 🔹 Actualizar datos del pedido
+                //oBEPedido.Estado = BEPedido.EstadoPedido.Cerrado;
                 oBEPedido.Fecha = DateTime.Now;
 
-                // Asignar estado inicial a los platos
+                // 🔹 Asegurar estados de los platos
                 foreach (var item in oBEPedido.ListaPlatos)
                 {
-                    if (item.Estado == default(BEPedidoPlato.EstadoPlato))
+                    if (item.Estado == default)
                         item.Estado = BEPedidoPlato.EstadoPlato.Pendiente;
                 }
-
-                // Guardar pedido (nuevo o existente)
+                oBLLPedido.DescontarStockInsumos(oBEPedido);
+                // 🔹 Guardar pedido (nuevo o existente)
                 oBLLPedido.Guardar(oBEPedido);
 
-                MessageBox.Show("Pedido confirmado y enviado a cocina.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 🔹 Confirmar al usuario
+                MessageBox.Show("Pedido confirmado y enviado a cocina.",
+                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // 🔹 Refrescar vista y limpiar
                 ActualizarDgvPedidos();
                 oBEPedido = null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al confirmar el pedido: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al confirmar el pedido: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
