@@ -12,6 +12,7 @@ namespace BLL
     {
 
         private MPPPlato oMPPPlato = new MPPPlato();
+        private BLLInsumo oBLLInsumo = new BLLInsumo();
 
         public bool CrearXML() { throw new NotImplementedException(); }
 
@@ -20,6 +21,36 @@ namespace BLL
         public void Guardar(BEPlato oBEPlato) { oMPPPlato.Guardar(oBEPlato); }
 
         public BEPlato ListarObjeto(BEPlato oBEPlato) { return oMPPPlato.ListarObjeto(oBEPlato); }
+        public List<BEPlatoInsumo> ListarInsumosPorPlato(int idPlato)
+        {
+            List<BEPlatoInsumo> lista = new List<BEPlatoInsumo>();
+
+            // Obtenemos el BEPlato completo
+            BEPlato plato = ListarObjetoPorId(new BEPlato { Id = idPlato });
+
+            // Traemos los datos crudos del mapper (idInsumo + cantidad)
+            var insumosDatos = oMPPPlato.ListarInsumosPorPlato(idPlato);
+
+            // Por cada insumo declarado en el XML del plato
+            foreach (var dato in insumosDatos)
+            {
+                // Obtenemos el objeto BEInsumo completo
+                BEInsumo insumo = oBLLInsumo.ListarObjetoPorId(dato.IdInsumo);
+
+                if (insumo != null)
+                {
+                    // Creamos la relación Plato–Insumo con su cantidad y costo unitario
+                    BEPlatoInsumo pi = new BEPlatoInsumo(insumo, dato.Cantidad)
+                    {
+                        Plato = plato
+                    };
+
+                    lista.Add(pi);
+                }
+            }
+
+            return lista;
+        }
 
         public BEPlato ListarObjetoPorId(BEPlato oBEPlato)
         {

@@ -1,6 +1,7 @@
 ﻿using Entity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -313,6 +314,26 @@ namespace Mapper
             }
 
             return plato;
+        }
+        public List<(int IdInsumo, decimal Cantidad)> ListarInsumosPorPlato(int idPlato)
+        {
+            List<(int, decimal)> lista = new List<(int, decimal)>();
+            XDocument xml = XDocument.Load(ruta);
+
+            var platoXml = xml.Root.Elements("plato")
+                .FirstOrDefault(x => (int)x.Attribute("Id") == idPlato);
+
+            if (platoXml == null)
+                return lista;
+
+            foreach (var elemento in platoXml.Elements("insumo"))
+            {
+                int idInsumo = (int)elemento.Attribute("IdInsumo");
+                decimal cantidad = decimal.Parse((string)elemento.Element("Cantidad"), CultureInfo.InvariantCulture);
+                lista.Add((idInsumo, cantidad));
+            }
+
+            return lista;
         }
 
 

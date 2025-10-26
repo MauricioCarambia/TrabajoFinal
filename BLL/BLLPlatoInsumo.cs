@@ -24,10 +24,7 @@ namespace BLL
             oMPPPlatoInsumo.Guardar(oBEPlatoInsumo);
         }
 
-        /// <summary>
-        /// Guarda todos los insumos de un plato (lista completa)
-        /// </summary>
-        /// <param name="oBEPlato"></param>
+        
         public void GuardarLista(BEPlato oBEPlato)
         {
             if (oBEPlato == null)

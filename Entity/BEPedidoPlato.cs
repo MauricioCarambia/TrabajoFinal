@@ -15,6 +15,7 @@ namespace Entity
         public EstadoPlato Estado { get; set; } = EstadoPlato.Pendiente;
         public enum EstadoPlato
         {
+            Confirmado,
             Pendiente,
             Preparacion,
             Terminado,

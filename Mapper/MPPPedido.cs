@@ -1,6 +1,7 @@
 ﻿using Entity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,59 +183,117 @@ namespace Mapper
 
             return pedido;
         }
+        public List<BEPedido> ListarTodo()
+        {
+            try
+            {
+                if (!File.Exists(ruta)) return new List<BEPedido>();
+
+                BDXML = XDocument.Load(ruta);
+                var pedidosXml = BDXML.Root.Element("Pedidos")?.Elements("pedido");
+
+                if (pedidosXml == null) return new List<BEPedido>();
+
+                List<BEPedido> listaPedidos = new List<BEPedido>();
+
+                foreach (var pedidoXml in pedidosXml)
+                {
+                    int reservaId = int.TryParse(pedidoXml.Element("ReservaId")?.Value, out int rid) ? rid : 0;
+                    int clienteId = int.TryParse(pedidoXml.Element("ClienteId")?.Value, out int cid) ? cid : 0;
+                    DateTime fecha = DateTime.TryParse(pedidoXml.Element("Fecha")?.Value, out DateTime f) ? f : DateTime.Now;
+
+                    // Crear objetos Reserva y Cliente (si tenés mappers de BLL, los usás)
+                    BEReserva reserva = new BEReserva
+                    {
+                        Id = reservaId,
+                        Cliente = new BECliente { IdCliente = clienteId },
+                        // Opcional: llenar Mesa, CantidadPersonas, etc., si tuvieras info
+                    };
+
+                    BEPedido pedido = new BEPedido
+                    {
+                        Id = int.TryParse(pedidoXml.Attribute("Id")?.Value, out int pid) ? pid : 0,
+                        Reserva = reserva,
+                        Cliente = reserva.Cliente,
+                        Fecha = fecha,
+                        Estado = Enum.TryParse(pedidoXml.Element("Estado")?.Value, out BEPedido.EstadoPedido estado)
+                                    ? estado
+                                    : BEPedido.EstadoPedido.Abierto,
+                        ListaPlatos = new List<BEPedidoPlato>()
+                    };
+
+                    // Leer los platos
+                    var platosXml = pedidoXml.Element("PedidoPlatos")?.Elements("pedidoPlato");
+                    if (platosXml != null)
+                    {
+                        MPPPlato mapperPlato = new MPPPlato();
+                        foreach (var pp in platosXml)
+                        {
+                            BEPlato plato = mapperPlato.ListarObjetoPorId(new BEPlato { Id = int.Parse(pp.Element("PlatoId")?.Value ?? "0") });
+
+                            BEPedidoPlato pedidoPlato = new BEPedidoPlato
+                            {
+                                Plato = plato,
+                                Cantidad = int.TryParse(pp.Element("Cantidad")?.Value, out int cant) ? cant : 0,
+                                Estado = Enum.TryParse(pp.Element("Estado")?.Value, out BEPedidoPlato.EstadoPlato ep) ? ep : BEPedidoPlato.EstadoPlato.Pendiente
+                            };
+                            pedido.ListaPlatos.Add(pedidoPlato);
+                        }
+                    }
+
+                    listaPedidos.Add(pedido);
+                }
+
+                return listaPedidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar pedidos: " + ex.Message, ex);
+            }
+        }
 
         public BEPedido ListarPorReserva(int reservaId)
         {
-            if (!CrearXML()) return null;
+            if (!File.Exists(ruta))
+                return null;
 
-            BDXML = XDocument.Load(ruta);
+            XDocument xml = XDocument.Load(ruta);
 
-            // Buscar el pedido por ReservaId
-            var pedidoXml = BDXML.Root.Element("Pedidos")?
-                .Elements("pedido")
-                .FirstOrDefault(p => (int)p.Element("ReservaId") == reservaId);
+            var pedidoXml = xml.Root.Elements("pedido")
+                .FirstOrDefault(p => int.Parse(p.Element("ReservaId")?.Value ?? "0") == reservaId);
 
-            if (pedidoXml == null) return null;
+            if (pedidoXml == null)
+                return null;
 
+            // Crear objeto pedido
             BEPedido pedido = new BEPedido
             {
-                Id = (int)pedidoXml.Attribute("Id"),
-                Fecha = DateTime.Parse(pedidoXml.Element("Fecha").Value.Trim()),
-                Estado = (BEPedido.EstadoPedido)Enum.Parse(typeof(BEPedido.EstadoPedido), pedidoXml.Element("Estado").Value.Trim()),
-                Cliente = new BECliente
-                {
-                    IdCliente = int.Parse(pedidoXml.Element("ClienteId").Value.Trim())
-                    // Nombre si lo querés, cargarlo desde BD Cliente
-                },
-                Reserva = new BEReserva
-                {
-                    Id = int.Parse(pedidoXml.Element("ReservaId").Value.Trim())
-                    // NumeroReserva si lo querés, cargarlo desde BD Reserva
-                },
+                Id = int.Parse(pedidoXml.Attribute("Id")?.Value ?? "0"),
+                Fecha = DateTime.Parse(pedidoXml.Element("Fecha")?.Value ?? DateTime.MinValue.ToString()),
+                Estado = Enum.TryParse(pedidoXml.Element("Estado")?.Value, out BEPedido.EstadoPedido estado) ? estado : BEPedido.EstadoPedido.Abierto,
+                Reserva = oBLLReserva.ListarObjetoPorId(new BEReserva { Id = reservaId }),
+                Cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = int.Parse(pedidoXml.Element("ClienteId")?.Value ?? "0") }),
                 ListaPlatos = new List<BEPedidoPlato>()
             };
 
-            var platosXml = pedidoXml.Element("PedidoPlatos")?.Elements("pedidoPlato");
-            if (platosXml != null)
+            // Cargar platos
+            foreach (var pp in pedidoXml.Element("PedidoPlatos")?.Elements("pedidoPlato") ?? Enumerable.Empty<XElement>())
             {
-                MPPPlato mapperPlato = new MPPPlato();
-                foreach (var ppXml in platosXml)
-                {
-                    int platoId = int.Parse(ppXml.Element("PlatoId").Value.Trim());
-                    BEPlato plato = mapperPlato.ListarObjetoPorId(new BEPlato { Id = platoId });
+                int platoId = int.Parse(pp.Element("PlatoId")?.Value ?? "0");
+                BEPlato plato = oBLLPlato.ListarObjetoPorId(new BEPlato { Id = platoId });
 
-                    BEPedidoPlato pedidoPlato = new BEPedidoPlato
-                    {
-                        Plato = plato,
-                        Cantidad = int.Parse(ppXml.Element("Cantidad").Value.Trim()),
-                        Estado = (BEPedidoPlato.EstadoPlato)Enum.Parse(typeof(BEPedidoPlato.EstadoPlato), ppXml.Element("Estado").Value.Trim())
-                    };
-                    pedido.ListaPlatos.Add(pedidoPlato);
-                }
+                pedido.ListaPlatos.Add(new BEPedidoPlato
+                {
+                    Plato = plato,
+                    Cantidad = int.TryParse(pp.Element("Cantidad")?.Value, out int cant) ? cant : 0,
+                    Estado = Enum.TryParse(pp.Element("Estado")?.Value, out BEPedidoPlato.EstadoPlato ep) ? ep : BEPedidoPlato.EstadoPlato.Pendiente
+                });
             }
 
             return pedido;
         }
+
+
 
         public bool VerificarExistenciaObjeto(BEPedido oBEPedido)
         {
@@ -246,6 +305,54 @@ namespace Mapper
                    .Any(p => (int)p.Element("ReservaId") == oBEPedido.Reserva?.Id)
                    ?? false;
         }
+
+        public bool VerificarStockPedido(BEPedido pedido, out List<string> errores)
+        {
+            errores = new List<string>();
+            if (!File.Exists("BD.xml"))
+            {
+                errores.Add("No se encontró el archivo XML de stock de insumos.");
+                return false;
+            }
+
+            XDocument xml = XDocument.Load(ruta);
+
+            foreach (var plato in pedido.ListaPlatos)
+            {
+                var insumosPlatoXml = xml.Root.Element("PlatoInsumos")?
+                                        .Elements("PlatoInsumo")
+                                        .Where(p => (int)p.Element("IdPlato") == plato.Plato.Id);
+
+                if (insumosPlatoXml == null) continue;
+
+                foreach (var piXml in insumosPlatoXml)
+                {
+                    int idInsumo = (int)piXml.Element("IdInsumo");
+                    decimal cantidadNecesaria = decimal.Parse(piXml.Element("Cantidad").Value) * plato.Cantidad;
+
+                    var insumoXml = xml.Root.Element("Insumos")?
+                                        .Elements("insumo")
+                                        .FirstOrDefault(i => (int)i.Attribute("Id") == idInsumo);
+
+                    decimal stockDisponible = 0;
+                    string nombreInsumo = $"Id {idInsumo}";
+                    if (insumoXml != null)
+                    {
+                        nombreInsumo = insumoXml.Element("Nombre")?.Value ?? nombreInsumo;
+                        stockDisponible = decimal.Parse(insumoXml.Element("Cantidad").Value.Trim());
+                    }
+
+                    if (cantidadNecesaria > stockDisponible)
+                    {
+                       errores.Add($"No hay stock suficiente de {nombreInsumo}.\nNecesario: {cantidadNecesaria}.\nDisponible: {stockDisponible}\npara el plato: {plato.Plato.Nombre}");
+    
+                    }
+                }
+            }
+
+            return !errores.Any();
+        }
+
         public void DescontarStockInsumos(BEPedido pedido)
         {
             if (pedido == null || pedido.ListaPlatos == null) return;
@@ -291,6 +398,33 @@ namespace Mapper
 
                 if (pedidoPlatoXml != null)
                     pedidoPlatoXml.SetElementValue("Estado", pedidoPlato.Estado.ToString());
+            }
+
+            xml.Save("BD.xml");
+        }
+        public void ReponerStockInsumos(BEPedidoPlato pedidoPlato)
+        {
+            if (pedidoPlato?.Plato?.ListaInsumos == null || !File.Exists("BD.xml"))
+                return;
+
+            XDocument xml = XDocument.Load("BD.xml");
+
+            foreach (var platoInsumo in pedidoPlato.Plato.ListaInsumos)
+            {
+                int idInsumo = platoInsumo.Insumo.Id;
+                decimal cantidadReponer = platoInsumo.Cantidad * pedidoPlato.Cantidad;
+
+                // Buscar insumo en XML
+                var insumoXml = xml.Root.Element("Insumos")?
+                                    .Elements("insumo")
+                                    .FirstOrDefault(i => (int)i.Attribute("Id") == idInsumo);
+
+                if (insumoXml != null)
+                {
+                    decimal cantidadActual = decimal.Parse(insumoXml.Element("Cantidad").Value.Trim());
+                    cantidadActual += cantidadReponer;
+                    insumoXml.Element("Cantidad").SetValue(cantidadActual.ToString("0.##"));
+                }
             }
 
             xml.Save("BD.xml");

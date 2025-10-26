@@ -279,7 +279,6 @@ namespace Mapper
         {
             try
             {
-                // Verifico la existencia del XML de reservas
                 if (!CrearXML())
                     throw new XmlException("Error: No se pudo recuperar o crear el XML de reservas.");
 
@@ -289,31 +288,35 @@ namespace Mapper
 
                 List<BEReserva> listaReservas = new List<BEReserva>();
 
-                // 🔹 Busco solo las reservas que coincidan con la fecha indicada
                 var lista = from r in BDXML.Root.Element("Reservas").Elements("reserva")
-                            where DateTime.Parse(r.Element("FechaReserva").Value.Trim()).Date == fecha.Date
+                            let fechaStr = r.Element("FechaReserva")?.Value.Trim() ?? ""
+                            let fechaR = DateTime.TryParse(fechaStr, out DateTime fr) ? fr : DateTime.MinValue
+                            where fechaR.Date == fecha.Date
                             select new BEReserva
                             {
-                                Id = int.Parse(r.Attribute("Id").Value.Trim()),
-                                NumeroReserva = r.Element("NumeroReserva").Value.Trim(),
-                                FechaReserva = DateTime.Parse(r.Element("FechaReserva").Value.Trim()),
-                                CantidadPersonas = int.Parse(r.Element("CantidadPersonas").Value.Trim()),
+                                Id = int.TryParse(r.Attribute("Id")?.Value.Trim(), out int id) ? id : 0,
+                                NumeroReserva = r.Element("NumeroReserva")?.Value.Trim() ?? "",
+                                FechaReserva = fechaR,
+                                CantidadPersonas = int.TryParse(r.Element("CantidadPersonas")?.Value.Trim(), out int cp) ? cp : 0,
 
-                                Cliente = new BECliente
-                                {
-                                    IdCliente = int.Parse(r.Element("Cliente").Attribute("IdCliente").Value.Trim()),
-                                    Nombre = r.Element("Cliente").Element("Nombre").Value.Trim()
-                                },
+                                Cliente = r.Element("Cliente") != null
+                                    ? new BECliente
+                                    {
+                                        IdCliente = int.TryParse(r.Element("Cliente").Attribute("IdCliente")?.Value.Trim(), out int cid) ? cid : 0,
+                                        Nombre = r.Element("Cliente").Element("Nombre")?.Value.Trim() ?? ""
+                                    }
+                                    : new BECliente(), // crea un cliente aunque falte
 
-                                Mesa = new BEMesa
-                                {
-                                    IdMesa = int.Parse(r.Element("Mesa").Attribute("IdMesa").Value.Trim()),
-                                    NumeroMesa = int.Parse(r.Element("Mesa").Element("NumeroMesa").Value.Trim())
-                                }
+                                Mesa = r.Element("Mesa") != null
+                                    ? new BEMesa
+                                    {
+                                        IdMesa = int.TryParse(r.Element("Mesa").Attribute("IdMesa")?.Value.Trim(), out int mid) ? mid : 0,
+                                        NumeroMesa = int.TryParse(r.Element("Mesa").Element("NumeroMesa")?.Value.Trim(), out int num) ? num : 0
+                                    }
+                                    : new BEMesa() // crea una mesa aunque falte
                             };
 
                 listaReservas = lista.ToList();
-
                 return listaReservas;
             }
             catch (XmlException ex) { throw ex; }
@@ -325,7 +328,6 @@ namespace Mapper
         {
             try
             {
-                // Verifico la existencia del XML de reservas
                 if (!CrearXML())
                     throw new XmlException("Error: No se pudo recuperar o crear el XML de reservas.");
 
@@ -336,30 +338,38 @@ namespace Mapper
                 List<BEReserva> listaReservas = new List<BEReserva>();
 
                 var lista = from r in BDXML.Root.Element("Reservas").Elements("reserva")
+                            let fechaReservaStr = r.Element("FechaReserva")?.Value.Trim() ?? ""
                             select new BEReserva
                             {
-                                Id = int.Parse(r.Attribute("Id").Value.Trim()),
-                                NumeroReserva = r.Element("NumeroReserva").Value.Trim(),
-                                FechaReserva = DateTime.Parse(r.Element("FechaReserva").Value.Trim()),
-                                CantidadPersonas = int.Parse(r.Element("CantidadPersonas").Value.Trim()),
-                                Cliente = new BECliente
-                                {
-                                    IdCliente = int.Parse(r.Element("Cliente").Attribute("IdCliente").Value.Trim()),
-                                    Nombre = r.Element("Cliente").Element("Nombre").Value.Trim()
-                                },
-                                Mesa = new BEMesa
-                                {
-                                    IdMesa = int.Parse(r.Element("Mesa").Attribute("IdMesa").Value.Trim()),
-                                    NumeroMesa = int.Parse(r.Element("Mesa").Element("NumeroMesa").Value.Trim())
-                                }
+                                Id = int.TryParse(r.Attribute("Id")?.Value.Trim(), out int id) ? id : 0,
+                                NumeroReserva = r.Element("NumeroReserva")?.Value.Trim() ?? "",
+                                FechaReserva = DateTime.TryParse(fechaReservaStr, out DateTime fecha) ? fecha : DateTime.MinValue,
+                                CantidadPersonas = int.TryParse(r.Element("CantidadPersonas")?.Value.Trim(), out int cp) ? cp : 0,
+
+                                Cliente = r.Element("Cliente") != null
+                                    ? new BECliente
+                                    {
+                                        IdCliente = int.TryParse(r.Element("Cliente").Attribute("IdCliente")?.Value.Trim(), out int cid) ? cid : 0,
+                                        Nombre = r.Element("Cliente").Element("Nombre")?.Value.Trim() ?? ""
+                                    }
+                                    : new BECliente(),
+
+                                Mesa = r.Element("Mesa") != null
+                                    ? new BEMesa
+                                    {
+                                        IdMesa = int.TryParse(r.Element("Mesa").Attribute("IdMesa")?.Value.Trim(), out int mid) ? mid : 0,
+                                        NumeroMesa = int.TryParse(r.Element("Mesa").Element("NumeroMesa")?.Value.Trim(), out int num) ? num : 0
+                                    }
+                                    : new BEMesa()
                             };
 
                 listaReservas = lista.ToList();
                 return listaReservas;
             }
             catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { throw new Exception("Error al listar todas las reservas: " + ex.Message, ex); }
         }
+
 
 
         public int ObtenerUltimoIdReserva()

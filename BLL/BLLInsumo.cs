@@ -18,7 +18,12 @@ namespace BLL
 
         public bool Guardar(BEInsumo oBEInsumo) { return oMPPInsumo.Guardar(oBEInsumo); }
 
+        public BEInsumo ListarObjetoPorId(int idInsumo)
+        {
+            return oMPPInsumo.ListarObjetoPorId(idInsumo);
+        }
         public BEInsumo ListarObjeto(BEInsumo oBEInsumo) { return oMPPInsumo.ListarObjeto(oBEInsumo); }
+       
 
         public List<BEInsumo> ListarTodo() { return oMPPInsumo.ListarTodo(); }
 

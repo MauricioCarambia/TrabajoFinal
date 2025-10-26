@@ -45,6 +45,7 @@
             platosToolStripMenuItem = new ToolStripMenuItem();
             pedidosToolStripMenuItem = new ToolStripMenuItem();
             cargarPedidoToolStripMenuItem = new ToolStripMenuItem();
+            verPedidosToolStripMenuItem = new ToolStripMenuItem();
             cocinaToolStripMenuItem = new ToolStripMenuItem();
             pedidosToolStripMenuItem1 = new ToolStripMenuItem();
             usuariosToolStripMenuItem = new ToolStripMenuItem();
@@ -61,7 +62,6 @@
             haverRestoreToolStripMenuItem = new ToolStripMenuItem();
             dashBoardToolStripMenuItem = new ToolStripMenuItem();
             verToolStripMenuItem = new ToolStripMenuItem();
-            verPedidosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -185,6 +185,13 @@
             cargarPedidoToolStripMenuItem.Text = "Cargar Pedido";
             cargarPedidoToolStripMenuItem.Click += cargarPedidoToolStripMenuItem_Click;
             // 
+            // verPedidosToolStripMenuItem
+            // 
+            verPedidosToolStripMenuItem.Name = "verPedidosToolStripMenuItem";
+            verPedidosToolStripMenuItem.Size = new Size(180, 22);
+            verPedidosToolStripMenuItem.Text = "Ver Pedidos";
+            verPedidosToolStripMenuItem.Click += verPedidosToolStripMenuItem_Click;
+            // 
             // cocinaToolStripMenuItem
             // 
             cocinaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pedidosToolStripMenuItem1 });
@@ -292,12 +299,6 @@
             verToolStripMenuItem.Size = new Size(135, 22);
             verToolStripMenuItem.Text = "Ver Informe";
             verToolStripMenuItem.Click += verToolStripMenuItem_Click;
-            // 
-            // verPedidosToolStripMenuItem
-            // 
-            verPedidosToolStripMenuItem.Name = "verPedidosToolStripMenuItem";
-            verPedidosToolStripMenuItem.Size = new Size(180, 22);
-            verPedidosToolStripMenuItem.Text = "Ver Pedidos";
             // 
             // frmMDI
             // 

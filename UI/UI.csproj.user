@@ -49,6 +49,9 @@
     <Compile Update="frmMesas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmPlatos.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -186,6 +186,38 @@ namespace Mapper
             catch (XmlException ex) { throw ex; }
             catch (Exception ex) { throw ex; }
         }
+        public BEInsumo ListarObjetoPorId(int idInsumo)
+        {
+            try
+            {
+                // Cargar XML
+                XDocument xml = XDocument.Load(ruta); // rutaInsumos es la ruta a tu XML de insumos
+
+                // Buscar el insumo por Id
+                var elemento = xml.Root.Elements("insumo")
+                    .FirstOrDefault(x => (int)x.Attribute("Id") == idInsumo);
+
+                if (elemento == null)
+                    return null;
+
+                // Mapear a BEInsumo
+                BEInsumo insumo = new BEInsumo
+                {
+                    Id = (int)elemento.Attribute("Id"),
+                    Nombre = (string)elemento.Element("Nombre"),
+                    UnidadMedida = Enum.Parse<UnidadesMedida>((string)elemento.Element("UnidadMedida")),
+                    Cantidad = decimal.Parse((string)elemento.Element("Cantidad")), // usar decimal si es necesario
+                    Precio = decimal.Parse((string)elemento.Element("Precio"))
+                };
+
+                return insumo;
+            }
+            catch
+            {
+                return null; // En caso de error
+            }
+        }
+       
         public BEInsumo ListarObjeto(BEInsumo oBEInsumo)
         {
             try
