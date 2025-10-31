@@ -16,5 +16,30 @@
       <Fecha_Registro>23/10/2025 11:38:46</Fecha_Registro>
       <usuario Id="1" />
     </bitacora>
+    <bitacora Id="4">
+      <Detalle>restore</Detalle>
+      <Fecha_Registro>26/10/2025 23:14:49</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
+    <bitacora Id="5">
+      <Detalle>restore</Detalle>
+      <Fecha_Registro>26/10/2025 23:58:01</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
+    <bitacora Id="6">
+      <Detalle>backup</Detalle>
+      <Fecha_Registro>27/10/2025 00:00:33</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
+    <bitacora Id="7">
+      <Detalle>backup</Detalle>
+      <Fecha_Registro>28/10/2025 21:01:35</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
+    <bitacora Id="8">
+      <Detalle>restore</Detalle>
+      <Fecha_Registro>30/10/2025 11:50:25</Fecha_Registro>
+      <usuario Id="1" />
+    </bitacora>
   </Bitacoras>
 </Root>

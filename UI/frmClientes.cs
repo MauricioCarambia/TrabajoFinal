@@ -36,7 +36,7 @@ namespace UI
 
                 if (oBECliente != null)
                 {
-                    if (oBECliente.IdCliente == 0)
+                    if (oBECliente.Id == 0)
                     {
                         // Guardar nueva Cliente
                         oBLLCliente.Guardar(oBECliente);
@@ -78,7 +78,7 @@ namespace UI
                     oBECliente = ValidarDatos();
                     if (oBECliente != null)
                     {
-                        if (oBECliente.IdCliente > 0)
+                        if (oBECliente.Id > 0)
                         {
 
                             oBLLCliente.Guardar(oBECliente);
@@ -135,7 +135,7 @@ namespace UI
                     oBECliente = ValidarDatos();
                     if (oBECliente != null)
                     {
-                        if (oBECliente.IdCliente > 0)
+                        if (oBECliente.Id > 0)
                         {
 
 
@@ -198,7 +198,7 @@ namespace UI
                 BECliente oBECliente = new BECliente();
 
                 // Si el campo de ID tiene valor, se asigna
-                oBECliente.IdCliente = string.IsNullOrWhiteSpace(txtIDCliente.Text) ? 0 : int.Parse(txtIDCliente.Text.Trim());
+                oBECliente.Id = string.IsNullOrWhiteSpace(txtIDCliente.Text) ? 0 : int.Parse(txtIDCliente.Text.Trim());
                 oBECliente.Nombre = txtNombre.Text.Trim();
                 oBECliente.DNI = txtDNI.Text.Trim();
                 oBECliente.Telefono = txtTelefono.Text.Trim();
@@ -218,7 +218,7 @@ namespace UI
                 oBECliente = (BECliente)dgvClientes.CurrentRow.DataBoundItem;
                 if (oBECliente != null)
                 {
-                    txtIDCliente.Text = oBECliente.IdCliente.ToString().Trim();
+                    txtIDCliente.Text = oBECliente.Id.ToString().Trim();
                     txtNombre.Text = oBECliente.Nombre.ToString().Trim();
                     txtDNI.Text = oBECliente.DNI.ToString().Trim();
                     txtTelefono.Text = oBECliente.Telefono.ToString().Trim();
@@ -260,7 +260,7 @@ namespace UI
 
                         if (clienteEncontrado != null)
                         {
-                            txtIDCliente.Text = clienteEncontrado.IdCliente.ToString();
+                            txtIDCliente.Text = clienteEncontrado.Id.ToString();
                             txtNombre.Text = clienteEncontrado.Nombre;
                             txtTelefono.Text = clienteEncontrado.Telefono;
                         }

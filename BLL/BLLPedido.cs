@@ -11,16 +11,34 @@ namespace BLL
     public class BLLPedido
     {
         private MPPPedido oMPPPedido = new MPPPedido();
+        private MPPReserva oMPPReserva = new MPPReserva();
+        private BLLMesa oBLLMesa = new BLLMesa();
 
         public bool CrearXML() { throw new NotImplementedException(); }
 
-        //public void Eliminar(BEPedido oBEPedido) { oMPPPedido.Eliminar(oBEPedido); }
+        public void EliminarPlato(BEPedido pedido, BEPedidoPlato plato, int cantidadAEliminar)
+        {
+            if (pedido == null || plato == null || cantidadAEliminar <= 0)
+                return;
+
+            // 1️⃣ Reponer stock proporcional
+            BEPedidoPlato platoTemporal = new BEPedidoPlato
+            {
+                Plato = plato.Plato,
+                Cantidad = cantidadAEliminar
+            };
+            MPPPedido mpp = new MPPPedido();
+            mpp.ReponerStockInsumos(platoTemporal);
+
+            // 2️⃣ Eliminar plato del XML (total o parcial)
+            mpp.EliminarPlato(pedido.Id, plato.Id, cantidadAEliminar);
+        }
 
         public void Guardar(BEPedido oBEPedido) { oMPPPedido.Guardar(oBEPedido); }
 
         //public BEPedido ListarObjeto(BEPedido oBEPedido) { return oMPPPedido.ListarObjeto(oBEPedido); }
 
-        public BEPedido ListarObjetoPorId(BEPedido oBEPedido) { return oMPPPedido.ListarObjetoPorId(oBEPedido); }
+        public BEPedido ListarObjetoPorId(int pedidoId) { return oMPPPedido.ListarObjetoPorId(pedidoId); }
         public void DescontarStockInsumos(BEPedido oBEPedido)
         {
             oMPPPedido.DescontarStockInsumos(oBEPedido);
@@ -73,9 +91,47 @@ namespace BLL
 
             return errores; // vacía si todo salió bien
         }
+        public List<BEPedido> ListarPedidosPorFecha(DateTime fecha)
+        {
+            var pedidos = oMPPPedido.ListarPedidosPorFecha(fecha); // Obtener todos los pedidos de ese día
+
+            foreach (var pedido in pedidos)
+            {
+                if (pedido.Reserva != null)
+                {
+                    // El cliente ya viene de la reserva
+                    pedido.Cliente = pedido.Reserva.Cliente;
+
+                    // La mesa también viene de la reserva
+                    pedido.Reserva.Mesa = pedido.Reserva.Mesa ?? oBLLMesa.ListarObjetoPorNumeroMesa(
+                        new BEMesa { NumeroMesa = pedido.Reserva.Mesa?.NumeroMesa ?? 0 });
+                }
+            }
+
+            return pedidos;
+        }
         public BEPedido ListarPorReserva(int reservaId)
         {
-            return oMPPPedido.ListarPorReserva(reservaId);
+            var pedido = oMPPPedido.ListarPorReserva(reservaId);
+            if (pedido == null)
+                return null;
+
+            BLLReserva oBLLReserva = new BLLReserva();
+            // Traer la reserva completa
+            pedido.Reserva = oBLLReserva.ListarObjetoPorId(pedido.Reserva);
+
+            // Traer el cliente completo
+            BLLCliente oBLLCliente = new BLLCliente();
+            pedido.Cliente = oBLLCliente.ListarObjetoPorId(pedido.Cliente);
+
+            // Traer los platos completos
+            foreach (var item in pedido.ListaPlatos)
+            {
+                BLLPlato oBLLPlato = new BLLPlato();
+                item.Plato = oBLLPlato.ListarObjetoPorId(item.Plato);
+            }
+
+            return pedido;
         }
 
         public List<BEPedido> ListarTodo() { return oMPPPedido.ListarTodo(); }
@@ -85,6 +141,55 @@ namespace BLL
         public decimal CalcularTotal(BEPedido pedido)
         {
             return pedido.ListaPlatos.Sum(p => (p.Plato?.PrecioVenta ?? 0) * p.Cantidad);
+        }
+        // Traer platos pendientes o en preparación
+        //public List<BEPedidoPlato> ObtenerPlatosPendientes()
+        //{
+        //    return oMPPPedido.ListarPlatosPorEstado("Pendiente");
+        //}
+
+        //// Traer platos terminados
+        public List<BEPedidoPlato> ObtenerPlatosTerminados()
+        {
+            return oMPPPedido.ObtenerPlatosPorEstado("Terminado");
+        }
+
+        // Método genérico si querés filtrar por cualquier estado
+        public List<BEPedidoPlato> ObtenerPlatosPorEstado(string estado)
+        {
+            return oMPPPedido.ObtenerPlatosPorEstado(estado);
+        }
+        public void CambiarEstadoPlato(int idPedido, int idPedidoPlato, BEPedidoPlato.EstadoPlato nuevoEstado)
+        {
+            if (idPedido <= 0 || idPedidoPlato <= 0)
+                throw new ArgumentException("Id de pedido o plato inválido.");
+
+            // Llamada al MPP para que modifique el XML
+            oMPPPedido.CambiarEstadoPlato(idPedido, idPedidoPlato, nuevoEstado);
+        }
+        public void EnviarPlatosACocina(int pedidoId)
+        {
+            try
+            {
+                oMPPPedido.EnviarPlatosACocina(pedidoId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al enviar platos a cocina: {ex.Message}");
+            }
+        }
+        public void CambiarEstadoPedido(int idPedido, BEPedido.EstadoPedido nuevoEstado)
+        {
+            if (idPedido <= 0) throw new ArgumentException("Id de pedido inválido.");
+
+            oMPPPedido.CambiarEstadoPedido(idPedido, nuevoEstado);
+        }
+        public void EnviarPedidoACobranza(int pedidoId)
+        {
+            if (pedidoId <= 0)
+                throw new Exception("Pedido inválido.");
+
+            oMPPPedido.EnviarPedidoACobranza(pedidoId);
         }
     }
 }

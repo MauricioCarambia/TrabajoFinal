@@ -25,6 +25,7 @@ namespace UI
         BEPedido oBEPedido;
         BLLPedido oBLLPedido;
         BLLInsumo oBLLInsumo;
+        BLLMesa oBLLMesa;
         public frmCargarPedido()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace UI
             oBEPedido = new BEPedido();
             oBLLPedido = new BLLPedido();
             oBLLInsumo = new BLLInsumo();
+            oBLLMesa = new BLLMesa();
         }
 
         private void frmCargarPedido_Load(object sender, EventArgs e)
@@ -145,6 +147,7 @@ namespace UI
 
                 int reservaId = Convert.ToInt32(cmbReservas.SelectedValue);
 
+                // Traigo la reserva completa
                 BEReserva reserva = oBLLReserva.ListarObjetoPorId(new BEReserva { Id = reservaId });
                 if (reserva == null) return;
 
@@ -152,10 +155,10 @@ namespace UI
                 txtCliente.Text = reserva.Cliente?.Nombre ?? "";
                 txtMesa.Text = reserva.Mesa?.NumeroMesa.ToString() ?? "";
 
-                // 👉 Verificar si ya hay un pedido activo para esta reserva
+                // Verificar si ya hay un pedido activo para esta reserva
                 if (oBEPedido == null || oBEPedido.Reserva == null || oBEPedido.Reserva.Id != reservaId)
                 {
-                    // Intentar traer pedido existente de la base (si lo guardás en XML)
+                    // Intentar traer pedido existente de la base (XML o DB)
                     var pedidoExistente = oBLLPedido.ListarPorReserva(reservaId);
 
                     if (pedidoExistente != null && pedidoExistente.ListaPlatos.Count > 0)
@@ -174,13 +177,56 @@ namespace UI
                     }
                 }
 
-
-                // ⚠️ NO limpiar dgv si el pedido ya tiene platos
+                // Actualizo el DataGridView con los platos de la reserva
                 ActualizarDgvPedidos();
+
+                // Si querés, podés separar la carga de los platos de la reserva en otro dgv
+                CargarPlatosReserva(reservaId);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar reserva: " + ex.Message);
+            }
+        }
+        private void CargarPlatosReserva(int reservaId)
+        {
+            try
+            {
+                dgvPedidos.Rows.Clear();
+                dgvPedidos.Columns.Clear();
+
+                dgvPedidos.Columns.Add("IdPlato", "ID");
+                dgvPedidos.Columns["IdPlato"].Visible = false;
+
+                dgvPedidos.Columns.Add("Nombre", "Nombre");
+                dgvPedidos.Columns.Add("Cantidad", "Cantidad");
+                dgvPedidos.Columns.Add("PrecioUnitario", "Precio Unitario");
+                dgvPedidos.Columns.Add("Subtotal", "Subtotal");
+                dgvPedidos.Columns.Add("Estado", "Estado");
+
+                if (oBEPedido == null || oBEPedido.ListaPlatos.Count == 0)
+                    return;
+
+                foreach (var platoPedido in oBEPedido.ListaPlatos)
+                {
+                    decimal subtotal = platoPedido.Cantidad * platoPedido.Plato.PrecioVenta;
+
+                    dgvPedidos.Rows.Add(
+                        platoPedido.Plato.Id,
+                        platoPedido.Plato.Nombre,
+                        platoPedido.Cantidad,
+                        platoPedido.Plato.PrecioVenta.ToString("C2"),
+                        subtotal.ToString("C2"),
+                        platoPedido.Estado.ToString()
+                    );
+                }
+
+                dgvPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvPedidos.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los platos de la reserva: " + ex.Message);
             }
         }
         private bool ValidarAgregarPlato(out int cantidad)
@@ -220,6 +266,20 @@ namespace UI
         {
             try
             {
+                // 0️⃣ Validar que el pedido no esté cerrado
+                if (oBEPedido.Estado == BEPedido.EstadoPedido.Cerrado)
+                {
+                    MessageBox.Show("No se pueden agregar más platos a un pedido cerrado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 0️⃣a Validar que la reserva no esté cerrada
+                if (oBEPedido.Reserva != null && oBEPedido.Reserva.Estado == BEReserva.EstadoReserva.Cerrada)
+                {
+                    MessageBox.Show("No se pueden agregar platos a un pedido cuya reserva esté cerrada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // 1️⃣ Verificar selección de plato
                 if (dgvPlatos.SelectedRows.Count == 0)
                 {
@@ -249,13 +309,11 @@ namespace UI
                 // 4️⃣ Obtener insumos del plato
                 List<BEPlatoInsumo> insumosPlato = oBLLPlato.ListarInsumosPorPlato(plato.Id);
 
-                // 5️⃣ Validar stock disponible de todos los insumos
+                // 5️⃣ Validar stock disponible
                 foreach (var insumoPlato in insumosPlato)
                 {
                     BEInsumo insumo = oBLLInsumo.ListarObjetoPorId(insumoPlato.Id);
-
                     decimal stockRestante = insumo.Cantidad - (insumoPlato.Cantidad * cantidad);
-
                     if (stockRestante < 0)
                     {
                         MessageBox.Show($"No hay suficiente stock de {insumo.Nombre}. Stock disponible: {insumo.Cantidad}, requerido: {insumoPlato.Cantidad * cantidad}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -263,30 +321,28 @@ namespace UI
                     }
                 }
 
-                // 6️⃣ Descontar stock de los insumos
+                // 6️⃣ Descontar stock
                 foreach (var insumoPlato in insumosPlato)
                 {
                     BEInsumo insumo = oBLLInsumo.ListarObjetoPorId(insumoPlato.Id);
                     insumo.Cantidad -= insumoPlato.Cantidad * cantidad;
-                    oBLLInsumo.Guardar(insumo); // Guardar cambios en XML o DB
+                    oBLLInsumo.Guardar(insumo);
                 }
 
                 // 7️⃣ Verificar si ya existe un plato pendiente del mismo tipo
-                var existente = oBEPedido.ListaPlatos
-                    .FirstOrDefault(p => p.Plato.Id == plato.Id && p.Estado == BEPedidoPlato.EstadoPlato.Pendiente);
-
+                var existente = oBEPedido.ListaPlatos.FirstOrDefault(p => p.Plato.Id == plato.Id && p.Estado == BEPedidoPlato.EstadoPlato.Cargado);
                 if (existente != null)
                 {
                     existente.Cantidad += cantidad;
                 }
                 else
                 {
-                    // 8️⃣ Agregar nuevo plato pendiente
+                    // 8️⃣ Agregar nuevo plato Cargado
                     oBEPedido.ListaPlatos.Add(new BEPedidoPlato
                     {
                         Plato = plato,
                         Cantidad = cantidad,
-                        Estado = BEPedidoPlato.EstadoPlato.Pendiente
+                        Estado = BEPedidoPlato.EstadoPlato.Cargado
                     });
                 }
 
@@ -363,9 +419,9 @@ namespace UI
                 var platoEliminar = oBEPedido.ListaPlatos[dgvPedidos.CurrentRow.Index];
 
                 // Solo eliminar si está pendiente
-                if (platoEliminar.Estado != BEPedidoPlato.EstadoPlato.Pendiente)
+                if (platoEliminar.Estado != BEPedidoPlato.EstadoPlato.Cargado)
                 {
-                    MessageBox.Show("Solo se pueden eliminar platos pendientes.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Solo se pueden eliminar platos Cargado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -413,24 +469,32 @@ namespace UI
         {
             try
             {
-                // Filtrar platos pendientes
+                // 🔹 Verificar si el pedido está cerrado
+                if (oBEPedido.Estado == BEPedido.EstadoPedido.Cerrado)
+                {
+                    MessageBox.Show("No se pueden agregar ni confirmar platos en un pedido cerrado.",
+                                    "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Filtrar platos cargados
                 var platosPendientes = oBEPedido.ListaPlatos
-                    .Where(p => p.Estado == BEPedidoPlato.EstadoPlato.Pendiente)
+                    .Where(p => p.Estado == BEPedidoPlato.EstadoPlato.Cargado)
                     .ToList();
 
                 if (!platosPendientes.Any())
                 {
-                    MessageBox.Show("No hay platos pendientes para confirmar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No hay platos cargados para confirmar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                // Creamos un pedido temporal con solo los pendientes
+                // Crear pedido temporal con los platos pendientes
                 BEPedido pedidoTemporal = new BEPedido
                 {
                     ListaPlatos = platosPendientes
                 };
 
-                // ✅ Llamada a la BLL para confirmar pedido
+                // ✅ Confirmar pedido
                 List<string> errores = oBLLPedido.ConfirmarPedido(pedidoTemporal, oBEPedido);
 
                 if (errores.Count > 0)
@@ -439,8 +503,27 @@ namespace UI
                     return;
                 }
 
+                // 🔹 Cambiar estado de mesa a ocupada si tiene reserva
+                if (oBEPedido.Reserva != null && oBEPedido.Reserva.Mesa != null)
+                {
+                    int idMesa = oBEPedido.Reserva.Mesa.IdMesa;
+                    oBLLMesa.ActualizarEstadoMesa(idMesa, BEMesa.EstadoMesa.Ocupada);
+                }
+
+                // 🔹 Actualizar grilla de pedidos
                 ActualizarDgvPedidos();
-                MessageBox.Show("Pedido confirmado y stock descontado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 🔹 Limpiar lista de platos confirmados
+                foreach (var plato in platosPendientes)
+                {
+                    oBEPedido.ListaPlatos.Remove(plato);
+                }
+
+                dgvPedidos.DataSource = null;
+                txtTotal.Clear();
+
+                MessageBox.Show("Pedido confirmado, stock descontado y mesa marcada como ocupada.",
+                                "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

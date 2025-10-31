@@ -189,7 +189,9 @@ namespace UI
 
         private void cobrarPedidoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmCobrarPedido frm = new frmCobrarPedido();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
         }
 
         private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -242,6 +244,13 @@ namespace UI
         private void verPedidosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPedidos frm = new frmPedidos();
+            frm.MdiParent = this;   // le decís que el padre es el MDI actual
+            frm.Show();
+        }
+
+        private void registrarPromocionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPromociones frm = new frmPromociones();
             frm.MdiParent = this;   // le decís que el padre es el MDI actual
             frm.Show();
         }

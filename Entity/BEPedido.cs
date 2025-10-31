@@ -14,14 +14,15 @@ namespace Entity
         public List<BEPedidoPlato> ListaPlatos { get; set; } = new List<BEPedidoPlato>();
         public EstadoPedido Estado { get; set; } = EstadoPedido.Abierto;
         public DateTime Fecha { get; set; }
-
+        public decimal Total { get; set; }
         public enum EstadoPedido
         {
             Abierto,
-            Cerrado
+            Cerrado,
+            Cobrado
         }
 
         // Precio total calculado automáticamente
-        public decimal Total => ListaPlatos.Sum(p => p.Subtotal);
+        //public decimal Total => ListaPlatos.Sum(p => p.Subtotal);
     }
 }

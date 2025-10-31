@@ -11,11 +11,14 @@ namespace Entity
         public int Id { get; set; }
         public BEPlato Plato { get; set; }
         public int Cantidad { get; set; }
+        public int IdPedido { get; set; }
 
-        public EstadoPlato Estado { get; set; } = EstadoPlato.Pendiente;
+
+        public EstadoPlato Estado { get; set; }
         public enum EstadoPlato
         {
             Confirmado,
+            Cargado,
             Pendiente,
             Preparacion,
             Terminado,
@@ -23,6 +26,6 @@ namespace Entity
         }
 
         // Precio total del plato en el pedido
-        public decimal Subtotal => Plato.PrecioVenta * Cantidad;
+        public decimal Subtotal => Cantidad * (Plato?.PrecioVenta ?? 0);
     }
 }

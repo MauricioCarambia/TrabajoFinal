@@ -465,7 +465,23 @@ namespace Mapper
             catch (Exception ex) { throw ex; }
         }
 
+        public void ActualizarEstadoMesa(int idMesa, BEMesa.EstadoMesa nuevoEstado)
+        {
+            if (!CrearXML())
+                throw new Exception("No se pudo cargar el XML de mesas.");
 
+            XDocument BDXML = XDocument.Load(ruta);
+
+            var mesa = BDXML.Descendants("mesa")
+                            .FirstOrDefault(m => int.Parse(m.Attribute("IdMesa").Value) == idMesa);
+
+            if (mesa == null)
+                throw new Exception($"No se encontró la mesa con Id {idMesa}.");
+
+            mesa.Element("Estado").Value = nuevoEstado.ToString();
+
+            BDXML.Save(ruta);
+        }
 
     }
 }

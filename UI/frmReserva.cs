@@ -52,7 +52,7 @@ namespace UI
             if (!int.TryParse(txtIdCliente.Text.Trim(), out int idCliente))
                 throw new Exception("Debe seleccionar un cliente válido.");
 
-            var cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = idCliente });
+            var cliente = oBLLCliente.ListarObjetoPorId(new BECliente { Id = idCliente });
             if (cliente == null)
                 throw new Exception("Cliente no encontrado.");
 
@@ -104,14 +104,16 @@ namespace UI
                     Margin = new Padding(8)
                 };
 
+                // 🔹 Buscar si hay una reserva para esta mesa
                 var reservaMesa = reservasDelDia.FirstOrDefault(r => r.Mesa.IdMesa == mesa.IdMesa);
 
-                if (reservaMesa != null)
-                    btnMesa.BackColor = Color.Goldenrod; // reservada
-                else if (mesa.Estado == BEMesa.EstadoMesa.Ocupada)
-                    btnMesa.BackColor = Color.IndianRed; // ocupada
+                // 🔹 Definir color según estado
+                if (mesa.Estado == BEMesa.EstadoMesa.Ocupada)
+                    btnMesa.BackColor = Color.IndianRed;         // Ocupada → rojo
+                else if (reservaMesa != null)
+                    btnMesa.BackColor = Color.Goldenrod;         // Reservada → amarillo
                 else
-                    btnMesa.BackColor = Color.LightGreen; // libre
+                    btnMesa.BackColor = Color.LightGreen;
 
                 btnMesa.Click += BtnMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
@@ -209,7 +211,7 @@ namespace UI
 
             if (clienteEncontrado != null)
             {
-                txtIdCliente.Text = clienteEncontrado.IdCliente.ToString();
+                txtIdCliente.Text = clienteEncontrado.Id.ToString();
                 txtNombre.Text = clienteEncontrado.Nombre;
                 txtTelefono.Text = clienteEncontrado.Telefono;
             }
@@ -284,7 +286,7 @@ namespace UI
 
         private void ValidarClienteSinReserva(BEReserva reserva, DateTime fecha)
         {
-            var reservaCliente = reservasDelDia.FirstOrDefault(r => r.Cliente.IdCliente == reserva.Cliente.IdCliente);
+            var reservaCliente = reservasDelDia.FirstOrDefault(r => r.Cliente.Id == reserva.Cliente.Id);
             if (reservaCliente != null)
                 throw new Exception($"El cliente {reserva.Cliente.Nombre} ya tiene una reserva para esta fecha.");
         }
@@ -373,5 +375,7 @@ namespace UI
         {
             this.Close();
         }
+
+        
     }
 }

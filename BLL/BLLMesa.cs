@@ -30,7 +30,13 @@ namespace BLL
 
         public bool VerificarExistenciaObjeto(BEMesa objeto) { throw new NotImplementedException(); }
 
+        public void ActualizarEstadoMesa(int idMesa, BEMesa.EstadoMesa nuevoEstado)
+        {
+            if (idMesa <= 0)
+                throw new ArgumentException("El Id de mesa no es válido.");
 
+            oMPPMesa.ActualizarEstadoMesa(idMesa, nuevoEstado);
+        }
 
 
 

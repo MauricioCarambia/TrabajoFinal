@@ -13,7 +13,15 @@ namespace Entity
         public DateTime FechaReserva { get; set; } 
         public BECliente Cliente { get; set; }      
         public int CantidadPersonas { get; set; }   
-        public BEMesa Mesa { get; set; }             
-        
+        public BEMesa Mesa { get; set; }
+        public EstadoReserva Estado { get; set; } = EstadoReserva.Abierta;
+
+        public enum EstadoReserva
+        {
+            Abierta,
+            Cerrada,
+            Finalizada
+        }
+
     }
 }

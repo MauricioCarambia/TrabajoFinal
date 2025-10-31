@@ -65,7 +65,7 @@ namespace Mapper
                     {
                         // Busco al cliente por su Id:
                         var buscarCliente = from cliente in BDXML.Root.Element("Clientes").Descendants("cliente")
-                                            where cliente.Attribute("IdCliente").Value.Trim() == oBECliente.IdCliente.ToString().Trim()
+                                            where cliente.Attribute("Id").Value.Trim() == oBECliente.Id.ToString().Trim()
                                             select cliente;
 
                         // Verifico si se encontró el cliente:
@@ -114,18 +114,18 @@ namespace Mapper
                         if (oBECliente != null)
                         {
                             // Si es un cliente nuevo (sin Id)
-                            if (oBECliente.IdCliente == 0)
+                            if (oBECliente.Id == 0)
                             {
                                 // Verificar si ya existe un cliente con el mismo DNI
                                 if (VerificarExistenciaObjeto(oBECliente) == false)
                                 {
                                     // Obtener nuevo Id autoincremental
                                     int ultimoIdCliente = ObtenerUltimoIdCliente() + 1;
-                                    oBECliente.IdCliente = ultimoIdCliente;
+                                    oBECliente.Id = ultimoIdCliente;
 
                                     // Agregar nuevo cliente al XML
                                     BDXML.Root.Element("Clientes").Add(new XElement("cliente",
-                                        new XAttribute("IdCliente", oBECliente.IdCliente.ToString().Trim()),
+                                        new XAttribute("Id", oBECliente.Id.ToString().Trim()),
                                         new XElement("Nombre", oBECliente.Nombre.Trim()),
                                         new XElement("DNI", oBECliente.DNI.Trim()),
                                         new XElement("Telefono", oBECliente.Telefono.Trim())
@@ -138,11 +138,11 @@ namespace Mapper
                                     throw new Exception("Error: Ya existe un cliente con ese DNI.");
                                 }
                             }
-                            // En caso de que el cliente ya exista, se modifica
+                            // En caso de que el cliente ya exista, se modifica 
                             else
                             {
                                 var buscarCliente = from cliente in BDXML.Root.Element("Clientes").Descendants("cliente")
-                                                    where cliente.Attribute("IdCliente").Value.Trim() == oBECliente.IdCliente.ToString().Trim()
+                                                    where cliente.Attribute("Id").Value.Trim() == oBECliente.Id.ToString().Trim()
                                                     select cliente;
 
                                 if (buscarCliente.Any())
@@ -210,7 +210,7 @@ namespace Mapper
                 // Construyo el objeto Cliente
                 BECliente ocliente = new BECliente
                 {
-                    IdCliente = int.Parse(clienteEncontrado.Attribute("IdCliente").Value.Trim()),
+                    Id = int.Parse(clienteEncontrado.Attribute("Id").Value.Trim()),
                     Nombre = clienteEncontrado.Element("Nombre").Value.Trim(),
                     DNI = clienteEncontrado.Element("DNI").Value.Trim(),
                     Telefono = clienteEncontrado.Element("Telefono").Value.Trim()
@@ -222,66 +222,47 @@ namespace Mapper
             catch (Exception) { throw; }
         }
 
-
-
         public BECliente ListarObjetoPorIdCliente(BECliente oBECliente)
         {
             try
             {
-                // Verifico la existencia del XML:
-                if (CrearXML() == true) // Se asume que CrearXML() también valida el XML de clientes
+                if (!CrearXML())
+                    throw new XmlException("Error: No se pudo recuperar el XML de clientes.");
+
+                BDXML = XDocument.Load(ruta);
+                if (BDXML == null)
+                    throw new XmlException("Error: No se pudo recuperar la información del XML.");
+
+                if (oBECliente == null)
+                    throw new Exception("Error: No se pudo obtener los datos del cliente.");
+
+                if (oBECliente.Id <= 0)
+                    throw new Exception($"Error: El cliente tiene un ID inválido ({oBECliente.Id}).");
+
+                // 🔍 Buscar cliente en el XML (según tu estructura)
+                var buscarCliente = from cliente in BDXML.Root.Element("Clientes").Elements("cliente")
+                                    where int.Parse(cliente.Attribute("Id").Value.Trim()) == oBECliente.Id
+                                    select cliente;
+
+                var clienteEncontrado = buscarCliente.FirstOrDefault();
+
+                if (clienteEncontrado == null)
+                    throw new Exception($"Error: No se encontró ningún cliente con Id {oBECliente.Id}.");
+
+                // ✅ Mapear el cliente encontrado al objeto BECliente
+                return new BECliente
                 {
-                    // Cargo el XML:
-                    BDXML = XDocument.Load(ruta);
-                    if (BDXML != null)
-                    {
-                        if (oBECliente != null)
-                        {
-                            // Busco el cliente por IdCliente
-                            var buscarCliente = from cliente in BDXML.Root.Element("Clientes").Descendants("cliente")
-                                                where int.Parse(cliente.Attribute("IdCliente").Value.Trim()) == oBECliente.IdCliente
-                                                select cliente;
-
-                            if (buscarCliente.Any())
-                            {
-                                var clienteEncontrado = buscarCliente.First();
-
-                                BECliente cliente = new BECliente
-                                {
-                                    IdCliente = int.Parse(clienteEncontrado.Attribute("IdCliente").Value.Trim()),
-                                    Nombre = clienteEncontrado.Element("Nombre").Value.Trim(),
-                                    DNI = clienteEncontrado.Element("DNI").Value.Trim(),
-                                    Telefono = clienteEncontrado.Element("Telefono").Value.Trim()
-                                };
-
-                                return cliente;
-                            }
-                            else
-                            {
-                                throw new Exception("Error: No se encontró ningún cliente con los datos brindados!");
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception("Error: No se pudo obtener los datos del cliente!");
-                        }
-                    }
-                    else
-                    {
-                        throw new XmlException("Error: No se pudo recuperar la información del XML!");
-                    }
-                }
-                else
-                {
-                    throw new XmlException("Error: No se pudo recuperar el XML!");
-                }
+                    Id = int.Parse(clienteEncontrado.Attribute("Id").Value.Trim()),
+                    Nombre = clienteEncontrado.Element("Nombre")?.Value.Trim() ?? "",
+                    DNI = clienteEncontrado.Element("DNI")?.Value.Trim() ?? "",
+                    Telefono = clienteEncontrado.Element("Telefono")?.Value.Trim() ?? ""
+                };
             }
-            catch (XmlException ex) { throw ex; }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar cliente: " + ex.Message);
+            }
         }
-
-
-
         public List<BECliente> ListarTodo()
         {
             try
@@ -298,7 +279,7 @@ namespace Mapper
                         var lista = from cliente in BDXML.Root.Element("Clientes").Elements("cliente")
                                     select new BECliente
                                     {
-                                        IdCliente = int.Parse(cliente.Attribute("IdCliente").Value),
+                                        Id = int.Parse(cliente.Attribute("Id").Value),
                                         Nombre = cliente.Element("Nombre").Value.Trim(),
                                         DNI = cliente.Element("DNI").Value.Trim(),
                                         Telefono = cliente.Element("Telefono").Value.Trim()
@@ -337,7 +318,7 @@ namespace Mapper
                     if (BDXML != null)
                     {
                         var pIdCliente = from cliente in BDXML.Root.Element("Clientes").Descendants("cliente")
-                                         select int.Parse(cliente.Attribute("IdCliente").Value.Trim());
+                                         select int.Parse(cliente.Attribute("Id").Value.Trim());
 
                         // Verifico si encontró algún IdCliente:
                         if (pIdCliente.Any())

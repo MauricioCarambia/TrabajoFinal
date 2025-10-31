@@ -11,6 +11,7 @@ namespace BLL
     public class BLLReserva
     {
         private MPPReserva oMPPReserva = new MPPReserva();
+        private MPPPedido oMPPPedido = new MPPPedido();
         private BLLCliente oBLLCliente = new BLLCliente();
         private BLLMesa oBLLMesa = new BLLMesa();
 
@@ -36,12 +37,35 @@ namespace BLL
             foreach (var r in reservas)
             {
                 // Completa los datos del cliente y la mesa
-                r.Cliente = oBLLCliente.ListarObjetoPorId(new BECliente { IdCliente = r.Cliente.IdCliente });
+                r.Cliente = oBLLCliente.ListarObjetoPorId(new BECliente { Id = r.Cliente.Id });
                 r.Mesa = oBLLMesa.ListarObjetoPorNumeroMesa(new BEMesa { NumeroMesa = r.Mesa.NumeroMesa });
 
             }
 
             return reservas;
         }
+        public List<BEPedido> ListarPedidosPorFecha(DateTime fecha)
+        {
+            var pedidos = oMPPPedido.ListarPedidosPorFecha(fecha);
+            var reservas = oMPPReserva.ListarTodo();
+
+            // Filtramos los pedidos según la fecha de su reserva
+            List<BEPedido> pedidosFiltrados = new List<BEPedido>();
+
+            foreach (var pedido in pedidos)
+            {
+                var reserva = reservas.FirstOrDefault(r => r.Id == pedido.Reserva.Id);
+
+                if (reserva != null && reserva.FechaReserva.Date == fecha.Date)
+                {
+                    pedido.Reserva = reserva;
+                    pedido.Cliente = reserva.Cliente;
+                    pedidosFiltrados.Add(pedido);
+                }
+            }
+
+            return pedidosFiltrados;
+        }
+       
     }
 }
