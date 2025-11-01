@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -40,6 +41,7 @@ namespace UI
         private void frmCobrarPedido_Load(object sender, EventArgs e)
         {
             CargarPedidosHoy();
+            CargarPedidosCobrados();
         }
 
         private void CargarPedidosHoy()
@@ -56,8 +58,18 @@ namespace UI
                     return;
                 }
 
-                // ✅ Armamos los datos de forma segura
-                dgvPedidos.DataSource = pedidos.Select(p => new
+                // 🔹 Obtenemos los pedidos que ya tienen cobro
+                var pedidosCobrados = oBLLCobro.ListarPedidosCobrados();
+
+                // 🔹 Filtramos solo los que NO están cobrados
+                var pedidosSinCobrar = pedidos
+                    .Where(p => !pedidosCobrados.Contains(p.Id))
+                    .ToList();
+
+
+
+                // ✅ Mostrar solo los pedidos sin cobrar
+                dgvPedidos.DataSource = pedidosSinCobrar.Select(p => new
                 {
                     PedidoId = p.Id,
                     NumeroReserva = p.Reserva?.NumeroReserva ?? "Sin reserva",
@@ -89,7 +101,7 @@ namespace UI
                 int pedidoId = Convert.ToInt32(dgvPedidos.CurrentRow.Cells["PedidoId"].Value);
                 pedidoSeleccionado = oBLLPedido.ListarObjetoPorId(pedidoId);
 
-               
+
                 if (pedidoSeleccionado == null)
                 {
                     LimpiarDetalle();
@@ -97,7 +109,7 @@ namespace UI
                 }
 
                 // ✅ Mostrar detalle completo del pedido
-                //MostrarDetallePedido(pedidoSeleccionado);
+                CargarPedidosCobrados();
 
                 txtReserva.Text = pedidoSeleccionado.Reserva?.NumeroReserva ?? "N/A";
                 txtCliente.Text = pedidoSeleccionado.Reserva?.Cliente?.Nombre ?? "N/A";
@@ -122,44 +134,65 @@ namespace UI
             }
         }
 
-        //private void MostrarDetallePedido(BEPedido pedido)
-        //{
-        //    try
-        //    {
-        //        dgvDetallePedido.DataSource = null;
+        private void CargarPedidosCobrados()
+        {
+            try
+            {
+                DateTime hoy = DateTime.Today;
 
-        //        if (pedido == null || pedido.ListaPlatos == null || pedido.ListaPlatos.Count == 0)
-        //            return;
+                // 🔹 Traer pedidos del día
+                var pedidos = oBLLPedido.ListarPedidosPorFecha(hoy);
+                if (pedidos == null || pedidos.Count == 0)
+                {
+                    dgvReservasCobradas.DataSource = null;
+                    LimpiarDetalle();
+                    return;
+                }
 
-        //        var listaParaDGV = pedido.ListaPlatos.Select(p => new
-        //        {
-        //            Id = p.Id,
-        //            IdPedido = pedido.Id,
-        //            Plato = p.Plato?.Nombre ?? "Sin nombre",
-        //            Cantidad = p.Cantidad,
-        //            PrecioVenta = p.Plato?.PrecioVenta.ToString("0.00") ?? "0.00",
-        //            Subtotal = p.Subtotal.ToString("0.00"),
-        //            Estado = p.Estado.ToString()
-        //        }).ToList();
+                // 🔹 Traer todos los cobros y sus facturas
+                var cobros = oBLLCobro.ListarTodo(); // Cada BECobro debe tener Factura y Pedido cargados
 
-        //        dgvDetallePedido.DataSource = listaParaDGV;
+                // 🔹 Filtrar solo los cobros de pedidos del día
+                var cobrosDelDia = cobros
+                    .Where(c => pedidos.Any(p => p.Id == c.Pedido.Id))
+                    .ToList();
 
-        //        if (dgvDetallePedido.Columns.Contains("Id"))
-        //            dgvDetallePedido.Columns["Id"].Visible = false;
+                if (cobrosDelDia.Count == 0)
+                {
+                    dgvReservasCobradas.DataSource = null;
+                    LimpiarDetalle();
+                    return;
+                }
 
-        //        if (dgvDetallePedido.Columns.Contains("IdPedido"))
-        //            dgvDetallePedido.Columns["IdPedido"].Visible = false;
+                // 🔹 Armar lista para mostrar
+                var listaMostrar = cobrosDelDia.Select(c => new
+                {
+                    PedidoId = c.Pedido.Id,
+                    IdFactura = c.Factura.IdFactura,
+                    NumeroFactura = c.Factura.NumeroFactura,
+                    NumeroReserva = c.Pedido.Reserva?.NumeroReserva ?? "Sin reserva",
+                    Cliente = c.Factura.Cliente?.Nombre ?? "Desconocido",
+                    FechaCobro = c.Fecha.ToString("dd/MM/yyyy HH:mm"),
+                    TotalFactura = c.Factura.Total.ToString()
+                }).ToList();
 
-        //        dgvDetallePedido.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-        //        dgvDetallePedido.AlternatingRowsDefaultCellStyle.BackColor = Color.LightYellow;
-        //        dgvDetallePedido.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
-        //        dgvDetallePedido.DefaultCellStyle.SelectionForeColor = Color.White;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error al mostrar el detalle del pedido: " + ex.Message);
-        //    }
-        //}
+                dgvReservasCobradas.DataSource = listaMostrar;
+
+                // 🔹 Configuración visual
+                dgvReservasCobradas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvReservasCobradas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvReservasCobradas.MultiSelect = false;
+                dgvReservasCobradas.ReadOnly = true;
+                dgvReservasCobradas.ClearSelection();
+                dgvReservasCobradas.Columns["PedidoId"].Visible = false;
+                dgvReservasCobradas.Columns["IdFactura"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar pedidos cobrados: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void LimpiarDetalle()
         {
@@ -168,7 +201,7 @@ namespace UI
             txtMesa.Clear();
             txtTotal.Clear();
             txtTotalCobrar.Clear();
-            dgvDetallePedido.DataSource = null;
+            dgvReservasCobradas.DataSource = null;
             cmbPromociones.DataSource = null;
         }
 
@@ -311,7 +344,17 @@ namespace UI
                     MessageBox.Show("Debe seleccionar un pedido primero.");
                     return;
                 }
-               
+
+                // 🔹 VALIDACIÓN: evitar cobrar pedido ya cobrado
+                var cobrosExistentes = oBLLCobro.ListarTodo(); // lista todos los cobros
+                bool yaCobrado = cobrosExistentes.Any(c => c.Pedido.Id == pedidoSeleccionado.Id);
+                if (yaCobrado)
+                {
+                    MessageBox.Show("Este pedido ya fue cobrado. No se puede realizar el cobro nuevamente.",
+                                    "Pedido ya cobrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Obtener promoción seleccionada
                 var promo = cmbPromociones.SelectedItem as BEPromociones;
 
@@ -325,14 +368,12 @@ namespace UI
                     return;
                 }
 
-                // Asegurarse de que tenga DNI
                 if (string.IsNullOrEmpty(cliente.DNI))
                     cliente.DNI = "Sin DNI";
 
                 // Crear factura
                 BEFactura factura = new BEFactura
                 {
-                    // Número de factura correlativo con formato 0000001
                     NumeroFactura = oBLLFactura.ObtenerProximoNumeroFactura(),
                     Cliente = cliente,
                     DetallePlatos = pedidoSeleccionado.ListaPlatos,
@@ -343,7 +384,6 @@ namespace UI
                     Fecha = DateTime.Now
                 };
 
-                // Guardar factura en XML
                 oBLLFactura.Guardar(factura);
 
                 // Crear cobro
@@ -356,13 +396,12 @@ namespace UI
                 };
 
                 oBLLCobro.Guardar(cobro);
-
+                CargarPedidosCobrados();
+                CargarPedidosHoy();
                 // Generar PDF de factura
-                GenerarFacturaPDF(factura.Cliente, factura.DetallePlatos,
-                                  factura.SubTotal, factura.Total);
+                oBLLFactura.GenerarFacturaPDF(factura);
 
                 // Actualizar estado del pedido y liberar mesa
-               
                 oBLLMesa.ActualizarEstadoMesa(pedidoSeleccionado.Reserva.Mesa.IdMesa, BEMesa.EstadoMesa.Libre);
 
                 MessageBox.Show($"Cobro registrado correctamente. Factura N° {factura.NumeroFactura}");
@@ -375,58 +414,157 @@ namespace UI
 
 
 
-        private void GenerarFacturaPDF(BECliente cliente, List<BEPedidoPlato> platos, decimal subTotal, decimal total)
+        //private void GenerarFacturaPDF(BECliente cliente, List<BEPedidoPlato> platos, decimal subTotal, decimal total, string factura)
+        //{
+        //    try
+        //    {
+        //        string nroFactura = factura; // 0000001
+        //        string nombreArchivo = $"Factura_{nroFactura}.pdf";
+        //        string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nombreArchivo);
+
+        //        Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+        //        PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
+        //        doc.Open();
+
+        //        doc.Add(new Paragraph($"Factura N° {nroFactura}") { Alignment = Element.ALIGN_CENTER });
+        //        doc.Add(new Paragraph(" "));
+        //        // ✅ Mostrar todos los datos del cliente
+        //        doc.Add(new Paragraph($"Cliente: {cliente.Nombre}"));
+        //        doc.Add(new Paragraph($"DNI: {cliente.DNI}"));
+        //        doc.Add(new Paragraph($"Teléfono: {cliente.Telefono ?? "Sin Teléfono"}"));
+        //        doc.Add(new Paragraph(" "));
+        //        doc.Add(new Paragraph($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}"));
+        //        doc.Add(new Paragraph(" "));
+
+        //        PdfPTable tabla = new PdfPTable(4) { WidthPercentage = 100 };
+        //        tabla.AddCell("Plato");
+        //        tabla.AddCell("Cantidad");
+        //        tabla.AddCell("Precio Unitario");
+        //        tabla.AddCell("Subtotal");
+
+        //        foreach (var p in platos)
+        //        {
+        //            tabla.AddCell(p.Plato.Nombre);
+        //            tabla.AddCell(p.Cantidad.ToString());
+        //            tabla.AddCell(p.Plato.PrecioVenta.ToString("0.00"));
+        //            tabla.AddCell((p.Plato.PrecioVenta * p.Cantidad).ToString("0.00"));
+        //        }
+
+        //        doc.Add(tabla);
+        //        doc.Add(new Paragraph(" "));
+        //        doc.Add(new Paragraph($"Subtotal: ${subTotal:0.00}"));
+        //        if (total < subTotal)
+        //            doc.Add(new Paragraph($"Descuento aplicado: ${subTotal - total:0.00}"));
+        //        doc.Add(new Paragraph($"Total a cobrar: ${total:0.00}"));
+
+        //        doc.Close();
+
+        //        MessageBox.Show($"Factura generada correctamente:\n{ruta}", "Factura", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error generando factura: " + ex.Message);
+        //    }
+        //}
+
+        private void btnSalir_Click_1(object sender, EventArgs e)
         {
+            Close();
+        }
+
+        private void btnImprimirFactura_Click(object sender, EventArgs e)
+        {
+            // Verificamos que haya una fila seleccionada en el DataGridView
+            if (dgvReservasCobradas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un pedido primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Obtener el Id del pedido desde la fila seleccionada
+            int idPedido = (int)dgvReservasCobradas.CurrentRow.Cells["PedidoId"].Value;
+
+            // Traer la factura desde el BLL
+            BEFactura factura = oBLLFactura.ListarPorPedido(idPedido);
+
+            if (factura == null)
+            {
+                MessageBox.Show("No se encontró la factura para este pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
-                string nroFactura = oBLLFactura.ObtenerProximoNumeroFactura(); // 0000001
-                string nombreArchivo = $"Factura_{nroFactura}.pdf";
-                string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nombreArchivo);
-
-                Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
-                PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
-                doc.Open();
-
-                doc.Add(new Paragraph($"Factura N° {nroFactura}") { Alignment = Element.ALIGN_CENTER });
-                doc.Add(new Paragraph(" "));
-                // ✅ Mostrar todos los datos del cliente
-                doc.Add(new Paragraph($"Cliente: {cliente.Nombre}"));
-                doc.Add(new Paragraph($"DNI: {cliente.DNI}"));
-                doc.Add(new Paragraph($"Teléfono: {cliente.Telefono ?? "Sin Teléfono"}"));
-                doc.Add(new Paragraph(" "));
-                doc.Add(new Paragraph($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}"));
-                doc.Add(new Paragraph(" "));
-
-                PdfPTable tabla = new PdfPTable(4) { WidthPercentage = 100 };
-                tabla.AddCell("Plato");
-                tabla.AddCell("Cantidad");
-                tabla.AddCell("Precio Unitario");
-                tabla.AddCell("Subtotal");
-
-                foreach (var p in platos)
-                {
-                    tabla.AddCell(p.Plato.Nombre);
-                    tabla.AddCell(p.Cantidad.ToString());
-                    tabla.AddCell(p.Plato.PrecioVenta.ToString("0.00"));
-                    tabla.AddCell((p.Plato.PrecioVenta * p.Cantidad).ToString("0.00"));
-                }
-
-                doc.Add(tabla);
-                doc.Add(new Paragraph(" "));
-                doc.Add(new Paragraph($"Subtotal: ${subTotal:0.00}"));
-                if (total < subTotal)
-                    doc.Add(new Paragraph($"Descuento aplicado: ${subTotal - total:0.00}"));
-                doc.Add(new Paragraph($"Total a cobrar: ${total:0.00}"));
-
-                doc.Close();
-
-                MessageBox.Show($"Factura generada correctamente:\n{ruta}", "Factura", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Llamamos al método que genera el PDF en el Mapper
+                oBLLFactura.GenerarFacturaPDF(factura);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error generando factura: " + ex.Message);
+                MessageBox.Show("Error al generar la factura PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //private void ReimprimirFacturaPDF(BEFactura factura)
+        //{
+        //    if (factura == null)
+        //    {
+        //        MessageBox.Show("No se encontró información de la factura.");
+        //        return;
+        //    }
+
+        //    string nroFactura = factura.NumeroFactura ?? "Desconocido";
+        //    string nombreArchivo = $"Factura_{nroFactura}.pdf";
+        //    string rutaPDF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nombreArchivo);
+
+        //    try
+        //    {
+        //        using (Document doc = new Document(PageSize.A4, 40, 40, 40, 40))
+        //        using (FileStream fs = new FileStream(rutaPDF, FileMode.Create))
+        //        {
+        //            PdfWriter.GetInstance(doc, fs);
+        //            doc.Open();
+
+        //            doc.Add(new Paragraph($"Factura N° {nroFactura}") { Alignment = Element.ALIGN_CENTER });
+        //            doc.Add(new Paragraph(" "));
+        //            // ✅ Mostrar todos los datos del cliente
+        //            doc.Add(new Paragraph($"Cliente: {cliente.Nombre}"));
+        //            doc.Add(new Paragraph($"DNI: {cliente.DNI}"));
+        //            doc.Add(new Paragraph($"Teléfono: {cliente.Telefono ?? "Sin Teléfono"}"));
+        //            doc.Add(new Paragraph(" "));
+        //            doc.Add(new Paragraph($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}"));
+        //            doc.Add(new Paragraph(" "));
+
+        //            PdfPTable tabla = new PdfPTable(4) { WidthPercentage = 100 };
+        //            tabla.AddCell("Plato");
+        //            tabla.AddCell("Cantidad");
+        //            tabla.AddCell("Precio Unitario");
+        //            tabla.AddCell("Subtotal");
+
+        //            foreach (var p in platos)
+        //            {
+        //                tabla.AddCell(p.Plato.Nombre);
+        //                tabla.AddCell(p.Cantidad.ToString());
+        //                tabla.AddCell(p.Plato.PrecioVenta.ToString("0.00"));
+        //                tabla.AddCell((p.Plato.PrecioVenta * p.Cantidad).ToString("0.00"));
+        //            }
+
+        //            doc.Add(tabla);
+        //            doc.Add(new Paragraph(" "));
+        //            doc.Add(new Paragraph($"Subtotal: ${subTotal:0.00}"));
+        //            if (total < subTotal)
+        //                doc.Add(new Paragraph($"Descuento aplicado: ${subTotal - total:0.00}"));
+        //            doc.Add(new Paragraph($"Total a cobrar: ${total:0.00}"));
+
+        //            doc.Close();
+        //        }
+
+        //        MessageBox.Show($"Factura generada correctamente en el escritorio:\n{nombreArchivo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al generar factura PDF: " + ex.Message);
+        //    }
+
+        //}
 
     }
 }

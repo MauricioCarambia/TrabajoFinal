@@ -41,5 +41,10 @@
       <Fecha_Registro>30/10/2025 11:50:25</Fecha_Registro>
       <usuario Id="1" />
     </bitacora>
+    <bitacora Id="9">
+      <Detalle>backup</Detalle>
+      <Fecha_Registro>01/11/2025 00:49:10</Fecha_Registro>
+      <usuario Id="5" />
+    </bitacora>
   </Bitacoras>
 </Root>

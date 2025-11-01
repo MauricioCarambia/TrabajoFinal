@@ -67,7 +67,8 @@
         "dependencies": {
           "BackUp": "1.0.0",
           "Entity": "1.0.0",
-          "Seguridad": "1.0.0"
+          "Seguridad": "1.0.0",
+          "iTextSharp": "5.5.13.4"
         },
         "runtime": {
           "Mapper.dll": {

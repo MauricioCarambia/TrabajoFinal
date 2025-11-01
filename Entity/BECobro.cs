@@ -14,6 +14,8 @@ namespace Entity
         public BEPromociones Promocion { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Total { get; set; }
+        public string MetodoPago { get; set; }
+        public BEUsuario Usuario { get; set; }
 
         public BECobro()
         {

@@ -792,7 +792,7 @@ namespace UI
                         AgregarPermisoAlTreeView(menuStrip, permisoUsuario.Nombre, nodoRaiz);
                     }
                 }
-                //treeVwUsuarioPermisosRoles.ExpandAll();
+                treeVwUsuarioPermisosRoles.ExpandAll();
             }
             else
             {

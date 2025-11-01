@@ -232,9 +232,13 @@ namespace UI
         }
         private void cmbUnidadesMedida_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Cargar valores del enum en un ComboBox
-            cmbUnidadMedida.DataSource = Enum.GetValues(typeof(UnidadesMedida));
-            cmbUnidadMedida.DropDownStyle = ComboBoxStyle.DropDownList;
+            if (cmbUnidadMedida.SelectedItem != null)
+            {
+                // Obtener el valor seleccionado del enum
+                UnidadesMedida unidadSeleccionada = (UnidadesMedida)cmbUnidadMedida.SelectedItem;
+
+                
+            }
         }
     }
 }

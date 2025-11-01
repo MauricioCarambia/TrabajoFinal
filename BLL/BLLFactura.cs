@@ -46,18 +46,15 @@ namespace BLL
                 throw new Exception("Error al obtener el número de factura: " + ex.Message);
             }
         }
+        public BEFactura ListarPorPedido(int idPedido)
+        {
+            return oMPPFactura.ListarPorPedido(idPedido);
+        }
 
-        //public BEFactura ListarObjetoPorId(int id)
-        //{
-        //    try
-        //    {
-        //        return oMPPFactura.ListarObjetoPorId(id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error al obtener factura: " + ex.Message);
-        //    }
-        //}
+        public void GenerarFacturaPDF(BEFactura factura)
+        {
+            oMPPFactura.GenerarFacturaPDF(factura);
+        }
 
         //public int ObtenerUltimoId()
         //{

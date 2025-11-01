@@ -66,6 +66,23 @@ namespace BLL
 
             return pedidosFiltrados;
         }
-       
+        //public BEReserva ObtenerReservaCompleta(int idReserva)
+        //{
+        //    // Llamamos al DAL/Mapper
+        //    BEReserva reserva = oMPPReserva.ListarObjetoPorIdReserva(new BEReserva { Id = idReserva });
+
+        //    if (reserva == null)
+        //        throw new Exception("No se encontró la reserva.");
+
+        //    // Llenar cliente completo
+        //    if (reserva.Cliente?.Id > 0)
+        //        reserva.Cliente = oBLLCliente.ListarObjetoPorIdCliente(new BECliente { Id = reserva.Cliente.Id });
+
+        //    // Llenar mesa completa
+        //    if (reserva.Mesa?.IdMesa > 0)
+        //        reserva.Mesa = oBLLMesa.ListarObjeto(new BEMesa { IdMesa = reserva.Mesa.IdMesa });
+
+        //    return reserva;
+        //}
     }
 }

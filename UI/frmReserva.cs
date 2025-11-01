@@ -89,9 +89,9 @@ namespace UI
         {
             flpMesas.Controls.Clear();
             var listaMesas = oBLLMesa.ListarTodo()
-                              .OrderBy(m => m.NumeroMesa) // ← Ordenar por número de mesa
+                              .OrderBy(m => m.NumeroMesa)
                               .ToList();
-            reservasDelDia = oBLLReserva.ListarPorFecha(fecha); // actualizar lista de reservas del día
+            reservasDelDia = oBLLReserva.ListarPorFecha(fecha); // solo reservas del día
 
             foreach (var mesa in listaMesas)
             {
@@ -104,16 +104,14 @@ namespace UI
                     Margin = new Padding(8)
                 };
 
-                // 🔹 Buscar si hay una reserva para esta mesa
+                // 🔹 Buscar reserva de esta mesa para el día seleccionado
                 var reservaMesa = reservasDelDia.FirstOrDefault(r => r.Mesa.IdMesa == mesa.IdMesa);
 
-                // 🔹 Definir color según estado
-                if (mesa.Estado == BEMesa.EstadoMesa.Ocupada)
-                    btnMesa.BackColor = Color.IndianRed;         // Ocupada → rojo
-                else if (reservaMesa != null)
-                    btnMesa.BackColor = Color.Goldenrod;         // Reservada → amarillo
+                // 🔹 Estado según si hay reserva hoy
+                if (reservaMesa != null)
+                    btnMesa.BackColor = Color.Goldenrod; // Reservada hoy
                 else
-                    btnMesa.BackColor = Color.LightGreen;
+                    btnMesa.BackColor = Color.LightGreen; // Libre
 
                 btnMesa.Click += BtnMesa_Click;
                 flpMesas.Controls.Add(btnMesa);
@@ -234,7 +232,10 @@ namespace UI
 
                 ValidarMesaDisponible(reserva, fecha);
                 ValidarClienteSinReserva(reserva, fecha);
+                reserva.Cliente = oBLLCliente.ListarObjetoPorId(reserva.Cliente);
 
+                // Completar la mesa
+                reserva.Mesa = oBLLMesa.ListarObjetoPorId(reserva.Mesa);
                 oBLLReserva.Guardar(reserva);
 
                 reserva.Mesa.Estado = BEMesa.EstadoMesa.Reservada;

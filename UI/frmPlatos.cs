@@ -127,7 +127,7 @@ namespace UI
             }
             int idInsumo = Convert.ToInt32(dgvInsumos.CurrentRow.Cells["Id"].Value);
             decimal cantidadUsada = cantidad; // Usamos la cantidad ingresada por el usuario
-            oBLLInsumo.DescontarStock(idInsumo, cantidadUsada);
+            //oBLLInsumo.DescontarStock(idInsumo, cantidadUsada);
 
             // Crear objeto PlatoInsumo
             BEPlatoInsumo platoInsumo = new BEPlatoInsumo
@@ -243,7 +243,7 @@ namespace UI
 
             // Guardar en XML usando BLL
             oBLLPlato.Guardar(oBEPlato);              // Guarda nodo <Platos> con datos del plato
-            oBLLPlatoInsumo.GuardarLista(oBEPlato);   // Guarda nodo <PlatoInsumos> con los insumos
+            //oBLLPlatoInsumo.GuardarLista(oBEPlato);   // Guarda nodo <PlatoInsumos> con los insumos
             oBEPlato.Activo = chkActivo.Checked;
 
             MessageBox.Show("Plato guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

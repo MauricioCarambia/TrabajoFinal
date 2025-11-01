@@ -5,7 +5,11 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Globalization;
 
 namespace Mapper
 {
@@ -48,7 +52,6 @@ namespace Mapper
 
         public void Guardar(BEFactura factura)
         {
-            // Cargar o crear el XML
             XDocument xml;
             if (!File.Exists(ruta))
             {
@@ -57,7 +60,6 @@ namespace Mapper
             }
 
             xml = XDocument.Load(ruta);
-
             XElement root = xml.Element("Root")?.Element("Facturas");
             if (root == null)
             {
@@ -65,33 +67,29 @@ namespace Mapper
                 xml.Element("Root").Add(root);
             }
 
-             // ← agregá esta prop. string o simplemente
-            // si querés mantener int también
-
-            // Asignar Id correlativo
             factura.IdFactura = ObtenerUltimoIdFactura() + 1;
             factura.NumeroFactura = ObtenerProximoNumeroFactura();
-
-            // Calcular subtotal si no viene
             factura.SubTotal = factura.DetallePlatos?.Sum(p => p.Plato.PrecioVenta * p.Cantidad) ?? 0;
 
-            // Crear el nodo de factura
+            var cultura = new CultureInfo("es-AR"); // ✅ formato con coma decimal
+
             XElement nodoFactura = new XElement("Factura",
                 new XAttribute("IdFactura", factura.IdFactura),
-                new XElement("NumeroFactura", factura.NumeroFactura),
-                new XElement("TipoFactura", "A"), // siempre tipo A
+                new XElement("NumeroFactura", factura.NumeroFactura ?? "0"),
+                new XElement("TipoFactura", "A"),
                 new XElement("Fecha", factura.Fecha.ToString("yyyy-MM-dd HH:mm:ss")),
 
-               new XElement("Cliente",
+                new XElement("Cliente",
                     new XElement("Nombre", factura.Cliente?.Nombre ?? "Sin nombre"),
                     new XElement("DNI", factura.Cliente?.DNI ?? "Sin DNI")
                 ),
 
-                new XElement("Subtotal", factura.SubTotal),
-                new XElement("Descuento", factura.DescuentoAplicado),
-                new XElement("Total", factura.Total),
+                // ✅ guardamos con coma decimal
+                new XElement("Subtotal", factura.SubTotal.ToString(cultura)),
+                new XElement("Descuento", factura.DescuentoAplicado.ToString(cultura)),
+                new XElement("Total", factura.Total.ToString(cultura)),
 
-               new XElement("Promocion",
+                new XElement("Promocion",
                     new XElement("Id", factura.PromocionAplicada?.Id ?? 0),
                     new XElement("Nombre", factura.PromocionAplicada?.Nombre ?? "Sin promoción")
                 ),
@@ -105,13 +103,12 @@ namespace Mapper
                     select new XElement("Plato",
                         new XElement("Nombre", p.Plato?.Nombre ?? "Desconocido"),
                         new XElement("Cantidad", p.Cantidad),
-                        new XElement("PrecioUnitario", p.Plato?.PrecioVenta ?? 0),
-                        new XElement("Total", (p.Plato?.PrecioVenta ?? 0) * p.Cantidad)
+                        new XElement("PrecioUnitario", (p.Plato?.PrecioVenta ?? 0).ToString(cultura)), // ✅ coma
+                        new XElement("Total", ((p.Plato?.PrecioVenta ?? 0) * p.Cantidad).ToString(cultura)) // ✅ coma
                     )
                 )
             );
 
-            // Guardar en XML
             root.Add(nodoFactura);
             xml.Save(ruta);
         }
@@ -146,52 +143,36 @@ namespace Mapper
             if (!CrearXML())
                 return lista;
 
+            var cultura = new CultureInfo("es-AR"); // ✅ leer con coma decimal
+
             foreach (var f in BDXML.Descendants("Factura"))
             {
                 try
                 {
-                    // 🧾 Cliente completo
                     var clienteElem = f.Element("Cliente");
                     BECliente cliente = new BECliente
                     {
-                        Id = int.TryParse(clienteElem?.Attribute("Id")?.Value, out int idCliente) ? idCliente : 0,
                         Nombre = clienteElem?.Element("Nombre")?.Value ?? "Desconocido",
-                        DNI = clienteElem?.Element("DNI")?.Value ?? "Sin DNI",
-                        Telefono = clienteElem?.Element("Telefono")?.Value ?? "Sin Teléfono"
+                        DNI = clienteElem?.Element("DNI")?.Value ?? "Sin DNI"
                     };
 
-                    // 🧩 Pedido
-                    BEPedido pedido = new BEPedido();
-                    var pedidoElem = f.Element("Pedido");
-                    if (pedidoElem != null)
-                    {
-                        int.TryParse(pedidoElem.Attribute("Id")?.Value, out int idPedido);
-                        pedido.Id = idPedido;
-                    }
-
-                    // 🧮 Crear objeto factura
                     BEFactura oBE = new BEFactura
                     {
                         IdFactura = int.TryParse(f.Attribute("IdFactura")?.Value, out int idFact) ? idFact : 0,
                         NumeroFactura = f.Element("NumeroFactura")?.Value ?? "0000000",
                         Fecha = DateTime.TryParse(f.Element("Fecha")?.Value, out DateTime fecha) ? fecha : DateTime.MinValue,
-                        Cliente = cliente,          // ✅ Cliente completo
-                        Total = decimal.TryParse(f.Element("Total")?.Value, out decimal total) ? total : 0,
-                        DescuentoAplicado = decimal.TryParse(f.Element("Descuento")?.Value, out decimal desc) ? desc : 0,
+                        Cliente = cliente,
+                        Total = decimal.TryParse(f.Element("Total")?.Value, NumberStyles.Any, cultura, out decimal total) ? total : 0,
+                        DescuentoAplicado = decimal.TryParse(f.Element("Descuento")?.Value, NumberStyles.Any, cultura, out decimal desc) ? desc : 0,
                         PromocionAplicada = new BEPromociones
                         {
-                            Nombre = f.Element("Promocion")?.Value ?? "Sin promoción"
-                        },
-                        Pedido = pedido
+                            Nombre = f.Element("Promocion")?.Element("Nombre")?.Value ?? "Sin promoción"
+                        }
                     };
 
                     lista.Add(oBE);
                 }
-                catch
-                {
-                    // Ignorar factura con errores y continuar
-                    continue;
-                }
+                catch { continue; }
             }
 
             return lista;
@@ -200,17 +181,37 @@ namespace Mapper
 
         public int ObtenerUltimoIdFactura()
         {
-            if (!CrearXML())
-                throw new Exception("No se pudo crear o cargar el XML.");
+            try
+            {
+                // Verificar que exista el XML
+                if (!CrearXML())
+                    throw new XmlException("Error: No se pudo recuperar el XML de facturas!");
 
-            BDXML = XDocument.Load(ruta);
+                BDXML = XDocument.Load(ruta);
+                if (BDXML == null)
+                    throw new XmlException("Error: No se pudo cargar el XML de facturas!");
 
-            var facturas = BDXML.Root.Element("Facturas")?.Elements("Factura");
+                // Obtener todos los IdFactura válidos
+                var ids = BDXML.Root
+                               ?.Element("Facturas")
+                               ?.Descendants("Factura")
+                               .Select(f =>
+                               {
+                                   var attr = f.Attribute("IdFactura");
+                                   return attr != null && int.TryParse(attr.Value.Trim(), out int val) ? (int?)val : null;
+                               })
+                               .Where(id => id.HasValue)
+                               .Select(id => id.Value)
+                               .ToList();
 
-            if (facturas != null && facturas.Any())
-                return facturas.Max(f => (int)f.Attribute("Id")) + 1;
-
-            return 1; // Si no hay facturas, el primer Id será 1
+                // Si no hay IDs válidos, devolver 0
+                return ids != null && ids.Any() ? ids.Max() : 0;
+            }
+            catch
+            {
+                // Relanzar la excepción manteniendo el stack trace original
+                throw;
+            }
         }
         public bool VerificarFacturaExistente(int numeroFactura)
         {
@@ -226,60 +227,189 @@ namespace Mapper
 
             return facturas.Any(f => (int)f.Element("NumeroFactura") == numeroFactura);
         }
+        public BEFactura ListarPorPedido(int idPedido)
+        {
+            if (!CrearXML())
+                throw new Exception("No se pudo crear o cargar el XML de facturas.");
 
-        //private void GenerarFacturaPDF(BEFactura factura)
-        //{
-        //    try
-        //    {
-        //        string nombreArchivo = $"Factura_{factura.NumeroFactura}.pdf";
-        //        string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nombreArchivo);
+            XDocument xml = XDocument.Load(ruta);
+            XElement root = xml.Element("Root")?.Element("Facturas");
+            if (root == null)
+                return null;
 
-        //        Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
-        //        PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
-        //        doc.Open();
+            XElement nodoFactura = root.Elements("Factura")
+                                       .FirstOrDefault(f => (int?)f.Element("Pedido")?.Element("Id") == idPedido);
 
-        //        // ENCABEZADO
-        //        var titulo = new Paragraph($"Factura {factura.TipoFactura} N° {factura.NumeroFactura}")
-        //        { Alignment = Element.ALIGN_CENTER };
-        //        doc.Add(titulo);
-        //        doc.Add(new Paragraph(" "));
-        //        doc.Add(new Paragraph($"Fecha: {factura.Fecha:dd/MM/yyyy HH:mm}"));
-        //        doc.Add(new Paragraph($"Cliente: {factura.Cliente.Nombre}"));
-        //        doc.Add(new Paragraph($"DNI: {factura.Cliente.DNI}"));
-        //        doc.Add(new Paragraph(" "));
+            if (nodoFactura == null)
+                return null;
 
-        //        // TABLA DETALLE
-        //        PdfPTable tabla = new PdfPTable(4) { WidthPercentage = 100 };
-        //        tabla.AddCell("Plato");
-        //        tabla.AddCell("Cantidad");
-        //        tabla.AddCell("Precio Unitario");
-        //        tabla.AddCell("Subtotal");
+            var cultura = CultureInfo.GetCultureInfo("es-AR"); // Coma decimal
 
-        //        foreach (var item in factura.DetallePlatos)
-        //        {
-        //            tabla.AddCell(item.Plato.Nombre);
-        //            tabla.AddCell(item.Cantidad.ToString());
-        //            tabla.AddCell(item.Plato.PrecioVenta.ToString("0.00"));
-        //            tabla.AddCell((item.Plato.PrecioVenta * item.Cantidad).ToString("0.00"));
-        //        }
+            // Construir BEFactura
+            BEFactura factura = new BEFactura
+            {
+                IdFactura = (int?)nodoFactura.Attribute("IdFactura") ?? 0,
+                NumeroFactura = (string)nodoFactura.Element("NumeroFactura") ?? "0000000",
+                Fecha = DateTime.TryParse((string)nodoFactura.Element("Fecha"), out DateTime f) ? f : DateTime.MinValue,
+                SubTotal = decimal.TryParse((string)nodoFactura.Element("Subtotal"), NumberStyles.Any, cultura, out decimal sub) ? sub : 0m,
+                DescuentoAplicado = decimal.TryParse((string)nodoFactura.Element("Descuento"), NumberStyles.Any, cultura, out decimal desc) ? desc : 0m,
+                Total = decimal.TryParse((string)nodoFactura.Element("Total"), NumberStyles.Any, cultura, out decimal tot) ? tot : 0m,
+                Cliente = new BECliente
+                {
+                    Nombre = (string)nodoFactura.Element("Cliente")?.Element("Nombre") ?? "Sin nombre",
+                    DNI = (string)nodoFactura.Element("Cliente")?.Element("DNI") ?? "Sin DNI"
+                },
+                Pedido = new BEPedido
+                {
+                    Id = (int?)nodoFactura.Element("Pedido")?.Element("Id") ?? 0
+                },
+                PromocionAplicada = new BEPromociones
+                {
+                    Nombre = (string)nodoFactura.Element("Promocion")?.Element("Nombre") ?? "Sin promoción"
+                },
+                DetallePlatos = nodoFactura.Element("Detalle")?
+                                    .Elements("Plato")
+                                    .Select(p => new BEPedidoPlato
+                                    {
+                                        Plato = new BEPlato
+                                        {
+                                            Nombre = (string)p.Element("Nombre") ?? "Desconocido",
+                                            PrecioVenta = decimal.TryParse((string)p.Element("PrecioUnitario"), NumberStyles.Any, cultura, out decimal pu) ? pu : 0m
+                                        },
+                                        Cantidad = int.TryParse((string)p.Element("Cantidad"), out int c) ? c : 0
+                                    }).ToList() ?? new List<BEPedidoPlato>()
+            };
 
-        //        doc.Add(tabla);
-        //        doc.Add(new Paragraph(" "));
+            return factura;
+        }
 
-        //        // TOTALES
-        //        doc.Add(new Paragraph($"Subtotal: ${factura.Subtotal:0.00}"));
-        //        if (factura.Descuento > 0)
-        //            doc.Add(new Paragraph($"Descuento aplicado: ${factura.Descuento:0.00}"));
-        //        doc.Add(new Paragraph($"Total a cobrar: ${factura.Total:0.00}"));
+        public BEFactura ListarObjetoPorId(int idFactura)
+        {
+            try
+            {
+                if (!CrearXML())
+                    return null;
 
-        //        doc.Close();
+                XDocument xml = XDocument.Load(ruta);
+                XElement root = xml.Element("Root")?.Element("Facturas");
 
-        //        MessageBox.Show($"Factura generada correctamente:\n{ruta}", "Factura", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error generando factura PDF: " + ex.Message);
-        //    }
-        //}
+                if (root == null)
+                    return null;
+
+                var f = root.Elements("Factura")
+                            .FirstOrDefault(x => (int?)x.Attribute("IdFactura") == idFactura);
+
+                if (f == null)
+                    return null;
+
+                BEFactura factura = new BEFactura
+                {
+                    IdFactura = (int?)f.Attribute("IdFactura") ?? 0,
+                    NumeroFactura = (string)f.Element("NumeroFactura") ?? "Sin numero",
+                    Fecha = DateTime.TryParse((string)f.Element("Fecha"), out DateTime fecha) ? fecha : DateTime.MinValue,
+                    SubTotal = decimal.TryParse((string)f.Element("Subtotal"), NumberStyles.Any, new CultureInfo("es-AR"), out decimal sub) ? sub : 0m,
+                    DescuentoAplicado = decimal.TryParse((string)f.Element("Descuento"), NumberStyles.Any, new CultureInfo("es-AR"), out decimal desc) ? desc : 0m,
+                    Total = decimal.TryParse((string)f.Element("Total"), NumberStyles.Any, new CultureInfo("es-AR"), out decimal tot) ? tot : 0m,
+                    PromocionAplicada = new BEPromociones
+                    {
+                        Nombre = (string)f.Element("Promocion")?.Element("Nombre") ?? "Sin promoción"
+                    },
+                    Pedido = new BEPedido
+                    {
+                        Id = (int?)f.Element("Pedido")?.Element("Id") ?? 0
+                    },
+                    Cliente = new BECliente
+                    {
+                        Nombre = (string)f.Element("Cliente")?.Element("Nombre") ?? "Desconocido",
+                        DNI = (string)f.Element("Cliente")?.Element("DNI") ?? "Sin DNI"
+                    }
+                };
+
+                // Opcional: cargar detalle de platos si existe
+                var detalle = f.Element("Detalle");
+                if (detalle != null)
+                {
+                    factura.DetallePlatos = new List<BEPedidoPlato>();
+                    foreach (var p in detalle.Elements("Plato"))
+                    {
+                        factura.DetallePlatos.Add(new BEPedidoPlato
+                        {
+                            Plato = new BEPlato
+                            {
+                                Nombre = (string)p.Element("Nombre") ?? "Sin nombre",
+                                PrecioVenta = decimal.TryParse((string)p.Element("PrecioUnitario"), NumberStyles.Any, new CultureInfo("es-AR"), out decimal pu) ? pu : 0m
+                            },
+                            Cantidad = int.TryParse((string)p.Element("Cantidad"), NumberStyles.Any, new CultureInfo("es-AR"), out int cant) ? cant : 0
+                        });
+                    }
+                }
+
+                return factura;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la factura: " + ex.Message);
+            }
+        }
+
+
+        public void GenerarFacturaPDF(BEFactura factura)
+        {
+            try
+            {
+                string nroFactura = factura.NumeroFactura;
+                string nombreArchivo = $"Factura_{nroFactura}.pdf";
+                string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nombreArchivo);
+
+                iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A4, 40, 40, 40, 40);
+                PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
+                doc.Open();
+               
+
+                doc.Add(new Paragraph($"Factura N° {nroFactura}") { Alignment = Element.ALIGN_CENTER });
+                doc.Add(new Paragraph(" "));
+
+                // Datos del cliente
+                doc.Add(new Paragraph($"Cliente: {factura.Cliente.Nombre}"));
+                doc.Add(new Paragraph($"DNI: {factura.Cliente.DNI}"));
+                doc.Add(new Paragraph($"Teléfono: {factura.Cliente.Telefono ?? "Sin Teléfono"}"));
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph($"Fecha: {factura.Fecha:dd/MM/yyyy HH:mm}"));
+                doc.Add(new Paragraph(" "));
+
+                // Tabla detalle
+                PdfPTable tabla = new PdfPTable(4) { WidthPercentage = 100 };
+                tabla.AddCell("Plato");
+                tabla.AddCell("Cantidad");
+                tabla.AddCell("Precio Unitario");
+                tabla.AddCell("Subtotal");
+
+                var cultura = new CultureInfo("es-AR"); // ✅ coma decimal
+
+                foreach (var p in factura.DetallePlatos)
+                {
+                    tabla.AddCell(p.Plato.Nombre);
+                    tabla.AddCell(p.Cantidad.ToString());
+                    tabla.AddCell(p.Plato.PrecioVenta.ToString("N2", cultura));
+                    tabla.AddCell((p.Plato.PrecioVenta * p.Cantidad).ToString("N2", cultura));
+                }
+
+                doc.Add(tabla);
+                doc.Add(new Paragraph(" "));
+
+                doc.Add(new Paragraph($"Subtotal: ${factura.SubTotal.ToString("N2", cultura)}"));
+                if (factura.Total < factura.SubTotal)
+                    doc.Add(new Paragraph($"Descuento aplicado: ${(factura.SubTotal - factura.Total).ToString("N2", cultura)}"));
+                doc.Add(new Paragraph($"Total a cobrar: ${factura.Total.ToString("N2", cultura)}"));
+
+                doc.Close();
+
+               
+            }
+            catch (Exception ex)
+            {
+                { throw ex; }
+            }
+        }
     }
 }

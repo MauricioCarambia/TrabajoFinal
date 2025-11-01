@@ -30,7 +30,7 @@
         {
             btnRecargar = new Button();
             groupBox3 = new GroupBox();
-            dgvDetallePedido = new DataGridView();
+            dgvReservasCobradas = new DataGridView();
             groupBox2 = new GroupBox();
             dgvPedidos = new DataGridView();
             groupBox1 = new GroupBox();
@@ -55,8 +55,9 @@
             btnCobrar = new Button();
             btnSalir = new Button();
             btnLimpiar = new Button();
+            btnImprimirFactura = new Button();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvDetallePedido).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReservasCobradas).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPedidos).BeginInit();
             groupBox1.SuspendLayout();
@@ -76,26 +77,26 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(dgvDetallePedido);
+            groupBox3.Controls.Add(dgvReservasCobradas);
             groupBox3.Location = new Point(374, 283);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(532, 272);
             groupBox3.TabIndex = 33;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Detalle Reserva";
+            groupBox3.Text = "Reservas cobradas";
             // 
-            // dgvDetallePedido
+            // dgvReservasCobradas
             // 
-            dgvDetallePedido.AllowUserToAddRows = false;
-            dgvDetallePedido.AllowUserToDeleteRows = false;
-            dgvDetallePedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDetallePedido.Location = new Point(6, 22);
-            dgvDetallePedido.MultiSelect = false;
-            dgvDetallePedido.Name = "dgvDetallePedido";
-            dgvDetallePedido.ReadOnly = true;
-            dgvDetallePedido.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDetallePedido.Size = new Size(520, 244);
-            dgvDetallePedido.TabIndex = 0;
+            dgvReservasCobradas.AllowUserToAddRows = false;
+            dgvReservasCobradas.AllowUserToDeleteRows = false;
+            dgvReservasCobradas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReservasCobradas.Location = new Point(6, 22);
+            dgvReservasCobradas.MultiSelect = false;
+            dgvReservasCobradas.Name = "dgvReservasCobradas";
+            dgvReservasCobradas.ReadOnly = true;
+            dgvReservasCobradas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReservasCobradas.Size = new Size(520, 244);
+            dgvReservasCobradas.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -352,6 +353,7 @@
             btnSalir.TabIndex = 29;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click_1;
             // 
             // btnLimpiar
             // 
@@ -364,11 +366,23 @@
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
+            // btnImprimirFactura
+            // 
+            btnImprimirFactura.Font = new Font("Segoe UI", 10F);
+            btnImprimirFactura.Location = new Point(12, 521);
+            btnImprimirFactura.Name = "btnImprimirFactura";
+            btnImprimirFactura.Size = new Size(141, 34);
+            btnImprimirFactura.TabIndex = 36;
+            btnImprimirFactura.Text = "Reimprimir Factura";
+            btnImprimirFactura.UseVisualStyleBackColor = true;
+            btnImprimirFactura.Click += btnImprimirFactura_Click;
+            // 
             // frmCobrarPedido
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(920, 571);
+            Controls.Add(btnImprimirFactura);
             Controls.Add(btnRecargar);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -381,7 +395,7 @@
             Text = "Cobrar Pedido";
             Load += frmCobrarPedido_Load;
             groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvDetallePedido).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReservasCobradas).EndInit();
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPedidos).EndInit();
             groupBox1.ResumeLayout(false);
@@ -395,7 +409,7 @@
 
         private Button btnRecargar;
         private GroupBox groupBox3;
-        private DataGridView dgvDetallePedido;
+        private DataGridView dgvReservasCobradas;
         private GroupBox groupBox2;
         private DataGridView dgvPedidos;
         private GroupBox groupBox1;
@@ -420,5 +434,6 @@
         private RadioButton rdoMercadoPago;
         private Label label3;
         private TextBox txtTotalCobrar;
+        private Button btnImprimirFactura;
     }
 }

@@ -63,7 +63,6 @@
             dgvDetallePedido.AllowUserToDeleteRows = false;
             dgvDetallePedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDetallePedido.Location = new Point(6, 22);
-            dgvDetallePedido.MultiSelect = false;
             dgvDetallePedido.Name = "dgvDetallePedido";
             dgvDetallePedido.ReadOnly = true;
             dgvDetallePedido.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

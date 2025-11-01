@@ -555,40 +555,80 @@ namespace Mapper
 
             return pedidoUnificado;
         }
-
         public List<BEPedidoPlato> ObtenerPlatosPorEstado(string estado)
         {
             if (!CrearXML())
                 throw new Exception("No se pudo cargar el XML.");
 
             BDXML = XDocument.Load(ruta);
-
             var lista = new List<BEPedidoPlato>();
 
             foreach (var pedido in BDXML.Descendants("Pedido"))
             {
-                int idPedido = int.Parse(pedido.Attribute("Id").Value);
+                // Inicializar idPedido
+                int idPedido = 0;
 
-                var platos = from p in pedido.Descendants("PedidoPlato")
-                             where string.Equals((string)p.Element("Estado"), estado, StringComparison.OrdinalIgnoreCase)
-                             select new BEPedidoPlato
-                             {
-                                 Id = int.Parse(p.Attribute("Id").Value),
-                                 IdPedido = idPedido,
-                                 Plato = new BEPlato
-                                 {
-                                     Id = int.Parse(p.Element("PlatoId").Value)
-                                 },
-                                 Cantidad = int.Parse(p.Element("Cantidad").Value),
-                                 Estado = Enum.Parse<BEPedidoPlato.EstadoPlato>(p.Element("Estado").Value),
-                                 //Subtotal = decimal.Parse(p.Element("Subtotal").Value)
-                             };
+                // Intentar obtener atributo "Id"
+                var attrIdPedido = pedido.Attribute("Id");
+                if (attrIdPedido != null)
+                {
+                    if (!int.TryParse(attrIdPedido.Value, out idPedido))
+                        throw new Exception($"El atributo 'Id' del Pedido '{pedido}' no es un número válido.");
+                }
+                else
+                {
+                    // Intentar obtener elemento "Id"
+                    var elemIdPedido = pedido.Element("Id");
+                    if (elemIdPedido != null)
+                    {
+                        if (!int.TryParse(elemIdPedido.Value, out idPedido))
+                            throw new Exception($"El elemento 'Id' del Pedido '{pedido}' no es un número válido.");
+                    }
+                    else
+                    {
+                        throw new Exception("El Pedido no tiene ni atributo 'Id' ni elemento 'Id'.");
+                    }
+                }
 
-                lista.AddRange(platos);
+                // Procesar los platos
+                foreach (var p in pedido.Descendants("PedidoPlato"))
+                {
+                    // Validar atributo Id del plato
+                    var attrIdPlato = p.Attribute("Id");
+                    if (attrIdPlato == null || !int.TryParse(attrIdPlato.Value, out int idPlato))
+                        throw new Exception("PedidoPlato no tiene atributo 'Id' válido.");
+
+                    // Validar elementos necesarios
+                    var elemPlatoId = p.Element("PlatoId");
+                    var elemCantidad = p.Element("Cantidad");
+                    var elemEstado = p.Element("Estado");
+
+                    if (elemPlatoId == null) throw new Exception("PedidoPlato no tiene el elemento 'PlatoId'.");
+                    if (elemCantidad == null) throw new Exception("PedidoPlato no tiene el elemento 'Cantidad'.");
+                    if (elemEstado == null) throw new Exception("PedidoPlato no tiene el elemento 'Estado'.");
+
+                    // Solo incluir si el estado coincide
+                    if (!string.Equals(elemEstado.Value, estado, StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    lista.Add(new BEPedidoPlato
+                    {
+                        Id = idPlato,
+                        IdPedido = idPedido,
+                        Plato = new BEPlato
+                        {
+                            Id = int.Parse(elemPlatoId.Value)
+                        },
+                        Cantidad = int.Parse(elemCantidad.Value),
+                        Estado = Enum.Parse<BEPedidoPlato.EstadoPlato>(elemEstado.Value)
+                    });
+                }
             }
 
             return lista;
         }
+
+
 
 
         public bool VerificarExistenciaObjeto(BEPedido oBEPedido)
